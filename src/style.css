@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --pustam-blue: #283890;
+  --pustam-yellow: #f0e846;
+  --pustam-orange: #ff740e;
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    font-family: 'Be Vietnam Pro', 'Be Vietnam', sans-serif;
+    background-color: var(--pustam-blue);
+    color: #ffffff;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, .display-text {
+    font-family: 'Fredoka', sans-serif;
+  }
+
+  body, nav, button, label, input, select, textarea {
+    font-family: 'Be Vietnam Pro', 'Be Vietnam', sans-serif;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #172159;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--pustam-orange);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pustam-yellow);
+}
+
+/* Glass effect for modern navigation header */
+.glass-nav {
+  background: rgba(40, 56, 144, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Cross-browser no-scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Scroll reveal utility classes */
+.reveal-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s var(--ease-spring), transform 0.7s var(--ease-spring);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero text entrance animation */
+@keyframes heroTextEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-text {
+  animation: heroTextEnter 0.65s var(--ease-spring) forwards;
+}
+
+/* SVG Route line flow animation */
+@keyframes routeDashFlow {
+  from {
+    stroke-dashoffset: 20;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-route-flow {
+  animation: routeDashFlow 1.8s linear infinite;
+}
+
+/* Respect user's system motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .animate-marquee {
+    animation: none !important;
+    transform: none !important;
+  }
+}
