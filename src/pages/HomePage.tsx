@@ -3,7 +3,7 @@ import { HeroSlider } from '../components/HeroSlider';
 import { AboutSection } from '../components/AboutSection';
 import { ProductsSection } from '../components/ProductsSection';
 import { ClientsMarquee } from '../components/ClientsMarquee';
-import { ExportGlobalSection } from '../components/ExportGlobalSection';
+
 import { FactorySection } from '../components/FactorySection';
 import { CertificationsSection } from '../components/CertificationsSection';
 import { LocationSection } from '../components/LocationSection';
@@ -29,8 +29,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* 5. Clients Logo Infinite Scrolling Bar */}
       <ClientsMarquee />
 
-      {/* 6. Export / Global Reach Section */}
-      <ExportGlobalSection onNavigate={onNavigate} />
+
 
       {/* 7. Factory & Manufacturing Section */}
       <FactorySection onNavigate={onNavigate} />

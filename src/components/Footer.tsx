@@ -72,14 +72,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Products
                 </button>
               </li>
-              <li>
-                <button
-                  onClick={() => handleLink('export')}
-                  className="hover:text-[#f0e846] transition-colors"
-                >
-                  Export
-                </button>
-              </li>
+
               <li>
                 <button
                   onClick={() => handleLink('factory')}

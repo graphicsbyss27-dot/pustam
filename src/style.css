@@ -47,9 +47,9 @@
 
 /* Glass effect for modern navigation header */
 .glass-nav {
-  background: rgba(40, 56, 144, 0.92);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 /* Cross-browser no-scrollbar utility */
