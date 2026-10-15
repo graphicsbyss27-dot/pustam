@@ -1,5 +1,5 @@
 import React from 'react';
-import { Globe, ArrowRight, ShieldCheck, PackageCheck } from 'lucide-react';
+import { Globe, ArrowRight, PackageCheck, Anchor, ShieldCheck } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface ExportGlobalSectionProps {
@@ -8,13 +8,6 @@ interface ExportGlobalSectionProps {
 
 export const ExportGlobalSection: React.FC<ExportGlobalSectionProps> = ({ onNavigate }) => {
   const { ref, isVisible } = useScrollReveal();
-
-  const genericDestinations = [
-    { id: '1', title: '[EXPORT CORRIDOR 01]', label: '[ADD DESTINATION SEAPORT / REGION]' },
-    { id: '2', title: '[EXPORT CORRIDOR 02]', label: '[ADD DESTINATION SEAPORT / REGION]' },
-    { id: '3', title: '[EXPORT CORRIDOR 03]', label: '[ADD DESTINATION SEAPORT / REGION]' },
-    { id: '4', title: '[EXPORT CORRIDOR 04]', label: '[ADD DESTINATION SEAPORT / REGION]' },
-  ];
 
   return (
     <section
@@ -30,7 +23,7 @@ export const ExportGlobalSection: React.FC<ExportGlobalSectionProps> = ({ onNavi
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-12 sm:mb-14">
           
           {/* Left Column: Eyebrow & Headline (7 cols) */}
           <div className="lg:col-span-7 space-y-3">
@@ -44,266 +37,317 @@ export const ExportGlobalSection: React.FC<ExportGlobalSectionProps> = ({ onNavi
 
             {/* Heading (Fredoka) */}
             <h2 className="font-headline font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white tracking-tight leading-tight">
-              From India to the <span className="text-[#f0e846]">World</span>.
+              Shipments <span className="text-[#f0e846]">Worldwide</span>.
             </h2>
           </div>
 
-          {/* Right Column: Editable Supporting Paragraph (5 cols) */}
+          {/* Right Column: Supporting Paragraph (5 cols) */}
           <div className="lg:col-span-5 space-y-4 lg:pt-2">
-            <div className="p-5 rounded-2xl bg-[#151f52] border border-[#f0e846]/30 shadow-inner">
-              <p className="font-mono text-xs sm:text-sm text-[#f0e846] leading-relaxed">
-                [ADD OFFICIAL EXPORT DESCRIPTION HERE — International container consignments, moisture-proof export packaging, and port logistics.]
-              </p>
-              <p className="text-[11px] text-white/50 mt-2">
-                (Export documentation, container shipping terms FOB/CIF, and overseas distribution network details can be customized here.)
-              </p>
+            <p className="font-body text-sm sm:text-base text-white/85 leading-relaxed">
+              From India to international markets, Pustam Paper Products supplies notebook products to buyers worldwide, supported by manufacturing capabilities and export-ready packaging.
+            </p>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#f0e846]/10 border border-[#f0e846]/25 text-[#f0e846] text-xs font-semibold">
+              <Globe className="w-4 h-4" />
+              <span className="font-headline tracking-wide">International Container Shipments</span>
             </div>
           </div>
 
         </div>
 
-        {/* Sophisticated India-to-World Animated Route Visual Canvas */}
+        {/* Elegant Animated Globe Shipping Visual Canvas */}
         <div className="rounded-3xl bg-[#151f52] border border-white/15 p-6 sm:p-8 md:p-10 shadow-2xl relative overflow-hidden mb-12">
           
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 relative z-20">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-[#283890] flex items-center justify-center text-[#f0e846] border border-white/10">
                 <Globe className="w-5 h-5" />
               </div>
               <div>
                 <h3 className="font-headline font-bold text-base sm:text-lg text-white">
-                  Worldwide Shipment Routes
+                  Worldwide Shipping Corridors
                 </h3>
                 <p className="text-xs text-white/60 font-mono">
-                  Origin: India Manufacturing Hub → Global Seaports
+                  Manufacturing Origin: India (Palghar) → Global Ports & Buyers
                 </p>
               </div>
             </div>
 
-            <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white/80">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white/80 self-start sm:self-auto font-mono">
               <span className="w-2 h-2 rounded-full bg-[#f0e846] animate-pulse" />
-              <span>Container Logistics (FCL / LCL)</span>
+              <span>Active International Despatch</span>
             </div>
           </div>
 
-          {/* SVG Route Visualization Map */}
-          <div className="relative w-full aspect-[16/8] sm:aspect-[16/7] bg-[#1e2b70]/90 rounded-2xl border border-white/10 overflow-hidden flex items-center justify-center">
+          {/* Globe Container Visual */}
+          <div className="relative w-full aspect-[4/3] sm:aspect-[16/8] md:aspect-[21/9] bg-[#101b44] rounded-2xl border border-white/10 overflow-hidden flex items-center justify-center">
             
-            <svg viewBox="0 0 900 420" className="w-full h-full">
+            {/* Subtle Starfield / Grid Background */}
+            <div className="absolute inset-0 bg-grid-pattern opacity-15" />
+            <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-[#0a122e] pointer-events-none" />
+
+            {/* Responsive Animated Globe SVG */}
+            <svg
+              viewBox="0 0 1000 500"
+              className="w-full h-full relative z-10 select-none pointer-events-none"
+              preserveAspectRatio="xMidYMid meet"
+            >
               <defs>
-                {/* Gradient for route lines */}
-                <linearGradient id="exportLineGrad" x1="100%" y1="50%" x2="0%" y2="50%">
-                  <stop offset="0%" stopColor="#f0e846" stopOpacity="0.9" />
-                  <stop offset="100%" stopColor="#ff740e" stopOpacity="0.85" />
+                {/* Radial gradient for globe sphere depth */}
+                <radialGradient id="globeSphere" cx="42%" cy="42%" r="60%">
+                  <stop offset="0%" stopColor="#283890" stopOpacity="0.85" />
+                  <stop offset="65%" stopColor="#182361" stopOpacity="0.95" />
+                  <stop offset="100%" stopColor="#0b1238" stopOpacity="1" />
+                </radialGradient>
+
+                {/* Outer Atmosphere Glow */}
+                <radialGradient id="atmosphereGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="85%" stopColor="#3b4cb8" stopOpacity="0" />
+                  <stop offset="97%" stopColor="#f0e846" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="#ff740e" stopOpacity="0.4" />
+                </radialGradient>
+
+                {/* Gradients for Shipping Arcs */}
+                <linearGradient id="arcEast" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#f0e846" stopOpacity="0.95" />
+                  <stop offset="100%" stopColor="#ff740e" stopOpacity="0.3" />
                 </linearGradient>
 
-                <linearGradient id="reverseLineGrad" x1="0%" y1="50%" x2="100%" y2="50%">
-                  <stop offset="0%" stopColor="#f0e846" stopOpacity="0.9" />
-                  <stop offset="100%" stopColor="#ff740e" stopOpacity="0.85" />
+                <linearGradient id="arcWest" x1="100%" y1="0%" x2="0%" y2="0%">
+                  <stop offset="0%" stopColor="#f0e846" stopOpacity="0.95" />
+                  <stop offset="100%" stopColor="#ff740e" stopOpacity="0.3" />
                 </linearGradient>
               </defs>
 
-              {/* Background Map Grid Coordinates */}
-              <g opacity="0.15">
-                <line x1="40" y1="105" x2="860" y2="105" stroke="#ffffff" strokeDasharray="4 6" />
-                <line x1="40" y1="210" x2="860" y2="210" stroke="#ffffff" strokeDasharray="4 6" />
-                <line x1="40" y1="315" x2="860" y2="315" stroke="#ffffff" strokeDasharray="4 6" />
-                <line x1="225" y1="20" x2="225" y2="400" stroke="#ffffff" strokeDasharray="4 6" />
-                <line x1="450" y1="20" x2="450" y2="400" stroke="#ffffff" strokeDasharray="4 6" />
-                <line x1="675" y1="20" x2="675" y2="400" stroke="#ffffff" strokeDasharray="4 6" />
-              </g>
-
-              {/* Simplified Abstract Continental Contours */}
-              <g fill="none" stroke="rgba(255, 255, 255, 0.18)" strokeWidth="1.5">
-                <path d="M 330,90 Q 370,70 410,95 T 450,140" />
-                <path d="M 370,170 Q 420,210 400,290 T 380,340" />
-                <path d="M 640,120 Q 720,150 760,230" />
-                <path d="M 120,110 Q 160,180 140,280" />
-              </g>
-
-              {/* Animated Route 1: India -> Generic Corridor 01 */}
-              <path
-                d="M 530,220 Q 420,170 340,180"
-                fill="none"
-                stroke="url(#exportLineGrad)"
-                strokeWidth="2.5"
-                strokeDasharray="6 4"
-                className="animate-route-flow"
-              />
-
-              {/* Animated Route 2: India -> Generic Corridor 02 */}
-              <path
-                d="M 530,220 Q 430,130 320,105"
-                fill="none"
-                stroke="url(#exportLineGrad)"
-                strokeWidth="2.5"
-                strokeDasharray="6 4"
-                className="animate-route-flow"
-              />
-
-              {/* Animated Route 3: India -> Generic Corridor 03 */}
-              <path
-                d="M 530,220 Q 430,280 340,310"
-                fill="none"
-                stroke="url(#exportLineGrad)"
-                strokeWidth="2.5"
-                strokeDasharray="6 4"
-                className="animate-route-flow"
-              />
-
-              {/* Animated Route 4: India -> Generic Corridor 04 */}
-              <path
-                d="M 530,220 Q 640,250 720,230"
-                fill="none"
-                stroke="url(#reverseLineGrad)"
-                strokeWidth="2.5"
-                strokeDasharray="6 4"
-                className="animate-route-flow"
-              />
-
-              {/* Animated Route 5: India -> Generic Corridor 05 */}
-              <path
-                d="M 530,220 Q 300,100 130,160"
-                fill="none"
-                stroke="url(#exportLineGrad)"
-                strokeWidth="2.5"
-                strokeDasharray="6 4"
-                className="animate-route-flow"
-                opacity="0.8"
-              />
-
-              {/* Moving Pulse Transit Dots along the routes */}
-              <circle r="4" fill="#ff740e">
-                <animateMotion
-                  path="M 530,220 Q 420,170 340,180"
-                  dur="4s"
-                  repeatCount="indefinite"
-                />
-              </circle>
-              <circle r="4" fill="#ff740e">
-                <animateMotion
-                  path="M 530,220 Q 430,130 320,105"
-                  dur="4.5s"
-                  repeatCount="indefinite"
-                />
-              </circle>
-              <circle r="4" fill="#ff740e">
-                <animateMotion
-                  path="M 530,220 Q 430,280 340,310"
-                  dur="5s"
-                  repeatCount="indefinite"
-                />
-              </circle>
-              <circle r="4" fill="#ff740e">
-                <animateMotion
-                  path="M 530,220 Q 640,250 720,230"
-                  dur="4.2s"
-                  repeatCount="indefinite"
-                />
-              </circle>
-
-              {/* Generic Destination 01 Marker */}
-              <g>
-                <circle cx="340" cy="180" r="5" fill="#ff740e" />
-                <circle cx="340" cy="180" r="9" fill="#ff740e" opacity="0.3" className="animate-ping" />
-                <text x="340" y="165" fill="#ffffff" fontSize="11" fontWeight="600" textAnchor="middle" fontFamily="'Be Vietnam Pro', sans-serif">
-                  [DESTINATION 01]
-                </text>
-              </g>
-
-              {/* Generic Destination 02 Marker */}
-              <g>
-                <circle cx="320" cy="105" r="5" fill="#ff740e" />
-                <circle cx="320" cy="105" r="9" fill="#ff740e" opacity="0.3" className="animate-ping" />
-                <text x="320" y="90" fill="#ffffff" fontSize="11" fontWeight="600" textAnchor="middle" fontFamily="'Be Vietnam Pro', sans-serif">
-                  [DESTINATION 02]
-                </text>
-              </g>
-
-              {/* Generic Destination 03 Marker */}
-              <g>
-                <circle cx="340" cy="310" r="5" fill="#ff740e" />
-                <circle cx="340" cy="310" r="9" fill="#ff740e" opacity="0.3" className="animate-ping" />
-                <text x="340" y="330" fill="#ffffff" fontSize="11" fontWeight="600" textAnchor="middle" fontFamily="'Be Vietnam Pro', sans-serif">
-                  [DESTINATION 03]
-                </text>
-              </g>
-
-              {/* Generic Destination 04 Marker */}
-              <g>
-                <circle cx="720" cy="230" r="5" fill="#ff740e" />
-                <circle cx="720" cy="230" r="9" fill="#ff740e" opacity="0.3" className="animate-ping" />
-                <text x="720" y="215" fill="#ffffff" fontSize="11" fontWeight="600" textAnchor="middle" fontFamily="'Be Vietnam Pro', sans-serif">
-                  [DESTINATION 04]
-                </text>
-              </g>
-
-              {/* Generic Destination 05 Marker */}
-              <g>
-                <circle cx="130" cy="160" r="5" fill="#ff740e" />
-                <circle cx="130" cy="160" r="9" fill="#ff740e" opacity="0.3" className="animate-ping" />
-                <text x="130" y="145" fill="#ffffff" fontSize="11" fontWeight="600" textAnchor="middle" fontFamily="'Be Vietnam Pro', sans-serif">
-                  [DESTINATION 05]
-                </text>
-              </g>
-
-              {/* INDIA ORIGIN POINT */}
-              <g>
-                <circle cx="530" cy="220" r="18" fill="#f0e846" opacity="0.25" className="animate-ping" />
-                <circle cx="530" cy="220" r="10" fill="#f0e846" opacity="0.5" />
-                <circle cx="530" cy="220" r="6" fill="#f0e846" />
+              {/* Central Globe Sphere */}
+              <g transform="translate(500, 250)">
                 
-                <rect x="470" y="240" width="120" height="24" rx="6" fill="#151f52" stroke="#f0e846" strokeWidth="1.5" />
-                <text x="530" y="256" fill="#f0e846" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="Fredoka">
-                  INDIA (ORIGIN)
+                {/* Atmosphere Rim */}
+                <circle cx="0" cy="0" r="185" fill="none" stroke="url(#atmosphereGlow)" strokeWidth="6" opacity="0.6" />
+                
+                {/* Main Sphere Body */}
+                <circle cx="0" cy="0" r="180" fill="url(#globeSphere)" stroke="rgba(255,255,255,0.18)" strokeWidth="1.5" />
+
+                {/* Latitude Ellipses */}
+                <ellipse cx="0" cy="0" rx="180" ry="18" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="1" strokeDasharray="3 4" />
+                <ellipse cx="0" cy="-60" rx="169" ry="15" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="1" strokeDasharray="3 4" />
+                <ellipse cx="0" cy="60" rx="169" ry="15" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="1" strokeDasharray="3 4" />
+                <ellipse cx="0" cy="-120" rx="134" ry="12" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1" strokeDasharray="3 4" />
+                <ellipse cx="0" cy="120" rx="134" ry="12" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1" strokeDasharray="3 4" />
+
+                {/* Longitude Meridians */}
+                <ellipse cx="0" cy="0" rx="55" ry="180" fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
+                <ellipse cx="0" cy="0" rx="115" ry="180" fill="none" stroke="rgba(255,255,255,0.09)" strokeWidth="1" />
+                <line x1="0" y1="-180" x2="0" y2="180" stroke="rgba(255,255,255,0.14)" strokeWidth="1" />
+
+                {/* Simplified Continental Silhouettes (Eastern Hemisphere & Asia Central) */}
+                {/* Eurasia Continent Silhouette */}
+                <path
+                  d="M -50 -105 Q -20 -115 15 -100 Q 55 -95 90 -70 Q 110 -50 85 -25 Q 60 -10 35 -15 Q 15 -35 -10 -40 Q -35 -40 -60 -65 Z"
+                  fill="rgba(240, 232, 70, 0.12)"
+                  stroke="rgba(240, 232, 70, 0.28)"
+                  strokeWidth="1.2"
+                />
+
+                {/* Indian Subcontinent Silhouette */}
+                <path
+                  d="M 5 -35 Q 25 -32 40 -25 Q 35 10 20 30 Q 10 15 5 -10 Z"
+                  fill="rgba(240, 232, 70, 0.25)"
+                  stroke="#f0e846"
+                  strokeWidth="1.5"
+                />
+
+                {/* Africa Silhouette */}
+                <path
+                  d="M -75 -45 Q -55 -40 -45 -15 Q -40 25 -65 75 Q -85 50 -95 15 Q -105 -20 -75 -45 Z"
+                  fill="rgba(255, 255, 255, 0.08)"
+                  stroke="rgba(255, 255, 255, 0.2)"
+                  strokeWidth="1.2"
+                />
+
+                {/* Southeast Asia / Australasia Silhouette */}
+                <path
+                  d="M 75 10 Q 105 15 120 40 Q 105 75 80 55 Q 65 30 75 10 Z"
+                  fill="rgba(255, 255, 255, 0.08)"
+                  stroke="rgba(255, 255, 255, 0.2)"
+                  strokeWidth="1.2"
+                />
+
+                {/* Americas Western Rim (Curved at Horizon) */}
+                <path
+                  d="M -150 -70 Q -130 -40 -140 10 Q -155 45 -145 90 Q -175 60 -170 -30 Z"
+                  fill="rgba(255, 255, 255, 0.06)"
+                  stroke="rgba(255, 255, 255, 0.15)"
+                  strokeWidth="1"
+                />
+
+                {/* India Origin Hub (Centered at approx x: 22, y: 0) */}
+                <g transform="translate(22, 2)">
+                  {/* Radar pulse rings */}
+                  <circle cx="0" cy="0" r="14" fill="none" stroke="#f0e846" strokeWidth="1.5" opacity="0.6" className="animate-ping" />
+                  <circle cx="0" cy="0" r="7" fill="#ff740e" stroke="#ffffff" strokeWidth="1.5" />
+                  <circle cx="0" cy="0" r="3" fill="#f0e846" />
+                </g>
+              </g>
+
+              {/* Shipping Arcs extending outward across the globe */}
+              {/* Arc 1: India to Middle East & GCC */}
+              <path
+                id="routeMiddleEast"
+                d="M 522 252 Q 440 210 370 230"
+                fill="none"
+                stroke="url(#arcWest)"
+                strokeWidth="2.5"
+                strokeDasharray="6 4"
+                className="animate-pulse"
+              />
+
+              {/* Arc 2: India to Europe & UK */}
+              <path
+                id="routeEurope"
+                d="M 522 252 Q 420 120 280 150"
+                fill="none"
+                stroke="url(#arcWest)"
+                strokeWidth="2.5"
+                strokeDasharray="6 4"
+              />
+
+              {/* Arc 3: India to North America (via Atlantic corridor) */}
+              <path
+                id="routeAmericas"
+                d="M 522 252 Q 350 80 150 170"
+                fill="none"
+                stroke="url(#arcWest)"
+                strokeWidth="2"
+                strokeDasharray="5 5"
+              />
+
+              {/* Arc 4: India to Africa */}
+              <path
+                id="routeAfrica"
+                d="M 522 252 Q 450 310 380 340"
+                fill="none"
+                stroke="url(#arcWest)"
+                strokeWidth="2.2"
+                strokeDasharray="6 4"
+              />
+
+              {/* Arc 5: India to Southeast Asia & Asia-Pacific */}
+              <path
+                id="routeAsiaPacific"
+                d="M 522 252 Q 620 240 730 270"
+                fill="none"
+                stroke="url(#arcEast)"
+                strokeWidth="2.5"
+                strokeDasharray="6 4"
+              />
+
+              {/* Arc 6: India to Far East */}
+              <path
+                id="routeFarEast"
+                d="M 522 252 Q 650 170 820 190"
+                fill="none"
+                stroke="url(#arcEast)"
+                strokeWidth="2"
+                strokeDasharray="5 5"
+              />
+
+              {/* Destination Hub Markers */}
+              {/* Middle East Marker */}
+              <circle cx="370" cy="230" r="5" fill="#f0e846" stroke="#283890" strokeWidth="2" />
+              <text x="350" y="215" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="end" opacity="0.9">
+                Middle East & GCC
+              </text>
+
+              {/* Europe Marker */}
+              <circle cx="280" cy="150" r="5" fill="#f0e846" stroke="#283890" strokeWidth="2" />
+              <text x="260" y="140" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="end" opacity="0.9">
+                UK & Europe
+              </text>
+
+              {/* Americas Marker */}
+              <circle cx="150" cy="170" r="5" fill="#ff740e" stroke="#ffffff" strokeWidth="2" />
+              <text x="140" y="195" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="end" opacity="0.9">
+                North America
+              </text>
+
+              {/* Africa Marker */}
+              <circle cx="380" cy="340" r="5" fill="#f0e846" stroke="#283890" strokeWidth="2" />
+              <text x="360" y="360" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="end" opacity="0.9">
+                African Markets
+              </text>
+
+              {/* Asia Pacific Marker */}
+              <circle cx="730" cy="270" r="5" fill="#f0e846" stroke="#283890" strokeWidth="2" />
+              <text x="745" y="285" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="start" opacity="0.9">
+                Southeast Asia
+              </text>
+
+              {/* Global Markets Far East Marker */}
+              <circle cx="820" cy="190" r="5" fill="#ff740e" stroke="#ffffff" strokeWidth="2" />
+              <text x="835" y="195" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="start" opacity="0.9">
+                Worldwide Ports
+              </text>
+
+              {/* Origin Callout Badge above India */}
+              <g transform="translate(522, 215)">
+                <rect x="-65" y="-22" width="130" height="22" rx="6" fill="#151f52" stroke="#f0e846" strokeWidth="1.2" />
+                <text x="0" y="-7" fill="#f0e846" fontSize="10.5" fontWeight="bold" fontFamily="monospace" textAnchor="middle">
+                  ORIGIN: INDIA
                 </text>
               </g>
             </svg>
 
-          </div>
-
-        </div>
-
-        {/* Generic Destination Corridors Placeholders Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {genericDestinations.map((dest) => (
-            <div
-              key={dest.id}
-              className="p-4 rounded-2xl bg-[#151f52] border border-white/10 hover:border-[#f0e846]/40 transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="font-mono text-xs font-bold text-[#ff740e]">
-                  {dest.title}
-                </span>
-                <span className="w-2 h-2 rounded-full bg-[#f0e846]" />
-              </div>
-              <p className="font-mono text-xs text-white/70">
-                {dest.label}
+            {/* Bottom Caption Pill */}
+            <div className="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-auto bg-[#151f52]/90 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/15 flex items-center gap-3">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#f0e846] shrink-0" />
+              <p className="text-xs text-white/80 font-mono">
+                Containerised sea freight through major Indian container ports to buyers worldwide.
               </p>
             </div>
-          ))}
-        </div>
 
-        {/* Packaging & Compliance Support Bar */}
-        <div className="p-5 rounded-2xl bg-[#151f52] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/80">
-          <div className="flex flex-wrap items-center gap-4">
-            <div className="flex items-center gap-2">
-              <PackageCheck className="w-4 h-4 text-[#f0e846]" />
-              <span>Moisture-Proof Sea Cargo Packaging</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-[#ff740e]" />
-              <span>DGFT IEC Registered Export Documentation</span>
-            </div>
           </div>
 
-          <button
-            onClick={() => onNavigate && onNavigate('contact')}
-            className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-[#f0e846] hover:bg-[#ff740e] text-[#283890] hover:text-white font-headline font-bold text-xs tracking-wide transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-1.5 shrink-0 shadow min-h-[44px]"
-          >
-            <span>Inquire for Export Consignment</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+        </div>
+
+        {/* 3 Export Infrastructure Trust Pillars */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <div className="p-6 rounded-2xl bg-[#151f52] border border-white/10 space-y-2">
+            <div className="w-10 h-10 rounded-xl bg-[#283890] flex items-center justify-center text-[#f0e846] mb-3">
+              <PackageCheck className="w-5 h-5" />
+            </div>
+            <h4 className="font-headline font-bold text-base text-white">
+              Export-Ready Packaging
+            </h4>
+            <p className="text-xs text-white/70 leading-relaxed font-body">
+              Heavy-duty shrink wrapping and corrugated export cartons protect notebooks from sea-transit humidity and handling.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-[#151f52] border border-white/10 space-y-2">
+            <div className="w-10 h-10 rounded-xl bg-[#283890] flex items-center justify-center text-[#ff740e] mb-3">
+              <Anchor className="w-5 h-5" />
+            </div>
+            <h4 className="font-headline font-bold text-base text-white">
+              Port Accessibility
+            </h4>
+            <p className="text-xs text-white/70 leading-relaxed font-body">
+              Located in Palghar, Maharashtra with efficient highway transit directly connecting to Mumbai seaports (Nhava Sheva / JNPT).
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-[#151f52] border border-white/10 space-y-2">
+            <div className="w-10 h-10 rounded-xl bg-[#283890] flex items-center justify-center text-[#f0e846] mb-3">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <h4 className="font-headline font-bold text-base text-white">
+              Registered Export Licencing
+            </h4>
+            <p className="text-xs text-white/70 leading-relaxed font-body">
+              Full DGFT Import Export Code (IEC: BNZPC4332C) and MSME regularisation enabling compliant international trade.
+            </p>
+          </div>
+
         </div>
 
       </div>

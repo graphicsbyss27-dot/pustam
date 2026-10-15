@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, Phone, ArrowUp } from 'lucide-react';
+import { MessageSquare, ArrowUp } from 'lucide-react';
+import { COMPANY_DETAILS } from '../data/websiteData';
 
 export const FloatingActions: React.FC = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const { contact } = COMPANY_DETAILS;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,30 +33,20 @@ export const FloatingActions: React.FC = () => {
         </button>
       )}
 
-      {/* Call Button */}
+      {/* WhatsApp Button only - Phone Call icon removed per specifications */}
       <a
-        href="tel:"
-        className="pointer-events-auto w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#ff740e] hover:bg-[#ea6505] text-white shadow-lg flex items-center justify-center transition-all hover:scale-105 group border-2 border-white/30"
-        title="Call Now"
-        aria-label="Call Now"
-      >
-        <Phone className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform" />
-      </a>
-
-      {/* WhatsApp Button with subtle accent badge */}
-      <a
-        href="https://wa.me/"
+        href={contact.whatsapp}
         target="_blank"
         rel="noopener noreferrer"
-        className="pointer-events-auto relative w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white shadow-xl flex items-center justify-center transition-all hover:scale-105 group border-2 border-white/40"
-        title="WhatsApp Desk"
-        aria-label="WhatsApp Desk"
+        className="pointer-events-auto relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white shadow-2xl flex items-center justify-center transition-all hover:scale-105 group border-2 border-white/40"
+        title="Chat with us on WhatsApp"
+        aria-label="Chat with us on WhatsApp"
       >
-        <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
+        <span className="absolute -top-0.5 -right-0.5 flex h-3.5 w-3.5">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-300 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-3 w-3 bg-[#f0e846]"></span>
+          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#f0e846]"></span>
         </span>
-        <MessageSquare className="w-5 h-5 fill-current text-white" />
+        <MessageSquare className="w-6 h-6 fill-current text-white" />
       </a>
 
     </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin, Phone, Mail, Navigation, MessageSquare, PhoneCall, ExternalLink } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { COMPANY_DETAILS } from '../data/websiteData';
 
 interface LocationSectionProps {
   onNavigate?: (page: 'home' | 'contact') => void;
@@ -8,6 +9,7 @@ interface LocationSectionProps {
 
 export const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) => {
   const { ref, isVisible } = useScrollReveal();
+  const { contact, address } = COMPANY_DETAILS;
 
   return (
     <section
@@ -45,36 +47,38 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) 
               {/* Location Contact Details Block */}
               <div className="space-y-3.5">
                 
-                {/* [ADD FULL ADDRESS] */}
+                {/* Address */}
                 <div className="p-4 rounded-2xl bg-[#1e2b70] border border-white/10 space-y-1">
                   <div className="flex items-center gap-2 text-xs font-semibold text-[#ff740e]">
                     <MapPin className="w-4 h-4" />
                     <span>Manufacturing Plant & Registered Office</span>
                   </div>
                   <p className="font-mono text-xs sm:text-sm text-white/90 leading-relaxed pt-1">
-                    [ADD FULL ADDRESS — Factory Plot / Industrial Area, City, State, PIN Code, India]
+                    {address.line1},<br />
+                    {address.line2},<br />
+                    {address.city}, {address.state} {address.pincode}, {address.country}
                   </p>
                 </div>
 
-                {/* [ADD PHONE] */}
+                {/* Phone */}
                 <div className="p-3.5 rounded-xl bg-[#1e2b70] border border-white/10 flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-[#283890] flex items-center justify-center text-[#f0e846] shrink-0">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div className="font-mono text-xs sm:text-sm text-white/90">
-                    <span className="text-[11px] text-white/50 block">Phone Desk</span>
-                    [ADD PHONE]
+                    <span className="text-[11px] text-white/50 block">Phone & WhatsApp</span>
+                    <a href={contact.phoneTel} className="hover:text-[#f0e846] transition-colors">{contact.phone}</a>
                   </div>
                 </div>
 
-                {/* [ADD EMAIL] */}
+                {/* Email */}
                 <div className="p-3.5 rounded-xl bg-[#1e2b70] border border-white/10 flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-[#283890] flex items-center justify-center text-[#f0e846] shrink-0">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div className="font-mono text-xs sm:text-sm text-white/90">
-                    <span className="text-[11px] text-white/50 block">Email Inquiries</span>
-                    [ADD EMAIL]
+                    <span className="text-[11px] text-white/50 block">Email Enquiries</span>
+                    <a href={contact.emailMailto} className="hover:text-[#f0e846] transition-colors break-all">{contact.email}</a>
                   </div>
                 </div>
 
@@ -83,7 +87,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) 
               {/* Action Buttons: WhatsApp & Call Now */}
               <div className="grid grid-cols-2 gap-3 pt-2">
                 <a
-                  href="https://wa.me/"
+                  href={contact.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-headline font-semibold text-xs flex items-center justify-center gap-1.5 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow"
@@ -93,7 +97,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) 
                 </a>
 
                 <a
-                  href="tel:"
+                  href={contact.phoneTel}
                   className="py-3 px-4 rounded-xl bg-[#ff740e] hover:bg-[#ea6505] text-white font-headline font-semibold text-xs flex items-center justify-center gap-1.5 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow"
                 >
                   <PhoneCall className="w-4 h-4" />
@@ -106,7 +110,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) 
             {/* CTA: Get Directions */}
             <div className="pt-6 mt-6 border-t border-white/10">
               <a
-                href="https://maps.google.com"
+                href={contact.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-3.5 px-4 rounded-xl bg-[#f0e846] hover:bg-[#ff740e] text-[#283890] hover:text-white font-headline font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow flex items-center justify-center gap-2 group"
@@ -118,10 +122,10 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) 
 
           </div>
 
-          {/* RIGHT: Map / Location Visual & [ADD GOOGLE MAP EMBED] Placeholder (7 cols) */}
+          {/* RIGHT: Map Visual (7 cols) */}
           <div className="lg:col-span-7 bg-[#151f52] rounded-3xl p-6 sm:p-8 border border-white/15 shadow-2xl flex flex-col justify-between min-h-[360px] sm:min-h-[440px] relative overflow-hidden">
             
-            {/* Replaceable Map Container */}
+            {/* Map Container */}
             <div className="relative w-full h-full min-h-[300px] bg-[#1e2b70] rounded-2xl border border-white/10 overflow-hidden flex items-center justify-center">
               
               {/* Map grid lines simulation */}
@@ -145,19 +149,19 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) 
                 <div className="w-10 h-2 bg-black/50 rounded-full blur-sm mt-2" />
               </div>
 
-              {/* Replaceable Google Map Embed Box Badge */}
+              {/* Location info badge */}
               <div className="absolute bottom-4 left-4 right-4 bg-[#151f52]/95 backdrop-blur-md p-4 rounded-xl border border-white/15 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
                 <div>
                   <h4 className="font-headline font-bold text-sm text-white">
-                    Pustam Converting & Supply Depot
+                    Pustam Paper Products
                   </h4>
-                  <p className="text-xs font-mono text-[#f0e846] mt-0.5">
-                    [ADD GOOGLE MAP EMBED — Replace with iframe or custom map API]
+                  <p className="text-xs font-mono text-white/70 mt-0.5">
+                    Palghar Udyog Nagar, Palghar 401404, Maharashtra
                   </p>
                 </div>
 
                 <a
-                  href="https://maps.google.com"
+                  href={contact.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-[#f0e846] hover:text-[#283890] text-xs font-semibold text-white transition-colors flex items-center gap-1.5 shrink-0"

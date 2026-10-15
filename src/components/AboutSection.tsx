@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Layers, ShieldCheck, Globe } from 'lucide-react';
+import { Sparkles, Layers, Globe, Tag } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface AboutSectionProps {
@@ -46,30 +46,19 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
             <div className="w-16 h-1 bg-[#ff740e] rounded-full" />
           </div>
 
-          {/* RIGHT: Short Paragraph & Editable Placeholder (5 cols) */}
+          {/* RIGHT: Official Company Description (5 cols) */}
           <div className="lg:col-span-5 space-y-5 lg:pt-3">
-            {/* Primary Editable Placeholder as requested */}
-            <div className="p-5 rounded-2xl bg-[#151f52] border border-[#f0e846]/30 shadow-inner transition-colors hover:border-[#f0e846]/50">
-              <p className="font-mono text-xs sm:text-sm text-[#f0e846] leading-relaxed">
-                [ADD 2–3 SENTENCE OFFICIAL PUSTAM COMPANY DESCRIPTION HERE]
-              </p>
-              <p className="text-[11px] text-white/50 mt-2 font-body">
-                (Company mission, converting capabilities, and manufacturing scope can be edited here without altering the design hierarchy.)
-              </p>
-            </div>
-
-            {/* Supporting Concise Statement */}
             <p className="font-body text-sm sm:text-base text-white/85 leading-relaxed">
-              Dedicated to manufacturing high-tensile notebooks, office registers, and customized paper solutions engineered for institutional buyers and global supply chains.
+              Established in 2016 and based in Palghar, India, we are a dedicated white-label manufacturer of paper notebooks. We partner with recognised Indian brands and merchant exporters to produce notebooks across every category, backed by a conversion capacity of 25 metric tonnes of paper per day. Our model is simple: we manage manufacturing, quality control and export-ready packaging, so our partners can focus on building their brands. We also supply directly to international buyers, offering consistent quality, dependable lead times and the scale to support growing orders.
             </p>
           </div>
 
         </div>
 
-        {/* Small Supporting Visual / Placeholder Metric Elements */}
+        {/* Four Information Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           
-          {/* Item 1 */}
+          {/* Card 1 — Production Capacity */}
           <div className="p-5 rounded-2xl bg-[#151f52] border border-white/10 hover:border-[#f0e846]/40 transition-all duration-300 hover:-translate-y-1 group">
             <div className="flex items-center justify-between mb-3">
               <span className="w-8 h-8 rounded-lg bg-[#283890] flex items-center justify-center text-[#f0e846] group-hover:bg-[#f0e846] group-hover:text-[#283890] transition-colors">
@@ -77,15 +66,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
               </span>
               <span className="w-2 h-2 rounded-full bg-[#ff740e]" />
             </div>
-            <div className="font-mono text-xs font-semibold text-[#f0e846] uppercase tracking-wider mb-1">
-              [ADD PRODUCTION CAPACITY]
+            <div className="font-headline font-bold text-sm sm:text-base text-white mb-1">
+              25 Metric Tonnes / Day
             </div>
-            <div className="text-xs text-white/70">
-              High-Speed Reel-to-Sheet Converting & Ruling
+            <div className="text-xs text-white/70 font-body leading-relaxed">
+              Paper conversion capacity for scalable notebook manufacturing.
             </div>
           </div>
 
-          {/* Item 2 */}
+          {/* Card 2 — Paper Grades / GSM */}
           <div className="p-5 rounded-2xl bg-[#151f52] border border-white/10 hover:border-[#ff740e]/40 transition-all duration-300 hover:-translate-y-1 group">
             <div className="flex items-center justify-between mb-3">
               <span className="w-8 h-8 rounded-lg bg-[#283890] flex items-center justify-center text-[#ff740e] group-hover:bg-[#ff740e] group-hover:text-white transition-colors">
@@ -93,15 +82,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
               </span>
               <span className="w-2 h-2 rounded-full bg-[#f0e846]" />
             </div>
-            <div className="font-mono text-xs font-semibold text-[#f0e846] uppercase tracking-wider mb-1">
-              [ADD PAPER GRADES / GSM]
+            <div className="font-headline font-bold text-sm sm:text-base text-white mb-1">
+              44 GSM – 90 GSM
             </div>
-            <div className="text-xs text-white/70">
-              High Whiteness & Zero Ink-Bleed Pages
+            <div className="text-xs text-white/70 font-body leading-relaxed">
+              Paper grades ranging from recycled to virgin, according to product and customer requirements.
             </div>
           </div>
 
-          {/* Item 3 */}
+          {/* Card 3 — Global Exports */}
           <div className="p-5 rounded-2xl bg-[#151f52] border border-white/10 hover:border-[#f0e846]/40 transition-all duration-300 hover:-translate-y-1 group">
             <div className="flex items-center justify-between mb-3">
               <span className="w-8 h-8 rounded-lg bg-[#283890] flex items-center justify-center text-[#f0e846] group-hover:bg-[#f0e846] group-hover:text-[#283890] transition-colors">
@@ -109,27 +98,27 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
               </span>
               <span className="w-2 h-2 rounded-full bg-[#ff740e]" />
             </div>
-            <div className="font-mono text-xs font-semibold text-[#f0e846] uppercase tracking-wider mb-1">
-              [ADD EXPORT FOOTPRINT]
+            <div className="font-headline font-bold text-sm sm:text-base text-white mb-1">
+              Worldwide Shipping
             </div>
-            <div className="text-xs text-white/70">
-              FCL & LCL International Port Shipments
+            <div className="text-xs text-white/70 font-body leading-relaxed">
+              Supplying international buyers with export-ready paper products.
             </div>
           </div>
 
-          {/* Item 4 */}
+          {/* Card 4 — White-Label Manufacturing */}
           <div className="p-5 rounded-2xl bg-[#151f52] border border-white/10 hover:border-[#ff740e]/40 transition-all duration-300 hover:-translate-y-1 group">
             <div className="flex items-center justify-between mb-3">
               <span className="w-8 h-8 rounded-lg bg-[#283890] flex items-center justify-center text-[#ff740e] group-hover:bg-[#ff740e] group-hover:text-white transition-colors">
-                <ShieldCheck className="w-4 h-4" />
+                <Tag className="w-4 h-4" />
               </span>
               <span className="w-2 h-2 rounded-full bg-[#f0e846]" />
             </div>
-            <div className="font-mono text-xs font-semibold text-[#f0e846] uppercase tracking-wider mb-1">
-              [ADD COMPLIANCE STANDARDS]
+            <div className="font-headline font-bold text-sm sm:text-base text-white mb-1">
+              Create Your Brand With Us
             </div>
-            <div className="text-xs text-white/70">
-              DGFT IEC & MSME UDYAM Registered
+            <div className="text-xs text-white/70 font-body leading-relaxed">
+              Your brand, our manufacturing expertise.
             </div>
           </div>
 

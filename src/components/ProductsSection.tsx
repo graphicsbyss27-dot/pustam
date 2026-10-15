@@ -137,7 +137,7 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ onNavigate }) 
                 className="flex-none w-[82vw] max-w-[320px] sm:max-w-none sm:w-[340px] md:w-[380px] snap-start rounded-3xl bg-[#151f52] border border-white/15 hover:border-white/30 transition-all duration-300 hover:-translate-y-1.5 overflow-hidden shadow-2xl flex flex-col justify-between group"
               >
                 <div>
-                  {/* Top Bar with Large Number & Tag */}
+                  {/* Top Bar with Number */}
                   <div className="p-5 sm:p-6 pb-3 sm:pb-4 flex items-center justify-between border-b border-white/10">
                     <span
                       className="font-headline font-bold text-3xl sm:text-4xl tracking-tight transition-transform duration-300 group-hover:scale-105"
@@ -145,12 +145,9 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ onNavigate }) 
                     >
                       {item.number}
                     </span>
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-white/60 px-3 py-1 rounded-full bg-white/5 border border-white/10">
-                      {item.category}
-                    </span>
                   </div>
 
-                  {/* Replaceable Product Image Slot */}
+                  {/* Product Image */}
                   <div className="relative h-44 sm:h-56 bg-[#1e2b70] overflow-hidden">
                     <img
                       src={item.image}
@@ -160,9 +157,6 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ onNavigate }) 
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-90"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#151f52] via-transparent to-transparent" />
-                    <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-mono text-white/80 border border-white/15">
-                      Replaceable Image Slot
-                    </div>
                   </div>
 
                   {/* Product Details Content */}
@@ -182,7 +176,7 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ onNavigate }) 
                     onClick={handleInquiry}
                     className="w-full py-3 px-3.5 sm:px-4 rounded-xl bg-[#1e2b70] hover:bg-[#ff740e] text-white font-headline font-semibold text-xs sm:text-sm transition-all flex items-center justify-between group/btn border border-white/10 hover:border-transparent active:scale-[0.99] min-h-[44px]"
                   >
-                    <span>Request Category Specifications</span>
+                    <span>Send an Enquiry</span>
                     <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center group-hover/btn:bg-white group-hover/btn:text-[#283890] transition-colors group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 shrink-0 ml-2">
                       <ArrowUpRight className="w-4 h-4 transition-transform" />
                     </div>
@@ -202,7 +196,9 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ onNavigate }) 
               style={{ width: `${Math.max(20, scrollProgress)}%` }}
             />
           </div>
-          <span className="font-mono text-xs text-white/50">05</span>
+          <span className="font-mono text-xs text-white/50">
+            {PRODUCTS_PLACEHOLDERS.length.toString().padStart(2, '0')}
+          </span>
         </div>
 
       </div>

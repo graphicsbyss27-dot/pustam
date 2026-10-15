@@ -1,5 +1,5 @@
 // PUSTAM PAPER PRODUCTS - CENTRAL WEBSITE DATA
-// Strictly follows Brand Guidelines & Editable Placeholders
+// Updated with official company content
 
 export interface SlideItem {
   id: number;
@@ -32,6 +32,10 @@ export interface CertificationItem {
   description: string;
   iconName: string;
   verified: boolean;
+  regNumber?: string;
+  date?: string;
+  pdfUrl?: string;
+  signatory?: string;
 }
 
 export interface FactoryHighlight {
@@ -52,47 +56,47 @@ export interface ExportDestination {
 export const HERO_SLIDES: SlideItem[] = [
   {
     id: 1,
-    title: "Paper Products, Made to Move Businesses.",
-    subtitle: "[ADD SHORT SUPPORTING COPY — High-volume precision converting, premium GSM paper, and custom private labeling.]",
-    tagline: "B2B Paper Converting",
-    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1600&q=80",
-    ctaText: "Request B2B Quote",
-    ctaAction: "contact",
-  },
-  {
-    id: 2,
-    title: "Designed for Everyday Possibilities.",
-    subtitle: "[ADD SHORT SUPPORTING COPY — School exercise notebooks, hardbound registers, spiral pads, and office reams.]",
-    tagline: "Stationery & Books",
-    image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1600&q=80",
-    ctaText: "Explore Products",
+    title: "India-made notebooks. Your brand. Shipped worldwide.",
+    subtitle: "Your trusted white-label notebook manufacturing partner for customised paper products and international supply.",
+    tagline: "White-Label Manufacturer",
+    image: "/assets/factory-ruling-printing-line.jpg",
+    ctaText: "Explore Our Products",
     ctaAction: "products",
   },
   {
+    id: 2,
+    title: "Paper Products With Purpose.",
+    subtitle: "Established in 2016, Palghar — manufacturing exercise books, registers, spiral notebooks and drawing books for Indian brands and international buyers.",
+    tagline: "Est. 2016, Palghar",
+    image: "/assets/factory-aerial-facility.jpg",
+    ctaText: "Partner With Us",
+    ctaAction: "contact",
+  },
+  {
     id: 3,
-    title: "From Paper to Possibility.",
-    subtitle: "[ADD SHORT SUPPORTING COPY — Automated reel-to-sheet slitting, multi-color ruling, and automatic binding lines.]",
-    tagline: "Modern Converting Plant",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80",
-    ctaText: "Explore Factory",
+    title: "25 Metric Tonnes of Paper. Converted Every Day.",
+    subtitle: "Our paper conversion capacity supports scalable notebook manufacturing for brands that are ready to grow.",
+    tagline: "Manufacturing Capacity",
+    image: "/assets/factory-interior-cutting.jpg",
+    ctaText: "Explore Our Products",
     ctaAction: "products",
   },
   {
     id: 4,
-    title: "Built for Brands. Made for Business.",
-    subtitle: "[ADD SHORT SUPPORTING COPY — Container-load global exports compliant with international shipping and packaging norms.]",
+    title: "Indian Manufacturing. Global Reach.",
+    subtitle: "Supplying export-ready paper products to international buyers across worldwide markets.",
     tagline: "Export & Logistics",
-    image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1600&q=80",
-    ctaText: "Export Inquiries",
+    image: "/assets/factory-warehouse-reels.jpg",
+    ctaText: "Partner With Us",
     ctaAction: "contact",
   },
   {
     id: 5,
-    title: "Paper Products by Pustam.",
-    subtitle: "[ADD SHORT SUPPORTING COPY — Sustainable raw paper sourcing, high opacity, and zero ink-bleeding manufacturing.]",
-    tagline: "Direct Manufacturer",
-    image: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=1600&q=80",
-    ctaText: "Contact Us",
+    title: "Your Brand. Our Manufacturing Expertise.",
+    subtitle: "We manage manufacturing, quality control and export-ready packaging — so your brand can focus on what it does best.",
+    tagline: "White-Label Partner",
+    image: "/products/case-bound-book.png",
+    ctaText: "Partner With Us",
     ctaAction: "contact",
   },
 ];
@@ -101,7 +105,6 @@ export interface ProductPlaceholderItem {
   id: string;
   number: string;
   name: string;
-  category: string;
   description: string;
   image: string;
   accent: 'yellow' | 'orange';
@@ -111,57 +114,68 @@ export const PRODUCTS_PLACEHOLDERS: ProductPlaceholderItem[] = [
   {
     id: "prod-01",
     number: "01",
-    name: "[PRODUCT CATEGORY 01]",
-    category: "[PRODUCT TYPE]",
-    description: "[ADD ONE-LINE PRODUCT DESCRIPTION / CONVERTING SPECIFICATION]",
-    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80",
+    name: "Exercise Books",
+    description: "Everyday writing notebooks in softcover and Bristol board, staple-bound for educational institutions, stationery brands and bulk supply.",
+    image: "/products/center-pinned-notebook.png",
     accent: "yellow",
   },
   {
     id: "prod-02",
     number: "02",
-    name: "[PRODUCT CATEGORY 02]",
-    category: "[PRODUCT TYPE]",
-    description: "[ADD ONE-LINE PRODUCT DESCRIPTION / CONVERTING SPECIFICATION]",
-    image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=800&q=80",
+    name: "Counter Books",
+    description: "Practical hardbound notebooks for daily business transactions, commercial bookkeeping, ledgers and inventory logs.",
+    image: "/products/counter-book.png",
     accent: "orange",
   },
   {
     id: "prod-03",
     number: "03",
-    name: "[PRODUCT CATEGORY 03]",
-    category: "[PRODUCT TYPE]",
-    description: "[ADD ONE-LINE PRODUCT DESCRIPTION / CONVERTING SPECIFICATION]",
-    image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=800&q=80",
+    name: "Composition Books",
+    description: "Durable sewn and cloth-taped marble and custom cover composition notebooks built for daily classroom and student use.",
+    image: "/products/composition-book.png",
     accent: "yellow",
   },
   {
     id: "prod-04",
     number: "04",
-    name: "[PRODUCT CATEGORY 04]",
-    category: "[PRODUCT TYPE]",
-    description: "[ADD ONE-LINE PRODUCT DESCRIPTION / CONVERTING SPECIFICATION]",
-    image: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=800&q=80",
+    name: "Spiral / Wiro Bound Notebooks",
+    description: "Flexible single-spiral and twin-wire bound notebooks with micro-perforated sheets, available in single and multi-subject partitions.",
+    image: "/products/spiral-notebook.png",
     accent: "orange",
   },
   {
     id: "prod-05",
     number: "05",
-    name: "[PRODUCT CATEGORY 05]",
-    category: "[PRODUCT TYPE]",
-    description: "[ADD ONE-LINE PRODUCT DESCRIPTION / CONVERTING SPECIFICATION]",
-    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80",
+    name: "Notepads",
+    description: "Writing pads with head-gummed bindings, micro-perforations and sturdy backings for offices, promotional stationery and note-taking.",
+    image: "/products/legal-writing-pad.png",
+    accent: "yellow",
+  },
+  {
+    id: "prod-06",
+    number: "06",
+    name: "Hardbound Registers",
+    description: "Section-sewn hardbound registers with reinforced spines for accounting, administrative records and permanent commercial archives.",
+    image: "/products/case-bound-book.png",
+    accent: "orange",
+  },
+  {
+    id: "prod-07",
+    number: "07",
+    name: "Drawing Books (Pinned and Spiral)",
+    description: "High-bulk cartridge paper drawing and sketch books, available in both staple-pinned and spiral-bound formats for art and education.",
+    image: "/products/drawing-sketch-book.png",
     accent: "yellow",
   },
 ];
 
 export const CLIENT_LOGOS = [
-  { name: "[ADD CLIENT LOGO 1]", label: "Educational Institutions" },
-  { name: "[ADD CLIENT LOGO 2]", label: "Corporate Distributors" },
-  { name: "[ADD CLIENT LOGO 3]", label: "Government Supply" },
-  { name: "[ADD CLIENT LOGO 4]", label: "Wholesale Stationers" },
-  { name: "[ADD CLIENT LOGO 5]", label: "Private Label Brands" },
-  { name: "[ADD CLIENT LOGO 6]", label: "Export Trading Houses" },
+  { name: "Brand Partner 1", label: "Educational Institutions" },
+  { name: "Brand Partner 2", label: "Corporate Distributors" },
+  { name: "Brand Partner 3", label: "Government Supply" },
+  { name: "Brand Partner 4", label: "Wholesale Stationers" },
+  { name: "Brand Partner 5", label: "Private Label Brands" },
+  { name: "Brand Partner 6", label: "Export Trading Houses" },
 ];
 
 export const CERTIFICATIONS_DATA: CertificationItem[] = [
@@ -171,9 +185,13 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     title: "Import Export Code (IEC)",
     authority: "Directorate General of Foreign Trade (DGFT), Govt. of India",
     status: "Active & Verified",
-    description: "Officially registered for global commercial exports and container-level international shipments.",
+    description: "Officially registered for legal commercial export operations and overseas container trade from Indian seaports.",
     iconName: "Globe",
     verified: true,
+    regNumber: "BNZPC4332C",
+    date: "22/11/2022",
+    pdfUrl: "/documents/pustam-iec-certificate.pdf",
+    signatory: "Rakesh Ankush Chavan",
   },
   {
     id: "udyam",
@@ -181,9 +199,13 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     title: "MSME UDYAM Registration",
     authority: "Ministry of Micro, Small & Medium Enterprises, Govt. of India",
     status: "Recognized Manufacturer",
-    description: "Certified manufacturing enterprise adhering to national industrial standards and compliance.",
+    description: "Government recognized paper converting enterprise (NIC 17093 & 18121) adhering to national industrial standards.",
     iconName: "ShieldCheck",
     verified: true,
+    regNumber: "UDYAM-MH-17-0069099",
+    date: "01/09/2022",
+    pdfUrl: "/documents/pustam-udyam-certificate.pdf",
+    signatory: "Pustam Paper Products",
   },
   {
     id: "gst",
@@ -191,87 +213,92 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     title: "GST Registration",
     authority: "Goods and Services Tax Network, Govt. of India",
     status: "Tax Compliant Enterprise",
-    description: "Fully regularized Indian tax entity enabling compliant interstate and B2B domestic invoicing.",
+    description: "Fully regularized Indian tax entity enabling compliant interstate commerce and transparent B2B domestic invoicing.",
     iconName: "FileCheck2",
     verified: true,
+    regNumber: "27BNZPC4332C1Z1",
+    date: "22/07/2022 (Amended 14/08/2024)",
+    pdfUrl: "/documents/pustam-gst-certificate.pdf",
+    signatory: "Rakesh Ankush Chavan",
   },
-  {
-    id: "custom-cert",
-    code: "[ADD CERTIFICATION]",
-    title: "[ADD QUALITY / FSC / ISO CERTIFICATE]",
-    authority: "[ADD ISSUING BODY]",
-    status: "[CERTIFICATION STATUS]",
-    description: "[ADD CERTIFICATION DETAILS, AUDIT SCOPE AND QUALITY MANAGEMENT STANDARDS]",
-    iconName: "Award",
-    verified: false,
-  }
 ];
 
 export const FACTORY_GALLERY: FactoryHighlight[] = [
   {
     id: "f1",
-    title: "High-Speed Reel-to-Sheet Line",
-    category: "Cutting & Precision",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
-    description: "Automated precision conversion from jumbo paper reels into uniform book sheet blocks.",
+    title: "Multi-Line Flexo Ruling & Converting Floor",
+    category: "Ruling & Formatting",
+    image: "/assets/factory-ruling-printing-line.jpg",
+    description: "High-speed flexographic ruling lines converting continuous paper webs with uniform line spacing and fast ink drying.",
   },
   {
     id: "f2",
-    title: "Multi-Color Ruling & Flexo Printing",
-    category: "Ruling & Formatting",
-    image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80",
-    description: "Crisp line ruling with quick ink drying, accurate line margins, and clean date/page headers.",
+    title: "High-Speed Precision Cutting & Sizing Line",
+    category: "Cutting & Precision",
+    image: "/assets/factory-interior-cutting.jpg",
+    description: "Heavy-duty paper guillotine cutting machine converting paper blocks into uniform notebook stacks with active quality checks.",
   },
   {
     id: "f3",
+    title: "Warehouse Logistics, Reel Staging & Loading Bay",
+    category: "Warehousing & Supply Chain",
+    image: "/assets/factory-warehouse-reels.jpg",
+    description: "High-ceiling storage holding jumbo raw reels, forklift handling, and palletised finished products staged for container loading.",
+  },
+  {
+    id: "f4",
+    title: "Palghar Manufacturing Plant & Logistics Compound",
+    category: "Facility & Infrastructure",
+    image: "/assets/factory-aerial-facility.jpg",
+    description: "Dedicated manufacturing premises in Palghar Udyog Nagar supporting 25 metric tonnes/day paper conversion.",
+  },
+  {
+    id: "f5",
     title: "Automated Wire-O & Stitching Units",
     category: "Binding Department",
     image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80",
     description: "Heavy-duty wire binding and wire stitching ensuring maximum page retention and flat lay.",
   },
   {
-    id: "f4",
-    title: "Shrink-Wrap & Pallet Packaging",
+    id: "f6",
+    title: "Moisture-Seal & Export Packaging Line",
     category: "Logistics & Quality",
     image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
-    description: "Moisture-sealed bundle wrapping and corrugated outer carton packing ready for container loading.",
-  },
-  {
-    id: "f5",
-    title: "[ADD FACTORY IMAGE]",
-    category: "[ADD SECTION]",
-    image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=800&q=80",
-    description: "[ADD FACTORY UNIT / MACHINERY DESCRIPTION - High-capacity warehousing, testing lab, or converting floor.]",
+    description: "Moisture-sealed bundle wrapping and palletised packing ready for safe national transit and container sea shipments.",
   },
 ];
 
 export const EXPORT_DESTINATIONS: ExportDestination[] = [
-  { region: "[EXPORT CORRIDOR 01]", port: "[ADD DESTINATION SEAPORT / REGION]", transitDays: "[ADD TRANSIT TIME]", status: "[ADD CORRIDOR STATUS]" },
-  { region: "[EXPORT CORRIDOR 02]", port: "[ADD DESTINATION SEAPORT / REGION]", transitDays: "[ADD TRANSIT TIME]", status: "[ADD CORRIDOR STATUS]" },
-  { region: "[EXPORT CORRIDOR 03]", port: "[ADD DESTINATION SEAPORT / REGION]", transitDays: "[ADD TRANSIT TIME]", status: "[ADD CORRIDOR STATUS]" },
-  { region: "[EXPORT CORRIDOR 04]", port: "[ADD DESTINATION SEAPORT / REGION]", transitDays: "[ADD TRANSIT TIME]", status: "[ADD CORRIDOR STATUS]" },
-  { region: "[ADD EXPORT COUNTRIES]", port: "[ADD TARGET SEAPORT]", transitDays: "[ADD TRANSIT TIME]", status: "[ADD CORRIDOR STATUS]" },
+  { region: "Worldwide Shipments", port: "International Markets", transitDays: "By Sea & Air", status: "Active" },
 ];
 
 export const COMPANY_DETAILS = {
-  name: "PUSTAM PAPER PRODUCTS",
-  tagline: "Modern Paper Products Manufacturer",
-  shortAbout: "[ADD 2–3 SENTENCE OFFICIAL PUSTAM COMPANY DESCRIPTION HERE]",
-  placeholderDescription: "[ADD COMPANY DESCRIPTION — Detailed founding story, factory footprint, vision, and manufacturing scale]",
+  name: "Pustam Paper Products",
+  tagline: "White-Label Notebook Manufacturer",
+  shortAbout: "Established in 2016 and based in Palghar, India, we are a dedicated white-label manufacturer of paper notebooks. We partner with recognised Indian brands and merchant exporters to produce notebooks across every category, backed by a conversion capacity of 25 metric tonnes of paper per day.",
+  proprietor: "Rakesh Ankush Chavan",
+  gstin: "27BNZPC4332C1Z1",
+  pan: "BNZPC4332C",
+  iec: "BNZPC4332C",
+  udyam: "UDYAM-MH-17-0069099",
   address: {
-    line1: "[ADD FACTORY / OFFICE ADDRESS LINE 1]",
-    line2: "[ADD INDUSTRIAL AREA / CITY / STATE]",
-    city: "[ADD CITY]",
-    state: "[ADD STATE]",
-    pincode: "[ADD PINCODE]",
+    line1: "Ground Floor, Plot No. 19–20, Dewan & Shah",
+    line2: "Palghar Udyog Nagar, Near Jayant Printery",
+    city: "Palghar",
+    state: "Maharashtra",
+    pincode: "401404",
     country: "India",
   },
   contact: {
-    phone: "[ADD PHONE NUMBER]",
-    whatsapp: "",
-    whatsappDisplay: "[ADD WHATSAPP NUMBER]",
-    email: "[ADD EMAIL ADDRESS]",
-    exportEmail: "[ADD EXPORT EMAIL]",
-    workingHours: "[ADD WORKING HOURS]",
+    phone: "+91 9766191027",
+    phoneTel: "tel:+919766191027",
+    phoneAlt: "+91 7770011312",
+    whatsapp: "https://wa.me/919766191027",
+    whatsappDisplay: "+91 9766191027",
+    email: "pustamofficial@gmail.com",
+    emailMailto: "mailto:pustamofficial@gmail.com",
+    exportEmail: "pustamofficial@gmail.com",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Plot+No+19-20+Palghar+Udyog+Nagar+Near+Jayant+Printery+Palghar+Maharashtra+401404",
+    workingHours: "Mon – Sat, 9:00 AM – 6:00 PM IST",
   },
 };

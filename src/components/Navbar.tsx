@@ -13,9 +13,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 15);
+      setScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -44,26 +45,26 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out ${
         scrolled
-          ? 'glass-nav py-2 shadow-md shadow-slate-900/10 border-b border-slate-200/90'
-          : 'bg-white py-2.5 sm:py-3 shadow-sm border-b border-slate-100'
+          ? 'bg-white/95 backdrop-blur-md py-2 shadow-md shadow-slate-900/5 border-b border-slate-200/90'
+          : 'bg-white py-3 sm:py-3.5 shadow-sm border-b border-slate-100'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         
-        {/* LEFT: Framed Highlighted Pustam Logo Badge */}
+        {/* LEFT: Highlighted Pustam Logo Badge */}
         <button
           onClick={() => handleLinkClick()}
-          className="flex items-center focus:outline-none group"
+          className="flex items-center focus:outline-none group shrink-0"
           aria-label="Pustam Paper Products Home"
         >
-          <div className="px-3 sm:px-4 py-1.5 rounded-xl bg-[#283890] shadow-md shadow-[#283890]/25 border border-[#3b4cb8] flex items-center group-hover:scale-105 group-hover:shadow-lg group-hover:border-[#f0e846]/60 transition-all duration-200">
+          <div className="px-3 sm:px-4 py-1.5 rounded-xl bg-[#283890] shadow-md shadow-[#283890]/20 border border-[#3b4cb8] flex items-center group-hover:scale-105 group-hover:shadow-lg group-hover:border-[#f0e846]/60 transition-all duration-200">
             <PustamLogo size="sm" />
           </div>
         </button>
 
-        {/* CENTER / RIGHT: Navigation Links */}
+        {/* CENTER / RIGHT: Navigation Links (Contact link removed, Certifications restored) */}
         <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
           <button
             onClick={() => handleLinkClick()}
@@ -91,23 +92,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
             onClick={() => handleLinkClick('factory')}
             className="text-sm font-semibold text-slate-700 hover:text-[#283890] transition-colors py-1"
           >
-            Factory
+            Manufacturing
+          </button>
+          <button
+            onClick={() => handleLinkClick('export')}
+            className="text-sm font-semibold text-slate-700 hover:text-[#283890] transition-colors py-1"
+          >
+            Export
           </button>
           <button
             onClick={() => handleLinkClick('certifications')}
             className="text-sm font-semibold text-slate-700 hover:text-[#283890] transition-colors py-1"
           >
             Certifications
-          </button>
-          <button
-            onClick={handleContactClick}
-            className={`text-sm font-semibold transition-colors hover:text-[#283890] relative py-1 ${
-              currentPage === 'contact'
-                ? 'text-[#283890] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#ff740e] after:rounded-full'
-                : 'text-slate-700'
-            }`}
-          >
-            Contact
           </button>
         </nav>
 
@@ -160,19 +157,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
             onClick={() => handleLinkClick('factory')}
             className="block w-full text-left py-3 px-4 rounded-xl text-sm font-semibold text-slate-800 hover:bg-slate-100 hover:text-[#283890] min-h-[44px] flex items-center"
           >
-            Factory
+            Manufacturing
+          </button>
+          <button
+            onClick={() => handleLinkClick('export')}
+            className="block w-full text-left py-3 px-4 rounded-xl text-sm font-semibold text-slate-800 hover:bg-slate-100 hover:text-[#283890] min-h-[44px] flex items-center"
+          >
+            Export
           </button>
           <button
             onClick={() => handleLinkClick('certifications')}
             className="block w-full text-left py-3 px-4 rounded-xl text-sm font-semibold text-slate-800 hover:bg-slate-100 hover:text-[#283890] min-h-[44px] flex items-center"
           >
             Certifications
-          </button>
-          <button
-            onClick={handleContactClick}
-            className="block w-full text-left py-3 px-4 rounded-xl text-sm font-semibold text-slate-800 hover:bg-slate-100 hover:text-[#283890] min-h-[44px] flex items-center"
-          >
-            Contact
           </button>
 
           <div className="pt-3 border-t border-slate-200">

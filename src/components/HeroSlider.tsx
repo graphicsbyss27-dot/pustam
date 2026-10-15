@@ -112,8 +112,8 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
             {slide.title}
           </h1>
 
-          {/* Small Supporting Statement Placeholder (Be Vietnam) */}
-          <p className="font-body text-xs sm:text-base md:text-lg text-white/85 font-normal leading-relaxed mb-6 sm:mb-8 max-w-xl font-mono">
+          {/* Supporting Statement */}
+          <p className="font-body text-xs sm:text-base md:text-lg text-white/85 font-normal leading-relaxed mb-6 sm:mb-8 max-w-xl">
             {slide.subtitle}
           </p>
 
@@ -131,7 +131,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
               onClick={() => onNavigate('contact')}
               className="px-5 sm:px-6 py-3.5 sm:py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-headline font-semibold text-xs sm:text-sm border border-white/20 hover:border-[#f0e846] transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 backdrop-blur-sm text-center min-h-[44px] flex items-center justify-center"
             >
-              Direct Factory Inquiry
+              Partner With Us
             </button>
           </div>
 

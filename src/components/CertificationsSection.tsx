@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Globe, ShieldCheck, FileCheck2, ExternalLink, CheckCircle2 } from 'lucide-react';
+import { Globe, ShieldCheck, FileCheck2, ExternalLink, CheckCircle2, FileText, Download } from 'lucide-react';
 import { CertificateModal, CertificateModalData } from './CertificateModal';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
@@ -12,21 +12,30 @@ export const CertificationsSection: React.FC = () => {
       code: 'IEC',
       title: 'Import Export Code (IEC)',
       authority: 'Directorate General of Foreign Trade (DGFT), Govt. of India',
-      placeholderText: '[ADD IEC DETAILS / DOCUMENT — Official export license & DGFT registration certificate]',
+      regNumber: 'BNZPC4332C',
+      date: '22/11/2022',
+      pdfUrl: '/documents/pustam-iec-certificate.pdf',
+      signatory: 'Rakesh Ankush Chavan',
       details: 'Registered for legal commercial export operations and overseas container trade from Indian seaports.',
     },
     {
       code: 'UDYAM',
       title: 'MSME UDYAM Registration',
       authority: 'Ministry of Micro, Small & Medium Enterprises, Govt. of India',
-      placeholderText: '[ADD UDYAM DETAILS / DOCUMENT — Manufacturing enterprise accreditation & MSME certificate]',
-      details: 'Government recognized paper products converting and manufacturing unit adhering to national industrial standards.',
+      regNumber: 'UDYAM-MH-17-0069099',
+      date: '01/09/2022',
+      pdfUrl: '/documents/pustam-udyam-certificate.pdf',
+      signatory: 'Pustam Paper Products',
+      details: 'Government recognized paper products converting enterprise (NIC 17093 & 18121) adhering to national industrial standards.',
     },
     {
       code: 'GST',
-      title: 'GST Registration',
+      title: 'GST Registration (REG-06)',
       authority: 'Goods and Services Tax Network, Govt. of India',
-      placeholderText: '[ADD GST DETAILS / DOCUMENT — Tax compliance regularisation & GSTIN certificate]',
+      regNumber: '27BNZPC4332C1Z1',
+      date: '22/07/2022 (Amended 14/08/2024)',
+      pdfUrl: '/documents/pustam-gst-certificate.pdf',
+      signatory: 'Rakesh Ankush Chavan',
       details: 'Fully regularized Indian tax entity enabling compliant interstate commerce and transparent B2B domestic invoicing.',
     },
   ];
@@ -72,7 +81,7 @@ export const CertificationsSection: React.FC = () => {
           </h2>
 
           <p className="font-body text-sm sm:text-base text-white/80 leading-relaxed">
-            Registered and compliant with Indian industrial authorities for trade transparency and global exports.
+            Registered and compliant with Indian industrial authorities for legal trade transparency, domestic supply, and global container exports.
           </p>
         </div>
 
@@ -106,17 +115,30 @@ export const CertificationsSection: React.FC = () => {
                   {cert.authority}
                 </div>
 
-                {/* Placeholder Document Block */}
-                <div className="p-4 rounded-xl bg-[#1e2b70] border border-dashed border-[#f0e846]/30 mb-4 group-hover:border-[#f0e846]/50 transition-colors">
-                  <p className="font-mono text-xs text-[#f0e846] leading-relaxed">
-                    {cert.placeholderText}
+                {/* Document Information Card with Registration Number */}
+                <div className="p-4 rounded-xl bg-[#1e2b70] border border-white/10 mb-4 group-hover:border-[#f0e846]/40 transition-colors space-y-1.5">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-white/60 block">
+                    Registration No:
+                  </span>
+                  <p className="font-mono text-xs sm:text-sm font-bold text-[#f0e846] tracking-wide break-all">
+                    {cert.regNumber}
                   </p>
+                  <span className="text-[11px] font-mono text-white/70 block">
+                    Issued: {cert.date}
+                  </span>
                 </div>
+
+                <p className="text-xs text-white/75 font-body leading-relaxed mb-4">
+                  {cert.details}
+                </p>
               </div>
 
               {/* Bottom Action Trigger */}
               <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-white/75 group-hover:text-white">
-                <span className="font-medium">Click to Preview Document</span>
+                <span className="font-medium flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#f0e846]" />
+                  <span>View Official PDF</span>
+                </span>
                 <div className="w-6 h-6 rounded-lg bg-white/10 flex items-center justify-center group-hover:bg-[#f0e846] group-hover:text-[#283890] transition-colors group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                   <ExternalLink className="w-3.5 h-3.5 transition-transform" />
                 </div>

@@ -1,12 +1,17 @@
 import React from 'react';
-import { X, ShieldCheck, Globe, FileCheck2, FileText, CheckCircle2 } from 'lucide-react';
+import { X, ShieldCheck, Globe, FileCheck2, FileText, CheckCircle2, Download, ExternalLink, Calendar, User, MapPin } from 'lucide-react';
 
 export interface CertificateModalData {
   code: string;
   title: string;
   authority: string;
-  placeholderText: string;
   details: string;
+  regNumber: string;
+  date: string;
+  pdfUrl: string;
+  signatory?: string;
+  subType?: string;
+  address?: string;
 }
 
 interface CertificateModalProps {
@@ -38,7 +43,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
           <div className="flex items-center gap-2.5">
             <span className="w-2.5 h-2.5 rounded-full bg-[#f0e846] animate-pulse" />
             <h3 className="font-headline font-bold text-base sm:text-lg text-white">
-              {data.code} — Official Document Preview
+              {data.code} — Official Government Registration
             </h3>
           </div>
           <button
@@ -54,53 +59,111 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
         <div className="p-6 sm:p-8 space-y-6">
           
           {/* Document Framing Box */}
-          <div className="p-6 sm:p-8 rounded-2xl bg-[#151f52] border-2 border-dashed border-[#f0e846]/40 text-center space-y-4">
+          <div className="p-6 sm:p-7 rounded-2xl bg-[#151f52] border border-white/15 space-y-5 text-left">
             
-            <div className="w-16 h-16 mx-auto rounded-2xl bg-[#283890] border border-white/15 flex items-center justify-center text-[#f0e846] shadow-lg">
-              <FileText className="w-8 h-8" />
-            </div>
+            {/* Top Badge & Code */}
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-[#283890] border border-white/15 flex items-center justify-center text-[#f0e846] shadow-md">
+                  <FileText className="w-6 h-6" />
+                </div>
+                <div>
+                  <span className="text-[11px] font-mono font-bold text-[#ff740e] uppercase tracking-wider block">
+                    GOVERNMENT OF INDIA
+                  </span>
+                  <h4 className="font-headline font-bold text-lg sm:text-xl text-white">
+                    {data.title}
+                  </h4>
+                </div>
+              </div>
 
-            <div>
-              <span className="text-xs font-mono font-bold text-[#ff740e] uppercase tracking-wider block mb-1">
-                {data.code} REGISTRATION CERTIFICATE
+              <span className="px-3 py-1 rounded-full bg-[#f0e846]/10 border border-[#f0e846]/30 text-xs font-mono font-bold text-[#f0e846]">
+                {data.code}
               </span>
-              <h4 className="font-headline font-bold text-xl sm:text-2xl text-white">
-                {data.title}
-              </h4>
-              <p className="text-xs text-white/70 italic mt-1">
-                Issuing Authority: {data.authority}
+            </div>
+
+            {/* Official Registration Number Card */}
+            <div className="p-4 rounded-xl bg-[#0f172a]/70 border border-white/15 space-y-1">
+              <div className="text-[11px] font-mono text-white/60 uppercase tracking-wider">
+                Registration / Identification Number:
+              </div>
+              <div className="font-mono font-bold text-base sm:text-lg text-[#f0e846] tracking-wide break-all">
+                {data.regNumber}
+              </div>
+            </div>
+
+            {/* Metadata Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs text-white/85">
+              <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1">
+                <span className="text-[10px] uppercase font-mono text-white/50 block">Issuing Authority</span>
+                <span className="font-medium text-white">{data.authority}</span>
+              </div>
+
+              <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1">
+                <span className="text-[10px] uppercase font-mono text-white/50 block">Registration / Effective Date</span>
+                <span className="font-medium text-white">{data.date}</span>
+              </div>
+
+              {data.signatory && (
+                <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1">
+                  <span className="text-[10px] uppercase font-mono text-white/50 block">Authorized Signatory / Legal Name</span>
+                  <span className="font-medium text-white">{data.signatory}</span>
+                </div>
+              )}
+
+              <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1">
+                <span className="text-[10px] uppercase font-mono text-white/50 block">Manufacturing Location</span>
+                <span className="font-medium text-white">Palghar, Maharashtra, India (401404)</span>
+              </div>
+            </div>
+
+            {/* Scope / Details */}
+            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
+              <p className="text-xs text-white/75 leading-relaxed font-body">
+                {data.details}
               </p>
             </div>
 
-            {/* Editable Document Slot Message */}
-            <div className="p-4 rounded-xl bg-black/40 border border-white/10 max-w-md mx-auto">
-              <p className="font-mono text-xs text-[#f0e846]">
-                {data.placeholderText}
-              </p>
-            </div>
-
-            <div className="flex items-center justify-center gap-2 text-xs text-white/80 pt-2">
+            {/* Verification status bar */}
+            <div className="flex items-center gap-2 text-xs text-[#f0e846] font-medium pt-1">
               <CheckCircle2 className="w-4 h-4 text-[#f0e846]" />
-              <span>Government of India Compliance Record</span>
+              <span>Verified Government Registration Certificate on File</span>
             </div>
 
           </div>
 
-          {/* Details Info */}
-          <p className="text-xs text-white/75 leading-relaxed text-center font-mono">
-            {data.details}
-          </p>
+          {/* Action Buttons: View PDF & Download */}
+          <div className="flex flex-col sm:flex-row gap-3">
+            <a
+              href={data.pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 py-3 px-4 rounded-xl bg-[#f0e846] hover:bg-[#ff740e] text-[#283890] hover:text-white font-headline font-bold text-xs sm:text-sm text-center transition-all flex items-center justify-center gap-2 shadow-lg"
+            >
+              <ExternalLink className="w-4 h-4" />
+              <span>View Official Certificate (PDF)</span>
+            </a>
+
+            <a
+              href={data.pdfUrl}
+              download
+              className="py-3 px-5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-headline font-semibold text-xs sm:text-sm text-center transition-colors flex items-center justify-center gap-2 border border-white/15"
+            >
+              <Download className="w-4 h-4" />
+              <span>Download PDF</span>
+            </a>
+          </div>
 
         </div>
 
         {/* Footer */}
         <div className="px-6 py-4 bg-[#151f52] border-t border-white/10 flex items-center justify-between text-xs text-white/70">
-          <span>Pustam Paper Products Verification</span>
+          <span>Pustam Paper Products — Palghar, Maharashtra</span>
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-xl bg-[#f0e846] hover:bg-[#ff740e] text-[#283890] hover:text-white font-headline font-semibold transition-colors"
+            className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-headline transition-colors"
           >
-            Close Preview
+            Close
           </button>
         </div>
 

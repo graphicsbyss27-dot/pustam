@@ -13,6 +13,7 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { COMPANY_DETAILS } from '../data/websiteData';
 
 interface ContactPageProps {
   onNavigate?: (page: 'home' | 'contact') => void;
@@ -20,6 +21,7 @@ interface ContactPageProps {
 
 export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   const { ref, isVisible } = useScrollReveal();
+  const { contact, address, gstin, pan } = COMPANY_DETAILS;
   const [formData, setFormData] = useState({
     fullName: '',
     companyName: '',
@@ -108,7 +110,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
           
           {/* WhatsApp Us Button Card */}
           <a
-            href="https://wa.me/"
+            href={contact.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             className="p-5 rounded-2xl bg-[#25D366]/20 border border-[#25D366]/40 hover:bg-[#25D366]/30 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-between group shadow-lg"
@@ -133,7 +135,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
           {/* Call Us Button Card */}
           <a
-            href="tel:"
+            href={contact.phoneTel}
             className="p-5 rounded-2xl bg-[#ff740e]/20 border border-[#ff740e]/40 hover:bg-[#ff740e]/30 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-between group shadow-lg"
           >
             <div className="flex items-center gap-3.5">
@@ -177,7 +179,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   </div>
                   <div>
                     <span className="text-[11px] text-white/50 block">Phone</span>
-                    [ADD PHONE NUMBER]
+                    {contact.phone}
                   </div>
                 </div>
 
@@ -188,7 +190,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   </div>
                   <div>
                     <span className="text-[11px] text-white/50 block">Email</span>
-                    [ADD EMAIL ADDRESS]
+                    <a href={contact.emailMailto} className="hover:text-[#f0e846] transition-colors break-all">{contact.email}</a>
                   </div>
                 </div>
 
@@ -199,7 +201,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   </div>
                   <div>
                     <span className="text-[11px] text-white/50 block">WhatsApp</span>
-                    [ADD WHATSAPP NUMBER]
+                    {contact.whatsappDisplay}
                   </div>
                 </div>
 
@@ -211,8 +213,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   <div>
                     <span className="text-[11px] text-white/50 block">Address</span>
                     <span className="leading-relaxed">
-                      [ADD FULL ADDRESS — Manufacturing Plant & Registered Office, City, State, PIN Code, India]
-                    </span>
+                        {address.line1}, {address.line2}, {address.city}, {address.state} {address.pincode}, {address.country}
+                      </span>
                   </div>
                 </div>
 
@@ -248,17 +250,16 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   <div className="w-8 h-1.5 bg-black/40 rounded-full blur-sm mt-1" />
                 </div>
 
-                {/* Map placeholder banner */}
                 <div className="absolute bottom-3 left-3 right-3 bg-black/75 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10 text-center">
                   <p className="font-mono text-[11px] text-[#f0e846]">
-                    [ADD GOOGLE MAP EMBED]
+                    Palghar Udyog Nagar, Palghar 401404
                   </p>
                 </div>
               </div>
 
               {/* Get Directions Button */}
               <a
-                href="https://maps.google.com"
+                href={contact.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-3 px-4 rounded-xl bg-[#f0e846] hover:bg-[#ff740e] text-[#283890] hover:text-white font-headline font-bold text-xs sm:text-sm tracking-wide transition-all shadow flex items-center justify-center gap-2 group"
