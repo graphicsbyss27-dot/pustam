@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, ShieldCheck, Globe, FileCheck2, FileText, CheckCircle2, Download, ExternalLink, Calendar, User, MapPin } from 'lucide-react';
+import { X, ShieldCheck, Globe, FileCheck2, FileText, CheckCircle2, ExternalLink, Calendar, User, MapPin } from 'lucide-react';
 
 export interface CertificateModalData {
   code: string;
@@ -132,7 +132,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
 
           </div>
 
-          {/* Action Buttons: View PDF & Download */}
+          {/* Action Button: View PDF only */}
           <div className="flex flex-col sm:flex-row gap-3">
             <a
               href={data.pdfUrl}
@@ -142,15 +142,6 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             >
               <ExternalLink className="w-4 h-4" />
               <span>View Official Certificate (PDF)</span>
-            </a>
-
-            <a
-              href={data.pdfUrl}
-              download
-              className="py-3 px-5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-headline font-semibold text-xs sm:text-sm text-center transition-colors flex items-center justify-center gap-2 border border-white/15"
-            >
-              <Download className="w-4 h-4" />
-              <span>Download PDF</span>
             </a>
           </div>
 

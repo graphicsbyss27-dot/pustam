@@ -23,12 +23,13 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const { contact, address } = COMPANY_DETAILS;
 
   const quickLinks = [
+    { label: 'Home', id: undefined },
     { label: 'About Us', id: 'about' },
     { label: 'Products', id: 'products' },
-    { label: 'White-Label', id: 'white-label' },
-    { label: 'Manufacturing', id: 'factory' },
-    { label: 'Export', id: 'export' },
+    { label: 'Infrastructure', id: 'factory' },
+    { label: 'Export & Reach', id: 'export' },
     { label: 'Certifications', id: 'certifications' },
+    { label: 'White-Label OEM', id: 'white-label' },
   ];
 
   const credentials = [
@@ -105,20 +106,29 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Col 2: Quick Links — 3 cols */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="font-headline font-bold text-sm sm:text-[15px] text-white tracking-wide uppercase">
-              Navigate
+              Quick Links
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {quickLinks.map(({ label, id }) => (
                 <li key={label}>
                   <button
                     onClick={() => handleLink(id)}
-                    className="group flex items-center gap-2 text-xs sm:text-[13px] text-white/55 hover:text-[#f0e846] transition-colors duration-150 font-body"
+                    className="group flex items-center gap-2.5 text-xs sm:text-[13px] text-white/55 hover:text-[#f0e846] transition-colors duration-150 font-body w-full text-left"
                   >
-                    <span className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-[#f0e846] group-hover:scale-125 transition-all duration-150 shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/15 group-hover:bg-[#f0e846] transition-all duration-150 shrink-0" />
                     {label}
                   </button>
                 </li>
               ))}
+              <li>
+                <button
+                  onClick={() => onNavigate('contact')}
+                  className="group flex items-center gap-2.5 text-xs sm:text-[13px] text-white/55 hover:text-[#f0e846] transition-colors duration-150 font-body w-full text-left"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/15 group-hover:bg-[#f0e846] transition-all duration-150 shrink-0" />
+                  Contact Us
+                </button>
+              </li>
             </ul>
           </div>
 

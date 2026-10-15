@@ -6,7 +6,7 @@ import { FactorySection } from '../components/FactorySection';
 import { ExportGlobalSection } from '../components/ExportGlobalSection';
 import { CertificationsSection } from '../components/CertificationsSection';
 import { WhiteLabelSection } from '../components/WhiteLabelSection';
-import { FinalCtaSection } from '../components/FinalCtaSection';
+
 
 interface HomePageProps {
   onNavigate: (page: 'home' | 'contact', sectionId?: string) => void;
@@ -37,8 +37,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* 7. White-Label Manufacturing — kept here, above footer CTA */}
       <WhiteLabelSection onNavigate={onNavigate} />
 
-      {/* 8. Final CTA Section */}
-      <FinalCtaSection onNavigate={onNavigate} />
 
     </div>
   );
