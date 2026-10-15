@@ -13,7 +13,7 @@ export default {
       },
       fontFamily: {
         headline: ['Fredoka', 'sans-serif'],
-        body: ['"Be Vietnam Pro"', '"Be Vietnam"', 'sans-serif'],
+        body: ['"DM Sans"', 'system-ui', 'sans-serif'],
       },
       keyframes: {
         marquee: {

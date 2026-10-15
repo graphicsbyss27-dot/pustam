@@ -1,7 +1,8 @@
 import React from 'react';
-import { ArrowRight, MessageSquare, Sparkles, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Sparkles, ShieldCheck } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { COMPANY_DETAILS } from '../data/websiteData';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 interface FinalCtaSectionProps {
   onNavigate: (page: 'home' | 'contact') => void;
@@ -61,9 +62,9 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onNavigate }) 
             href={contact.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto px-7 py-3.5 sm:py-4 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-headline font-semibold text-sm sm:text-base tracking-wide transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-xl flex items-center justify-center gap-2 min-h-[48px]"
+            className="w-full sm:w-auto px-7 py-3.5 sm:py-4 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-headline font-semibold text-sm sm:text-base tracking-wide transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-xl flex items-center justify-center gap-2.5 min-h-[48px]"
           >
-            <MessageSquare className="w-4 h-4 fill-current" />
+            <WhatsAppIcon className="w-5 h-5 rounded-md object-contain shrink-0" />
             <span>WhatsApp Us</span>
           </a>
 

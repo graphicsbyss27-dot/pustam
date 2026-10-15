@@ -1,7 +1,8 @@
 import React from 'react';
-import { MapPin, Phone, Mail, Navigation, MessageSquare, PhoneCall, ExternalLink } from 'lucide-react';
+import { MapPin, Phone, Mail, Navigation, PhoneCall, ExternalLink } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { COMPANY_DETAILS } from '../data/websiteData';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 interface LocationSectionProps {
   onNavigate?: (page: 'home' | 'contact') => void;
@@ -90,9 +91,9 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) 
                   href={contact.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-headline font-semibold text-xs flex items-center justify-center gap-1.5 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow"
+                  className="py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-headline font-semibold text-xs flex items-center justify-center gap-2 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow"
                 >
-                  <MessageSquare className="w-4 h-4 fill-current" />
+                  <WhatsAppIcon className="w-4 h-4 rounded-sm object-contain shrink-0" />
                   <span>WhatsApp</span>
                 </a>
 

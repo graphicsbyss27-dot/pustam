@@ -3,7 +3,6 @@ import {
   Phone,
   Mail,
   MapPin,
-  MessageSquare,
   Navigation,
   Send,
   CheckCircle2,
@@ -14,6 +13,7 @@ import {
 } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { COMPANY_DETAILS } from '../data/websiteData';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 
 interface ContactPageProps {
   onNavigate?: (page: 'home' | 'contact') => void;
@@ -116,8 +116,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
             className="p-5 rounded-2xl bg-[#25D366]/20 border border-[#25D366]/40 hover:bg-[#25D366]/30 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-between group shadow-lg"
           >
             <div className="flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-xl bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform">
-                <MessageSquare className="w-5 h-5 fill-current" />
+              <div className="w-11 h-11 shrink-0 drop-shadow group-hover:scale-105 transition-transform">
+                <WhatsAppIcon className="w-full h-full object-contain" />
               </div>
               <div>
                 <h3 className="font-headline font-bold text-base sm:text-lg text-white">
@@ -196,8 +196,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
                 {/* WhatsApp */}
                 <div className="p-3.5 rounded-xl bg-[#1e2b70] border border-white/10 flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#283890] flex items-center justify-center text-[#25D366] shrink-0">
-                    <MessageSquare className="w-4 h-4 fill-current" />
+                  <div className="w-8 h-8 shrink-0">
+                    <WhatsAppIcon className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <span className="text-[11px] text-white/50 block">WhatsApp</span>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { X, Shield, Cpu, PackageCheck, Zap, MessageSquare, Factory } from 'lucide-react';
+import { X, Shield, Cpu, PackageCheck, Zap, Factory } from 'lucide-react';
 import { COMPANY_DETAILS } from '../data/websiteData';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 interface VideoModalProps {
   isOpen: boolean;
@@ -133,7 +134,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose }) => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-headline font-bold transition-all shadow-lg hover:scale-105"
               >
-                <MessageSquare className="w-4 h-4 fill-current" />
+                <WhatsAppIcon className="w-4 h-4 rounded-sm object-contain shrink-0" />
                 <span>Request Video Walkthrough on WhatsApp</span>
               </a>
               <a

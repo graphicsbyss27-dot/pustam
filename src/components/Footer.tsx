@@ -1,7 +1,8 @@
 import React from 'react';
-import { Phone, MessageSquare, MapPin, Mail, ArrowUp, ArrowRight, Globe, Award, Package } from 'lucide-react';
+import { Phone, MapPin, Mail, ArrowUp, ArrowRight, Globe, Award, Package } from 'lucide-react';
 import { PustamLogo } from './PustamLogo';
 import { COMPANY_DETAILS } from '../data/websiteData';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 interface FooterProps {
   onNavigate: (page: 'home' | 'contact', sectionId?: string) => void;
@@ -70,7 +71,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#25D366]/15 hover:bg-[#25D366] text-[#25D366] hover:text-white text-xs font-semibold border border-[#25D366]/30 hover:border-[#25D366] transition-all duration-200"
               >
-                <MessageSquare className="w-3.5 h-3.5 fill-current" />
+                <WhatsAppIcon className="w-4 h-4 rounded-sm object-contain shrink-0" />
                 <span>WhatsApp</span>
               </a>
               <a

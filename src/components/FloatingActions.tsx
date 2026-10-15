@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, ArrowUp } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import { COMPANY_DETAILS } from '../data/websiteData';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const FloatingActions: React.FC = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const { contact } = COMPANY_DETAILS;
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 350);
-    };
+    const handleScroll = () => setShowScrollTop(window.scrollY > 350);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
     <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-2.5 pointer-events-none">
-      
+
       {/* Scroll to Top */}
       {showScrollTop && (
         <button
@@ -33,20 +30,21 @@ export const FloatingActions: React.FC = () => {
         </button>
       )}
 
-      {/* WhatsApp Button only - Phone Call icon removed per specifications */}
+      {/* WhatsApp Button — real brand icon */}
       <a
         href={contact.whatsapp}
         target="_blank"
         rel="noopener noreferrer"
-        className="pointer-events-auto relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white shadow-2xl flex items-center justify-center transition-all hover:scale-105 group border-2 border-white/40"
+        className="pointer-events-auto relative w-14 h-14 sm:w-16 sm:h-16 hover:scale-105 active:scale-95 transition-all duration-200 drop-shadow-2xl"
         title="Chat with us on WhatsApp"
         aria-label="Chat with us on WhatsApp"
       >
-        <span className="absolute -top-0.5 -right-0.5 flex h-3.5 w-3.5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-300 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#f0e846]"></span>
+        {/* Live pulse indicator */}
+        <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 z-10">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f0e846] opacity-75" />
+          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#f0e846]" />
         </span>
-        <MessageSquare className="w-6 h-6 fill-current text-white" />
+        <WhatsAppIcon className="w-full h-full object-contain" />
       </a>
 
     </div>

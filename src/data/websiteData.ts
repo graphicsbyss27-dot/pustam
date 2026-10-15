@@ -298,7 +298,7 @@ export const COMPANY_DETAILS = {
     email: "pustamofficial@gmail.com",
     emailMailto: "mailto:pustamofficial@gmail.com",
     exportEmail: "pustamofficial@gmail.com",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Plot+No+19-20+Palghar+Udyog+Nagar+Near+Jayant+Printery+Palghar+Maharashtra+401404",
+    mapsUrl: "https://maps.app.goo.gl/bwigE29JJdmmgDDx8",
     workingHours: "Mon – Sat, 9:00 AM – 6:00 PM IST",
   },
 };
