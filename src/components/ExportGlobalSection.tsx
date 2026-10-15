@@ -1,10 +1,26 @@
 import React from 'react';
-import { Globe, ArrowRight, PackageCheck, Anchor, ShieldCheck } from 'lucide-react';
+import { Globe, ArrowRight, PackageCheck, Anchor, ShieldCheck, TrendingUp, MapPin } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface ExportGlobalSectionProps {
   onNavigate?: (page: 'home' | 'contact', sectionId?: string) => void;
 }
+
+const EXPORT_DESTINATIONS = [
+  { region: 'Middle East & GCC', countries: 'UAE, Saudi Arabia, Kuwait, Qatar', color: '#f0e846', dot: '#f0e846' },
+  { region: 'UK & Europe', countries: 'United Kingdom, Germany, France', color: '#ff740e', dot: '#ff740e' },
+  { region: 'North America', countries: 'USA, Canada', color: '#f0e846', dot: '#f0e846' },
+  { region: 'Africa', countries: 'Nigeria, Kenya, Tanzania, South Africa', color: '#ff740e', dot: '#ff740e' },
+  { region: 'Southeast Asia', countries: 'Malaysia, Singapore, Indonesia', color: '#f0e846', dot: '#f0e846' },
+  { region: 'Indian Subcontinent', countries: 'Bangladesh, Sri Lanka, Nepal', color: '#a5f3fc', dot: '#a5f3fc' },
+];
+
+const STATS = [
+  { value: '6+', label: 'Export Regions', icon: Globe },
+  { value: '25 MT', label: 'Daily Capacity', icon: TrendingUp },
+  { value: 'JNPT', label: 'Port of Dispatch', icon: Anchor },
+  { value: 'IEC', label: 'Licensed Exporter', icon: ShieldCheck },
+];
 
 export const ExportGlobalSection: React.FC<ExportGlobalSectionProps> = ({ onNavigate }) => {
   const { ref, isVisible } = useScrollReveal();
@@ -17,339 +33,153 @@ export const ExportGlobalSection: React.FC<ExportGlobalSectionProps> = ({ onNavi
         isVisible ? 'reveal-visible' : ''
       }`}
     >
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#283890]/50 rounded-full blur-3xl pointer-events-none" />
+      {/* Subtle ambient glow */}
+      <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-[#283890]/40 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-[#f0e846]/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Section Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-12 sm:mb-14">
-          
-          {/* Left Column: Eyebrow & Headline (7 cols) */}
-          <div className="lg:col-span-7 space-y-3">
-            {/* Small Eyebrow */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end mb-14 sm:mb-16">
+          <div className="lg:col-span-7 space-y-4">
             <div className="flex items-center gap-2">
               <span className="w-8 h-0.5 bg-[#f0e846]" />
               <span className="text-[#f0e846] font-headline font-semibold text-xs sm:text-sm uppercase tracking-widest">
                 GLOBAL REACH
               </span>
             </div>
-
-            {/* Heading (Fredoka) */}
             <h2 className="font-headline font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white tracking-tight leading-tight">
               Shipments <span className="text-[#f0e846]">Worldwide</span>.
             </h2>
-          </div>
-
-          {/* Right Column: Supporting Paragraph (5 cols) */}
-          <div className="lg:col-span-5 space-y-4 lg:pt-2">
-            <p className="font-body text-sm sm:text-base text-white/85 leading-relaxed">
-              From India to international markets, Pustam Paper Products supplies notebook products to buyers worldwide, supported by manufacturing capabilities and export-ready packaging.
+            <p className="font-body text-sm sm:text-base text-white/80 leading-relaxed max-w-xl">
+              From our Palghar manufacturing facility, Pustam Paper Products exports containerised
+              sea freight through JNPT — India's largest container port — to buyers across
+              six global regions.
             </p>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#f0e846]/10 border border-[#f0e846]/25 text-[#f0e846] text-xs font-semibold">
-              <Globe className="w-4 h-4" />
-              <span className="font-headline tracking-wide">International Container Shipments</span>
-            </div>
           </div>
-
-        </div>
-
-        {/* Elegant Animated Globe Shipping Visual Canvas */}
-        <div className="rounded-3xl bg-[#151f52] border border-white/15 p-6 sm:p-8 md:p-10 shadow-2xl relative overflow-hidden mb-12">
-          
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 relative z-20">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-[#283890] flex items-center justify-center text-[#f0e846] border border-white/10">
-                <Globe className="w-5 h-5" />
-              </div>
-              <div>
-                <h3 className="font-headline font-bold text-base sm:text-lg text-white">
-                  Worldwide Shipping Corridors
-                </h3>
-                <p className="text-xs text-white/60 font-mono">
-                  Manufacturing Origin: India (Palghar) → Global Ports & Buyers
-                </p>
-              </div>
-            </div>
-
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white/80 self-start sm:self-auto font-mono">
+          <div className="lg:col-span-5 flex items-center gap-3">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f0e846]/10 border border-[#f0e846]/25 text-[#f0e846] text-xs font-semibold font-mono">
               <span className="w-2 h-2 rounded-full bg-[#f0e846] animate-pulse" />
-              <span>Active International Despatch</span>
+              <span>Active International Exports · IEC: BNZPC4332C</span>
             </div>
           </div>
+        </div>
 
-          {/* Globe Container Visual */}
-          <div className="relative w-full aspect-[4/3] sm:aspect-[16/8] md:aspect-[21/9] bg-[#101b44] rounded-2xl border border-white/10 overflow-hidden flex items-center justify-center">
-            
-            {/* Subtle Starfield / Grid Background */}
-            <div className="absolute inset-0 bg-grid-pattern opacity-15" />
-            <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-[#0a122e] pointer-events-none" />
-
-            {/* Responsive Animated Globe SVG */}
-            <svg
-              viewBox="0 0 1000 500"
-              className="w-full h-full relative z-10 select-none pointer-events-none"
-              preserveAspectRatio="xMidYMid meet"
+        {/* Stats Row */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          {STATS.map(({ value, label, icon: Icon }) => (
+            <div
+              key={label}
+              className="p-5 sm:p-6 rounded-2xl bg-[#151f52] border border-white/10 flex flex-col gap-2 hover:border-[#f0e846]/30 transition-colors duration-200"
             >
-              <defs>
-                {/* Radial gradient for globe sphere depth */}
-                <radialGradient id="globeSphere" cx="42%" cy="42%" r="60%">
-                  <stop offset="0%" stopColor="#283890" stopOpacity="0.85" />
-                  <stop offset="65%" stopColor="#182361" stopOpacity="0.95" />
-                  <stop offset="100%" stopColor="#0b1238" stopOpacity="1" />
-                </radialGradient>
+              <div className="w-9 h-9 rounded-xl bg-[#283890] flex items-center justify-center text-[#f0e846] border border-white/10">
+                <Icon className="w-4.5 h-4.5 w-[18px] h-[18px]" />
+              </div>
+              <div className="font-headline font-bold text-2xl sm:text-3xl text-[#f0e846]">{value}</div>
+              <div className="text-xs text-white/60 font-body leading-snug">{label}</div>
+            </div>
+          ))}
+        </div>
 
-                {/* Outer Atmosphere Glow */}
-                <radialGradient id="atmosphereGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="85%" stopColor="#3b4cb8" stopOpacity="0" />
-                  <stop offset="97%" stopColor="#f0e846" stopOpacity="0.25" />
-                  <stop offset="100%" stopColor="#ff740e" stopOpacity="0.4" />
-                </radialGradient>
+        {/* Two-column: Origin Info + Destination List */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
 
-                {/* Gradients for Shipping Arcs */}
-                <linearGradient id="arcEast" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#f0e846" stopOpacity="0.95" />
-                  <stop offset="100%" stopColor="#ff740e" stopOpacity="0.3" />
-                </linearGradient>
+          {/* LEFT: Origin + Corridor Info */}
+          <div className="lg:col-span-5 space-y-4">
 
-                <linearGradient id="arcWest" x1="100%" y1="0%" x2="0%" y2="0%">
-                  <stop offset="0%" stopColor="#f0e846" stopOpacity="0.95" />
-                  <stop offset="100%" stopColor="#ff740e" stopOpacity="0.3" />
-                </linearGradient>
-              </defs>
-
-              {/* Central Globe Sphere */}
-              <g transform="translate(500, 250)">
-                
-                {/* Atmosphere Rim */}
-                <circle cx="0" cy="0" r="185" fill="none" stroke="url(#atmosphereGlow)" strokeWidth="6" opacity="0.6" />
-                
-                {/* Main Sphere Body */}
-                <circle cx="0" cy="0" r="180" fill="url(#globeSphere)" stroke="rgba(255,255,255,0.18)" strokeWidth="1.5" />
-
-                {/* Latitude Ellipses */}
-                <ellipse cx="0" cy="0" rx="180" ry="18" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="1" strokeDasharray="3 4" />
-                <ellipse cx="0" cy="-60" rx="169" ry="15" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="1" strokeDasharray="3 4" />
-                <ellipse cx="0" cy="60" rx="169" ry="15" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="1" strokeDasharray="3 4" />
-                <ellipse cx="0" cy="-120" rx="134" ry="12" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1" strokeDasharray="3 4" />
-                <ellipse cx="0" cy="120" rx="134" ry="12" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1" strokeDasharray="3 4" />
-
-                {/* Longitude Meridians */}
-                <ellipse cx="0" cy="0" rx="55" ry="180" fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
-                <ellipse cx="0" cy="0" rx="115" ry="180" fill="none" stroke="rgba(255,255,255,0.09)" strokeWidth="1" />
-                <line x1="0" y1="-180" x2="0" y2="180" stroke="rgba(255,255,255,0.14)" strokeWidth="1" />
-
-                {/* Simplified Continental Silhouettes (Eastern Hemisphere & Asia Central) */}
-                {/* Eurasia Continent Silhouette */}
-                <path
-                  d="M -50 -105 Q -20 -115 15 -100 Q 55 -95 90 -70 Q 110 -50 85 -25 Q 60 -10 35 -15 Q 15 -35 -10 -40 Q -35 -40 -60 -65 Z"
-                  fill="rgba(240, 232, 70, 0.12)"
-                  stroke="rgba(240, 232, 70, 0.28)"
-                  strokeWidth="1.2"
-                />
-
-                {/* Indian Subcontinent Silhouette */}
-                <path
-                  d="M 5 -35 Q 25 -32 40 -25 Q 35 10 20 30 Q 10 15 5 -10 Z"
-                  fill="rgba(240, 232, 70, 0.25)"
-                  stroke="#f0e846"
-                  strokeWidth="1.5"
-                />
-
-                {/* Africa Silhouette */}
-                <path
-                  d="M -75 -45 Q -55 -40 -45 -15 Q -40 25 -65 75 Q -85 50 -95 15 Q -105 -20 -75 -45 Z"
-                  fill="rgba(255, 255, 255, 0.08)"
-                  stroke="rgba(255, 255, 255, 0.2)"
-                  strokeWidth="1.2"
-                />
-
-                {/* Southeast Asia / Australasia Silhouette */}
-                <path
-                  d="M 75 10 Q 105 15 120 40 Q 105 75 80 55 Q 65 30 75 10 Z"
-                  fill="rgba(255, 255, 255, 0.08)"
-                  stroke="rgba(255, 255, 255, 0.2)"
-                  strokeWidth="1.2"
-                />
-
-                {/* Americas Western Rim (Curved at Horizon) */}
-                <path
-                  d="M -150 -70 Q -130 -40 -140 10 Q -155 45 -145 90 Q -175 60 -170 -30 Z"
-                  fill="rgba(255, 255, 255, 0.06)"
-                  stroke="rgba(255, 255, 255, 0.15)"
-                  strokeWidth="1"
-                />
-
-                {/* India Origin Hub (Centered at approx x: 22, y: 0) */}
-                <g transform="translate(22, 2)">
-                  {/* Radar pulse rings */}
-                  <circle cx="0" cy="0" r="14" fill="none" stroke="#f0e846" strokeWidth="1.5" opacity="0.6" className="animate-ping" />
-                  <circle cx="0" cy="0" r="7" fill="#ff740e" stroke="#ffffff" strokeWidth="1.5" />
-                  <circle cx="0" cy="0" r="3" fill="#f0e846" />
-                </g>
-              </g>
-
-              {/* Shipping Arcs extending outward across the globe */}
-              {/* Arc 1: India to Middle East & GCC */}
-              <path
-                id="routeMiddleEast"
-                d="M 522 252 Q 440 210 370 230"
-                fill="none"
-                stroke="url(#arcWest)"
-                strokeWidth="2.5"
-                strokeDasharray="6 4"
-                className="animate-pulse"
-              />
-
-              {/* Arc 2: India to Europe & UK */}
-              <path
-                id="routeEurope"
-                d="M 522 252 Q 420 120 280 150"
-                fill="none"
-                stroke="url(#arcWest)"
-                strokeWidth="2.5"
-                strokeDasharray="6 4"
-              />
-
-              {/* Arc 3: India to North America (via Atlantic corridor) */}
-              <path
-                id="routeAmericas"
-                d="M 522 252 Q 350 80 150 170"
-                fill="none"
-                stroke="url(#arcWest)"
-                strokeWidth="2"
-                strokeDasharray="5 5"
-              />
-
-              {/* Arc 4: India to Africa */}
-              <path
-                id="routeAfrica"
-                d="M 522 252 Q 450 310 380 340"
-                fill="none"
-                stroke="url(#arcWest)"
-                strokeWidth="2.2"
-                strokeDasharray="6 4"
-              />
-
-              {/* Arc 5: India to Southeast Asia & Asia-Pacific */}
-              <path
-                id="routeAsiaPacific"
-                d="M 522 252 Q 620 240 730 270"
-                fill="none"
-                stroke="url(#arcEast)"
-                strokeWidth="2.5"
-                strokeDasharray="6 4"
-              />
-
-              {/* Arc 6: India to Far East */}
-              <path
-                id="routeFarEast"
-                d="M 522 252 Q 650 170 820 190"
-                fill="none"
-                stroke="url(#arcEast)"
-                strokeWidth="2"
-                strokeDasharray="5 5"
-              />
-
-              {/* Destination Hub Markers */}
-              {/* Middle East Marker */}
-              <circle cx="370" cy="230" r="5" fill="#f0e846" stroke="#283890" strokeWidth="2" />
-              <text x="350" y="215" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="end" opacity="0.9">
-                Middle East & GCC
-              </text>
-
-              {/* Europe Marker */}
-              <circle cx="280" cy="150" r="5" fill="#f0e846" stroke="#283890" strokeWidth="2" />
-              <text x="260" y="140" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="end" opacity="0.9">
-                UK & Europe
-              </text>
-
-              {/* Americas Marker */}
-              <circle cx="150" cy="170" r="5" fill="#ff740e" stroke="#ffffff" strokeWidth="2" />
-              <text x="140" y="195" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="end" opacity="0.9">
-                North America
-              </text>
-
-              {/* Africa Marker */}
-              <circle cx="380" cy="340" r="5" fill="#f0e846" stroke="#283890" strokeWidth="2" />
-              <text x="360" y="360" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="end" opacity="0.9">
-                African Markets
-              </text>
-
-              {/* Asia Pacific Marker */}
-              <circle cx="730" cy="270" r="5" fill="#f0e846" stroke="#283890" strokeWidth="2" />
-              <text x="745" y="285" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="start" opacity="0.9">
-                Southeast Asia
-              </text>
-
-              {/* Global Markets Far East Marker */}
-              <circle cx="820" cy="190" r="5" fill="#ff740e" stroke="#ffffff" strokeWidth="2" />
-              <text x="835" y="195" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="start" opacity="0.9">
-                Worldwide Ports
-              </text>
-
-              {/* Origin Callout Badge above India */}
-              <g transform="translate(522, 215)">
-                <rect x="-65" y="-22" width="130" height="22" rx="6" fill="#151f52" stroke="#f0e846" strokeWidth="1.2" />
-                <text x="0" y="-7" fill="#f0e846" fontSize="10.5" fontWeight="bold" fontFamily="monospace" textAnchor="middle">
-                  ORIGIN: INDIA
-                </text>
-              </g>
-            </svg>
-
-            {/* Bottom Caption Pill */}
-            <div className="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-auto bg-[#151f52]/90 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/15 flex items-center gap-3">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#f0e846] shrink-0" />
-              <p className="text-xs text-white/80 font-mono">
-                Containerised sea freight through major Indian container ports to buyers worldwide.
-              </p>
+            {/* Origin Card */}
+            <div className="p-6 rounded-2xl bg-[#151f52] border border-[#f0e846]/25 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#f0e846]/5 rounded-full blur-2xl pointer-events-none" />
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-[#283890] flex items-center justify-center border border-[#f0e846]/30">
+                  <MapPin className="w-5 h-5 text-[#f0e846]" />
+                </div>
+                <div>
+                  <div className="font-headline font-bold text-white text-sm">Manufacturing Origin</div>
+                  <div className="text-xs text-white/55 font-mono">Palghar, Maharashtra, India</div>
+                </div>
+              </div>
+              <div className="space-y-2.5 text-xs text-white/75 font-body leading-relaxed">
+                <div className="flex items-center gap-2.5">
+                  <Anchor className="w-3.5 h-3.5 text-[#ff740e] shrink-0" />
+                  <span>Sea freight via JNPT / Nhava Sheva, Mumbai</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <PackageCheck className="w-3.5 h-3.5 text-[#f0e846] shrink-0" />
+                  <span>Shrink-wrapped &amp; corrugated export carton packing</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#f0e846] shrink-0" />
+                  <span>DGFT IEC &amp; MSME registered — compliant international trade</span>
+                </div>
+              </div>
             </div>
 
+            {/* Trust pillars */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
+              {[
+                { icon: PackageCheck, title: 'Export-Ready Packaging', desc: 'Heavy-duty shrink wrapping and corrugated cartons protect goods through sea transit.', color: 'text-[#f0e846]' },
+                { icon: Anchor, title: 'Port Accessibility', desc: 'Direct highway link from Palghar to Mumbai seaports (Nhava Sheva / JNPT).', color: 'text-[#ff740e]' },
+                { icon: ShieldCheck, title: 'Licensed Exporter', desc: 'IEC: BNZPC4332C · Full DGFT compliance for international trade.', color: 'text-[#f0e846]' },
+              ].map(({ icon: Icon, title, desc, color }) => (
+                <div key={title} className="p-5 rounded-2xl bg-[#151f52] border border-white/10 flex gap-4 items-start hover:border-white/20 transition-colors duration-200">
+                  <div className={`w-9 h-9 rounded-xl bg-[#283890] flex items-center justify-center shrink-0 border border-white/10 ${color}`}>
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="font-headline font-semibold text-sm text-white mb-0.5">{title}</div>
+                    <div className="text-xs text-white/60 font-body leading-relaxed">{desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* RIGHT: Export Destinations Grid */}
+          <div className="lg:col-span-7">
+            <div className="p-6 sm:p-8 rounded-2xl bg-[#151f52] border border-white/10 h-full">
+              <div className="flex items-center gap-2 mb-6">
+                <Globe className="w-5 h-5 text-[#f0e846]" />
+                <h3 className="font-headline font-bold text-base sm:text-lg text-white">Export Destinations</h3>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {EXPORT_DESTINATIONS.map(({ region, countries, dot }) => (
+                  <div
+                    key={region}
+                    className="flex items-start gap-3 p-4 rounded-xl bg-[#1e2b70]/70 border border-white/8 hover:border-white/20 transition-all duration-200 group"
+                  >
+                    <div
+                      className="w-2.5 h-2.5 rounded-full shrink-0 mt-1"
+                      style={{ background: dot, boxShadow: `0 0 6px ${dot}88` }}
+                    />
+                    <div>
+                      <div className="font-headline font-semibold text-sm text-white group-hover:text-[#f0e846] transition-colors duration-200">
+                        {region}
+                      </div>
+                      <div className="text-xs text-white/50 font-body mt-0.5 leading-relaxed">{countries}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Bottom CTA */}
+              <div className="mt-6 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <p className="text-xs text-white/55 font-body leading-relaxed max-w-xs">
+                  Containerised sea freight through major Indian ports to global buyers. Custom export documentation provided.
+                </p>
+                <button
+                  onClick={() => onNavigate && onNavigate('contact')}
+                  className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#283890] hover:bg-[#ff740e] text-white text-xs font-semibold font-headline tracking-wide transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
+                >
+                  <span>Get Export Quote</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
           </div>
 
         </div>
-
-        {/* 3 Export Infrastructure Trust Pillars */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          <div className="p-6 rounded-2xl bg-[#151f52] border border-white/10 space-y-2">
-            <div className="w-10 h-10 rounded-xl bg-[#283890] flex items-center justify-center text-[#f0e846] mb-3">
-              <PackageCheck className="w-5 h-5" />
-            </div>
-            <h4 className="font-headline font-bold text-base text-white">
-              Export-Ready Packaging
-            </h4>
-            <p className="text-xs text-white/70 leading-relaxed font-body">
-              Heavy-duty shrink wrapping and corrugated export cartons protect notebooks from sea-transit humidity and handling.
-            </p>
-          </div>
-
-          <div className="p-6 rounded-2xl bg-[#151f52] border border-white/10 space-y-2">
-            <div className="w-10 h-10 rounded-xl bg-[#283890] flex items-center justify-center text-[#ff740e] mb-3">
-              <Anchor className="w-5 h-5" />
-            </div>
-            <h4 className="font-headline font-bold text-base text-white">
-              Port Accessibility
-            </h4>
-            <p className="text-xs text-white/70 leading-relaxed font-body">
-              Located in Palghar, Maharashtra with efficient highway transit directly connecting to Mumbai seaports (Nhava Sheva / JNPT).
-            </p>
-          </div>
-
-          <div className="p-6 rounded-2xl bg-[#151f52] border border-white/10 space-y-2">
-            <div className="w-10 h-10 rounded-xl bg-[#283890] flex items-center justify-center text-[#f0e846] mb-3">
-              <ShieldCheck className="w-5 h-5" />
-            </div>
-            <h4 className="font-headline font-bold text-base text-white">
-              Registered Export Licencing
-            </h4>
-            <p className="text-xs text-white/70 leading-relaxed font-body">
-              Full DGFT Import Export Code (IEC: BNZPC4332C) and MSME regularisation enabling compliant international trade.
-            </p>
-          </div>
-
-        </div>
-
       </div>
     </section>
   );

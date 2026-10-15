@@ -2,10 +2,10 @@ import React from 'react';
 import { HeroSlider } from '../components/HeroSlider';
 import { AboutSection } from '../components/AboutSection';
 import { ProductsSection } from '../components/ProductsSection';
-import { WhiteLabelSection } from '../components/WhiteLabelSection';
 import { FactorySection } from '../components/FactorySection';
 import { ExportGlobalSection } from '../components/ExportGlobalSection';
 import { CertificationsSection } from '../components/CertificationsSection';
+import { WhiteLabelSection } from '../components/WhiteLabelSection';
 import { FinalCtaSection } from '../components/FinalCtaSection';
 
 interface HomePageProps {
@@ -15,7 +15,7 @@ interface HomePageProps {
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   return (
     <div className="w-full pt-14 sm:pt-16">
-      
+
       {/* 1. Hero — Product & Manufacturing Slider */}
       <HeroSlider onNavigate={onNavigate} />
 
@@ -25,17 +25,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* 3. Products Horizontal Scrolling Rail (7 Required Categories) */}
       <ProductsSection onNavigate={onNavigate} />
 
-      {/* 4. White-Label Manufacturing */}
-      <WhiteLabelSection onNavigate={onNavigate} />
-
-      {/* 5. Factory & Manufacturing Infrastructure */}
+      {/* 4. Factory & Manufacturing Infrastructure */}
       <FactorySection onNavigate={onNavigate} />
 
-      {/* 6. Export & Global Reach (Shipments Worldwide Globe) */}
+      {/* 5. Export & Global Reach */}
       <ExportGlobalSection onNavigate={onNavigate} />
 
-      {/* 7. Certifications & Registrations (Restored with Official Documents) */}
+      {/* 6. Certifications & Registrations */}
       <CertificationsSection />
+
+      {/* 7. White-Label Manufacturing — kept here, above footer CTA */}
+      <WhiteLabelSection onNavigate={onNavigate} />
 
       {/* 8. Final CTA Section */}
       <FinalCtaSection onNavigate={onNavigate} />
