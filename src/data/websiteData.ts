@@ -95,7 +95,7 @@ export const HERO_SLIDES: SlideItem[] = [
     title: "Your Brand. Our Manufacturing Expertise.",
     subtitle: "We manage manufacturing, quality control and export-ready packaging — so your brand can focus on what it does best.",
     tagline: "White-Label Partner",
-    image: "/products/case-bound-book.png",
+    image: "/products/handbound-registers.jpg",
     ctaText: "Partner With Us",
     ctaAction: "contact",
   },
@@ -116,7 +116,7 @@ export const PRODUCTS_PLACEHOLDERS: ProductPlaceholderItem[] = [
     number: "01",
     name: "Exercise Books",
     description: "Everyday writing notebooks in softcover and Bristol board, staple-bound for educational institutions, stationery brands and bulk supply.",
-    image: "/products/center-pinned-notebook.png",
+    image: "/products/exercise-books.jpg",
     accent: "yellow",
   },
   {
@@ -124,7 +124,7 @@ export const PRODUCTS_PLACEHOLDERS: ProductPlaceholderItem[] = [
     number: "02",
     name: "Counter Books",
     description: "Practical hardbound notebooks for daily business transactions, commercial bookkeeping, ledgers and inventory logs.",
-    image: "/products/counter-book.png",
+    image: "/products/counter-books.jpg",
     accent: "orange",
   },
   {
@@ -132,7 +132,7 @@ export const PRODUCTS_PLACEHOLDERS: ProductPlaceholderItem[] = [
     number: "03",
     name: "Composition Books",
     description: "Durable sewn and cloth-taped marble and custom cover composition notebooks built for daily classroom and student use.",
-    image: "/products/composition-book.png",
+    image: "/products/composition-books.jpg",
     accent: "yellow",
   },
   {
@@ -140,7 +140,7 @@ export const PRODUCTS_PLACEHOLDERS: ProductPlaceholderItem[] = [
     number: "04",
     name: "Spiral / Wiro Bound Notebooks",
     description: "Flexible single-spiral and twin-wire bound notebooks with micro-perforated sheets, available in single and multi-subject partitions.",
-    image: "/products/spiral-notebook.png",
+    image: "/products/spiral-notebooks.jpg",
     accent: "orange",
   },
   {
@@ -148,7 +148,7 @@ export const PRODUCTS_PLACEHOLDERS: ProductPlaceholderItem[] = [
     number: "05",
     name: "Notepads",
     description: "Writing pads with head-gummed bindings, micro-perforations and sturdy backings for offices, promotional stationery and note-taking.",
-    image: "/products/legal-writing-pad.png",
+    image: "/products/notepads.jpg",
     accent: "yellow",
   },
   {
@@ -156,7 +156,7 @@ export const PRODUCTS_PLACEHOLDERS: ProductPlaceholderItem[] = [
     number: "06",
     name: "Hardbound Registers",
     description: "Section-sewn hardbound registers with reinforced spines for accounting, administrative records and permanent commercial archives.",
-    image: "/products/case-bound-book.png",
+    image: "/products/handbound-registers.jpg",
     accent: "orange",
   },
   {
