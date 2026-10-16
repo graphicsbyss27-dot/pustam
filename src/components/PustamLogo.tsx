@@ -20,7 +20,7 @@ export const PustamLogo: React.FC<PustamLogoProps> = ({
   return (
     <div className={`flex items-center select-none ${className}`}>
       <img
-        src="/assets/pustam-logo.png"
+        src="/assets/PUSTAM.png"
         alt="PUSTAM PAPER PRODUCTS"
         className={`${heights[size]} w-auto object-contain rounded-md`}
       />

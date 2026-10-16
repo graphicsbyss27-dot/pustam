@@ -56,7 +56,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           {/* Col 1: Brand Block — 5 cols */}
           <div className="lg:col-span-5 space-y-5">
-            <PustamLogo size="md" />
+            <button
+              onClick={() => handleLink()}
+              className="inline-flex items-center focus:outline-none group text-left"
+              aria-label="Pustam Paper Products Home"
+            >
+              <div className="px-3.5 py-2 rounded-xl bg-[#283890] shadow-md shadow-black/20 border border-[#3b4cb8] flex items-center group-hover:scale-105 group-hover:shadow-lg group-hover:border-[#f0e846]/60 transition-all duration-200">
+                <PustamLogo size="md" />
+              </div>
+            </button>
 
             <p className="text-[13px] sm:text-sm text-white/65 leading-relaxed max-w-sm font-body">
               White-label notebook manufacturer based in Palghar, Maharashtra. We partner with
