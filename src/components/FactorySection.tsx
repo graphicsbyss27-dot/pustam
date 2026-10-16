@@ -10,28 +10,36 @@ const YOUTUBE_URL = 'https://youtube.com/@twofoldstationery?si=ooO3KW5As5621baS'
 
 const INFRA_IMAGES = [
   {
-    image: '/assets/factory-aerial-facility.jpg',
-    badge: 'CAMPUS OVERVIEW',
-    title: 'Palghar Manufacturing Plant',
-    subtitle: '30,000+ Sq. Ft. Converting & Logistics Facility',
+    image: '/assets/infra-reels-storage.jpg',
+    alt: 'Parent Reel Inventory Warehouse',
   },
   {
-    image: '/assets/factory-warehouse-reels.jpg',
-    badge: 'LOGISTICS & STORAGE',
-    title: 'Raw Reel Warehouse',
-    subtitle: 'Climate-Monitored Parent Reel Staging & Inventory',
+    image: '/assets/infra-flexo-ruling.jpg',
+    alt: 'High-Speed Web Ruling and Converting Press',
   },
   {
-    image: '/assets/factory-interior-cutting.jpg',
-    badge: 'PRECISION CUTTING',
-    title: 'Automated Guillotine Line',
-    subtitle: 'High-Speed Slitting with ±0.5mm Sheet Precision',
+    image: '/assets/infra-spine-stitching.jpg',
+    alt: 'Automated Spine Wire Stitching Line',
   },
   {
-    image: '/assets/factory-ruling-printing-line.jpg',
-    badge: 'FLEXO RULING',
-    title: 'Multi-Color Web Ruling',
-    subtitle: 'Simultaneous 2-Sided Web Ruling & Sheet Delivery',
+    image: '/assets/infra-digital-console.jpg',
+    alt: 'Digital Operator Control Console',
+  },
+  {
+    image: '/assets/infra-quality-inspection.jpg',
+    alt: 'In-Process Quality and Spec Inspection',
+  },
+  {
+    image: '/assets/infra-warehouse-forklift.jpg',
+    alt: 'Palletized Storage and Forklift Logistics',
+  },
+  {
+    image: '/assets/infra-automated-binding.jpg',
+    alt: 'Automated Multi-Head Spine Binding Line',
+  },
+  {
+    image: '/assets/infra-guillotine-cutting.jpg',
+    alt: 'Precision Industrial Guillotine Cutting',
   },
 ];
 
@@ -89,39 +97,20 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
           </div>
         </div>
 
-        {/* 4 Clean Image Tiles (Just the images, clean minimal metadata) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 mb-12">
+        {/* 8 Pure Image Tiles (No excess text or data, clean photographic gallery) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 mb-12">
           {INFRA_IMAGES.map((item, idx) => (
             <div
               key={idx}
-              className="group rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col"
+              className="group relative aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#283890]/30 transition-all duration-300 hover:-translate-y-1"
             >
-              {/* Image Frame */}
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                
-                {/* Badge Overlay */}
-                <div className="absolute top-3 left-3 z-10">
-                  <span className="px-2.5 py-1 rounded-md bg-black/70 backdrop-blur-md text-[10px] font-mono font-semibold text-white tracking-wider border border-white/10">
-                    {item.badge}
-                  </span>
-                </div>
-              </div>
-
-              {/* Title & Subtitle bar */}
-              <div className="p-4 sm:p-5 flex-1 flex flex-col justify-center bg-white border-t border-slate-100">
-                <h3 className="font-headline font-bold text-sm sm:text-base text-[#151f52] group-hover:text-[#283890] transition-colors leading-snug">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-slate-500 font-body mt-1 leading-relaxed">
-                  {item.subtitle}
-                </p>
-              </div>
+              <img
+                src={item.image}
+                alt={item.alt}
+                loading="lazy"
+                className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
             </div>
           ))}
         </div>

@@ -53,24 +53,24 @@ const PRODUCT_IMAGES = [
 // ─────────────────────────────────────────────────────────────
 const FACTORY_IMAGES = [
   {
-    image: '/assets/factory-assembly-line.jpg',
-    alt: 'Automated Notebook Converting Assembly Line',
-  },
-  {
-    image: '/assets/factory-ruling-automation.jpg',
-    alt: 'Automated Wire-O & Flexo Ruling Department',
-  },
-  {
     image: '/assets/factory-aerial-facility.jpg',
-    alt: 'Palghar Manufacturing Campus',
+    alt: 'Palghar Manufacturing Plant Campus',
   },
   {
-    image: '/assets/factory-interior-cutting.jpg',
-    alt: 'Precision High-Speed Guillotine Cutting Line',
+    image: '/assets/infra-flexo-ruling.jpg',
+    alt: 'High-Speed Web Ruling and Converting Press',
   },
   {
-    image: '/assets/factory-warehouse-reels.jpg',
-    alt: 'Controlled Parent Reel Storage Warehouse',
+    image: '/assets/infra-automated-binding.jpg',
+    alt: 'Automated Multi-Head Spine Stitching and Trimming Line',
+  },
+  {
+    image: '/assets/infra-reels-storage.jpg',
+    alt: 'Parent Paper Reel Storage and Raw Materials Warehouse',
+  },
+  {
+    image: '/assets/infra-guillotine-cutting.jpg',
+    alt: 'Heavy-Duty Industrial Guillotine Paper Cutting Machine',
   },
 ];
 
@@ -384,11 +384,11 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
         <div className="relative z-20 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full h-full pt-4 sm:pt-6 pb-16 sm:pb-20 flex items-center justify-center">
           <div className="w-full h-full max-h-[70vh] grid grid-cols-12 gap-2 sm:gap-3.5 p-2 sm:p-3 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm shadow-2xl">
             
-            {/* Left Major Showcase: Automated Assembly Line */}
+            {/* Left Major Showcase: Palghar Manufacturing Plant */}
             <div
               onClick={() => onNavigate('home', 'factory')}
               className="col-span-12 sm:col-span-6 h-full rounded-2xl overflow-hidden bg-[#11193d] shadow-2xl border border-white/30 cursor-pointer group hover:scale-[1.01] hover:border-[#ff740e]/60 transition-all duration-300"
-              title="Automated Assembly Line"
+              title="Palghar Manufacturing Plant"
             >
               <img
                 src={FACTORY_IMAGES[0].image}
@@ -401,11 +401,11 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
             {/* Right Supporting 4-Grid of Industrial Photos */}
             <div className="col-span-12 sm:col-span-6 grid grid-cols-2 gap-2 sm:gap-3.5 h-full">
               
-              {/* Automated Binding Floor */}
+              {/* Flexo Web Ruling */}
               <div
                 onClick={() => onNavigate('home', 'factory')}
                 className="rounded-2xl overflow-hidden bg-[#11193d] shadow-lg border border-white/20 cursor-pointer group hover:scale-[1.02] hover:border-[#f0e846]/60 transition-all duration-300"
-                title="Automated Wire-O & Binding"
+                title="High-Speed Web Ruling Line"
               >
                 <img
                   src={FACTORY_IMAGES[1].image}
@@ -415,15 +415,29 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
                 />
               </div>
 
-              {/* Plant Aerial Campus */}
+              {/* Automated Spine Stitching */}
               <div
                 onClick={() => onNavigate('home', 'factory')}
                 className="rounded-2xl overflow-hidden bg-[#11193d] shadow-lg border border-white/20 cursor-pointer group hover:scale-[1.02] hover:border-[#f0e846]/60 transition-all duration-300"
-                title="Palghar Industrial Campus"
+                title="Automated Spine Stitching Line"
               >
                 <img
                   src={FACTORY_IMAGES[2].image}
                   alt={FACTORY_IMAGES[2].alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+
+              {/* Raw Reel Storage */}
+              <div
+                onClick={() => onNavigate('home', 'factory')}
+                className="rounded-2xl overflow-hidden bg-[#11193d] shadow-lg border border-white/20 cursor-pointer group hover:scale-[1.02] hover:border-[#f0e846]/60 transition-all duration-300"
+                title="Parent Reel Storage Warehouse"
+              >
+                <img
+                  src={FACTORY_IMAGES[3].image}
+                  alt={FACTORY_IMAGES[3].alt}
                   loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -434,20 +448,6 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
                 onClick={() => onNavigate('home', 'factory')}
                 className="rounded-2xl overflow-hidden bg-[#11193d] shadow-lg border border-white/20 cursor-pointer group hover:scale-[1.02] hover:border-[#f0e846]/60 transition-all duration-300"
                 title="Precision Guillotine Cutting"
-              >
-                <img
-                  src={FACTORY_IMAGES[3].image}
-                  alt={FACTORY_IMAGES[3].alt}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-
-              {/* Parent Reel Storage */}
-              <div
-                onClick={() => onNavigate('home', 'factory')}
-                className="rounded-2xl overflow-hidden bg-[#11193d] shadow-lg border border-white/20 cursor-pointer group hover:scale-[1.02] hover:border-[#f0e846]/60 transition-all duration-300"
-                title="Raw Reel Warehouse Logistics"
               >
                 <img
                   src={FACTORY_IMAGES[4].image}
