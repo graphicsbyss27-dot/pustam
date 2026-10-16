@@ -83,23 +83,12 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
   const handleLinkClick = (sectionId?: string) => {
     setMobileMenuOpen(false);
-    if (sectionId) {
-      if (currentPage !== 'home') {
-        onNavigate('home', sectionId);
-      } else {
-        const el = document.getElementById(sectionId);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      onNavigate('home');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    onNavigate('home', sectionId);
   };
 
   const handleContactClick = () => {
     setMobileMenuOpen(false);
     onNavigate('contact');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const navLinkClass = (sectionId?: string) => {
