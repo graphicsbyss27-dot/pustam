@@ -9,7 +9,6 @@ import {
   PhoneCall,
   ArrowLeft,
   Sparkles,
-  ExternalLink,
 } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { COMPANY_DETAILS } from '../data/websiteData';
@@ -213,19 +212,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 <h3 className="font-headline font-bold text-lg text-[#151f52]">
                   Plant &amp; Office Location
                 </h3>
-                <a
-                  href={contact.mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-3 py-1 rounded-lg bg-[#283890]/8 hover:bg-[#283890] text-[#283890] hover:text-white text-xs font-semibold transition-colors flex items-center gap-1 shrink-0"
-                >
-                  <span>Google Maps</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
+                <span className="text-xs text-slate-400 font-medium">Palghar Campus</span>
               </div>
 
               {/* Map iframe */}
-              <div className="relative h-48 sm:h-56 rounded-2xl overflow-hidden border border-slate-100">
+              <div className="relative h-56 sm:h-64 rounded-2xl overflow-hidden border border-slate-100">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3752.6!2d72.7785!3d19.6973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be71a6e6b6a6b6b%3A0x0!2sPalghar%20Udyog%20Nagar!5e0!3m2!1sen!2sin!4v1"
                   width="100%"
