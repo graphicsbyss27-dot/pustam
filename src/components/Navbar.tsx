@@ -93,19 +93,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
   const navLinkClass = (sectionId?: string) => {
     const active = isActive(sectionId);
-    return `text-sm font-semibold transition-all duration-200 relative py-1 hover:text-[#283890] ${
+    return `text-sm font-semibold transition-all duration-200 relative py-1 ${
       active
-        ? 'text-[#283890] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#ff740e] after:rounded-full'
-        : 'text-slate-600'
+        ? 'text-[#283890] font-bold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#ff740e] after:rounded-full'
+        : 'text-slate-700 hover:text-[#283890]'
     }`;
   };
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out navbar-header bg-white ${
         scrolled
-          ? 'bg-white/96 backdrop-blur-md py-2 shadow-md shadow-slate-900/5 border-b border-slate-200/90'
-          : 'bg-white py-3 sm:py-3.5 shadow-sm border-b border-slate-100'
+          ? 'scrolled py-2 sm:py-2.5 shadow-md border-b border-slate-200'
+          : 'py-3 sm:py-3.5 shadow-sm border-b border-slate-100'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -168,7 +168,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
       {/* MOBILE: Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white/98 backdrop-blur-xl border-t border-slate-200 px-4 sm:px-6 pt-3 pb-6 space-y-1.5 mt-2 shadow-xl animate-fadeIn">
+        <div className="lg:hidden bg-white navbar-drawer border-t border-slate-200 px-4 sm:px-6 pt-3 pb-6 space-y-1.5 mt-2 shadow-2xl animate-fadeIn">
           {[
             { label: 'Home', id: undefined },
             { label: 'About', id: 'about' },
