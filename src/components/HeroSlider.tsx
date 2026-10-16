@@ -3,7 +3,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ArrowRight,
-  ExternalLink,
   Factory,
   Play,
   Layers,
@@ -118,8 +117,6 @@ const FACTORY_COLLAGE = [
     height: 'h-36 sm:h-44 lg:h-[185px]',
   },
 ];
-
-const YOUTUBE_URL = 'https://youtube.com/@twofoldstationery?si=ooO3KW5As5621baS';
 
 export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -292,7 +289,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          SLIDE 3: VIDEO TOUR + ONE LINE + CTA BUTTON (Redirects to YouTube)
+          SLIDE 3: VIDEO TOUR SNIPPET (No redirect, self-contained preview)
           ───────────────────────────────────────────────────────────── */}
       <div
         className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex items-center justify-center ${
@@ -313,16 +310,15 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
 
         <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-6 sm:pt-8 pb-24 sm:pb-28 flex flex-col items-center justify-center text-center my-auto">
           
-          {/* ONE LINE OF HEADLINE TEXT (as requested) */}
-          <h1 className="font-headline font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white tracking-tight leading-snug max-w-2xl mb-2 sm:mb-3 drop-shadow-md">
-            Watch Our High-Speed Paper Converting &amp; Notebook Manufacturing Tour
+          {/* Headline */}
+          <h1 className="font-headline font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white tracking-tight leading-snug max-w-2xl mb-3 sm:mb-4 drop-shadow-md">
+            High-Speed Paper Converting &amp; Notebook Manufacturing Tour
           </h1>
 
-          {/* Interactive Cinema Video Frame (Clicking redirects to YouTube channel) */}
+          {/* Interactive Cinema Video Frame (Pure Clean Video) */}
           <div
-            onClick={() => window.open(YOUTUBE_URL, '_blank', 'noopener,noreferrer')}
-            className="relative max-w-xl sm:max-w-2xl w-full max-h-[38vh] sm:max-h-[44vh] aspect-video rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border-2 sm:border-3 border-white/25 group cursor-pointer hover:border-[#ff0000] hover:shadow-red-600/40 transition-all duration-300"
-            title="Click to watch on YouTube"
+            className="relative max-w-xl sm:max-w-2xl w-full max-h-[38vh] sm:max-h-[44vh] aspect-video rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border-2 sm:border-3 border-white/25 group hover:border-[#f0e846]/80 transition-all duration-300"
+            title="Pustam Manufacturing Tour"
           >
             <video
               ref={videoRef}
@@ -333,41 +329,17 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
               playsInline
               className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700"
             />
-
-            {/* Top YouTube live badge */}
-            <div className="absolute top-2.5 left-2.5 sm:top-3.5 sm:left-3.5 z-20 flex items-center gap-2 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-white text-[11px] sm:text-xs font-semibold shadow">
-              <span className="w-2 h-2 rounded-full bg-[#ff0000] animate-pulse" />
-              <span>Twofold Stationery · Factory Tour</span>
-            </div>
-
-            {/* Glowing Red Play Center Overlay */}
-            <div className="absolute inset-0 bg-black/35 group-hover:bg-black/15 transition-colors flex items-center justify-center">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-[#ff0000] text-white flex items-center justify-center shadow-2xl shadow-red-600/60 group-hover:scale-110 transition-transform duration-300">
-                <Play className="w-6 h-6 sm:w-8 sm:h-8 fill-white text-white translate-x-0.5" />
-              </div>
-            </div>
-
-            {/* Bottom-right Direct Link Badge */}
-            <div className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 z-20 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg bg-black/75 backdrop-blur-md border border-white/15 text-[10px] sm:text-xs text-white font-headline font-semibold flex items-center gap-1.5 group-hover:bg-[#ff0000] transition-colors">
-              <span>Watch on YouTube</span>
-              <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-            </div>
           </div>
 
-          {/* CTA Buttons Row - clear of bottom selector bar */}
+          {/* CTA Buttons Row — Internal navigation, clear of bottom selector bar */}
           <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5 mt-3 sm:mt-4 mb-1">
-            <a
-              href={YOUTUBE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 sm:px-7 py-2.5 sm:py-3 rounded-xl bg-[#ff0000] hover:bg-[#d90000] text-white font-headline font-bold text-xs sm:text-sm tracking-wide flex items-center justify-center gap-2 shadow-xl shadow-red-600/30 hover:shadow-red-600/50 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 min-h-[42px]"
+            <button
+              onClick={() => onNavigate('home', 'factory')}
+              className="px-5 sm:px-7 py-2.5 sm:py-3 rounded-xl bg-[#ff740e] hover:bg-[#e06307] text-white font-headline font-bold text-xs sm:text-sm tracking-wide flex items-center justify-center gap-2 shadow-xl shadow-orange-600/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 min-h-[42px]"
             >
-              <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5 fill-current shrink-0" viewBox="0 0 24 24">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-              </svg>
-              <span>Watch on YouTube</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+              <span>Explore Inside Pustam</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
 
             <button
               onClick={() => onNavigate('contact')}
@@ -408,7 +380,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
         {[
           { label: 'Products', icon: Layers, idx: 0 },
           { label: 'Factory', icon: Factory, idx: 1 },
-          { label: 'Video Tour', icon: Video, idx: 2 },
+          { label: 'Factory Tour', icon: Video, idx: 2 },
         ].map((item) => {
           const Icon = item.icon;
           const isActive = currentSlide === item.idx;
@@ -418,9 +390,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
               onClick={() => goToSlide(item.idx)}
               className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs font-headline font-semibold transition-all duration-300 flex items-center gap-1.5 sm:gap-2 ${
                 isActive
-                  ? item.idx === 2
-                    ? 'bg-[#ff0000] text-white shadow-lg shadow-red-600/40'
-                    : 'bg-[#ff740e] text-white shadow-lg shadow-orange-600/40'
+                  ? 'bg-[#ff740e] text-white shadow-lg shadow-orange-600/40'
                   : 'text-white/60 hover:text-white hover:bg-white/10'
               }`}
             >
