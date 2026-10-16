@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Play, Maximize2, Zap, Cpu, PackageCheck, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Play, Maximize2, Zap, Cpu, PackageCheck, ShieldCheck, CheckCircle2, Eye } from 'lucide-react';
 import { VideoModal } from './VideoModal';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
@@ -7,9 +7,12 @@ interface FactorySectionProps {
   onNavigate?: (page: 'home' | 'contact', sectionId?: string) => void;
 }
 
+type PhotoKey = 'ruling' | 'cutting' | 'warehouse' | 'aerial';
+
 export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) => {
   const { ref, isVisible } = useScrollReveal();
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState<PhotoKey>('aerial');
   const [isPlayingInline, setIsPlayingInline] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -20,6 +23,11 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
         videoRef.current.play();
       }
     }, 50);
+  };
+
+  const openPhotoModal = (photo: PhotoKey) => {
+    setSelectedPhoto(photo);
+    setIsVideoOpen(true);
   };
 
   return (
@@ -89,13 +97,17 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
 
         </div>
 
-        {/* 4-Image Infrastructure Gallery Grid */}
+        {/* 4-Image Infrastructure Gallery Grid (Clickable to open high-res modal) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-10 items-stretch">
           
           {/* 1. Large Dominant Factory Image: Aerial View (7 cols) */}
-          <div className="lg:col-span-7 rounded-3xl bg-[#151f52] border border-white/15 overflow-hidden shadow-2xl relative min-h-[320px] sm:min-h-[420px] flex flex-col justify-between group hover:-translate-y-1 transition-all duration-300">
+          <div
+            onClick={() => openPhotoModal('aerial')}
+            className="lg:col-span-7 rounded-3xl bg-[#151f52] border border-white/15 overflow-hidden shadow-2xl relative min-h-[320px] sm:min-h-[420px] flex flex-col justify-between group hover:-translate-y-1 hover:border-[#f0e846]/50 transition-all duration-300 cursor-pointer"
+            title="Click to view high-resolution facility overview"
+          >
             <img
-              src="/infra/ariel-factory.png"
+              src="/assets/factory-aerial-facility.jpg"
               alt="Pustam Palghar manufacturing campus aerial view"
               loading="lazy"
               decoding="async"
@@ -109,16 +121,18 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
                 <span className="w-2 h-2 rounded-full bg-[#f0e846]" />
                 CAMPUS OVERVIEW
               </span>
-              <span className="text-xs font-mono text-white/70 bg-black/50 px-2.5 py-1 rounded-md backdrop-blur-xs">
-                Palghar, Maharashtra
+              <span className="text-xs font-mono text-white/70 bg-black/50 px-2.5 py-1 rounded-md backdrop-blur-xs flex items-center gap-1.5">
+                <Eye className="w-3.5 h-3.5 text-[#f0e846]" />
+                <span>Palghar, Maharashtra</span>
               </span>
             </div>
 
             {/* Bottom Caption */}
             <div className="relative z-10 p-5 sm:p-6 pt-0">
-              <div className="p-4 sm:p-5 rounded-2xl bg-[#151f52]/90 backdrop-blur-md border border-white/15 max-w-lg shadow-lg">
-                <h3 className="font-headline font-bold text-base sm:text-lg text-white mb-1">
-                  High-Capacity Converting & Logistics Campus
+              <div className="p-4 sm:p-5 rounded-2xl bg-[#151f52]/90 backdrop-blur-md border border-white/15 max-w-lg shadow-lg group-hover:bg-[#151f52] transition-colors">
+                <h3 className="font-headline font-bold text-base sm:text-lg text-white mb-1 flex items-center justify-between">
+                  <span>High-Capacity Converting &amp; Logistics Campus</span>
+                  <span className="text-xs text-[#f0e846] opacity-0 group-hover:opacity-100 transition-opacity">Click to Inspect &rarr;</span>
                 </h3>
                 <p className="text-xs text-white/75 font-body leading-relaxed">
                   30,000+ sq. ft. industrial plant featuring high-bay material handling docks, climate-monitored reel storage, and automated converting rails.
@@ -128,9 +142,13 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
           </div>
 
           {/* 2. Top Right: Multi-Color Ruling Area (5 cols) */}
-          <div className="lg:col-span-5 rounded-3xl bg-[#151f52] border border-white/15 overflow-hidden shadow-xl relative min-h-[320px] sm:min-h-[420px] flex flex-col justify-between group hover:-translate-y-1 transition-all duration-300">
+          <div
+            onClick={() => openPhotoModal('ruling')}
+            className="lg:col-span-5 rounded-3xl bg-[#151f52] border border-white/15 overflow-hidden shadow-xl relative min-h-[320px] sm:min-h-[420px] flex flex-col justify-between group hover:-translate-y-1 hover:border-[#f0e846]/50 transition-all duration-300 cursor-pointer"
+            title="Click to view ruling & printing lines"
+          >
             <img
-              src="/infra/ruling-area.png"
+              src="/assets/factory-ruling-printing-line.jpg"
               alt="High-speed multi-color flexographic ruling department"
               loading="lazy"
               decoding="async"
@@ -143,15 +161,17 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#ff740e]" />
                 FLEXO RULING
               </span>
-              <span className="text-xs font-mono text-white/70 bg-black/50 px-2.5 py-1 rounded-md backdrop-blur-xs">
-                High-Speed Line
+              <span className="text-xs font-mono text-white/70 bg-black/50 px-2.5 py-1 rounded-md backdrop-blur-xs flex items-center gap-1.5">
+                <Eye className="w-3 h-3 text-[#f0e846]" />
+                <span>High-Speed Line</span>
               </span>
             </div>
 
             <div className="relative z-10 p-5 sm:p-6 pt-0">
-              <div className="p-4 rounded-2xl bg-[#151f52]/90 backdrop-blur-md border border-white/15 shadow-lg">
-                <h3 className="font-headline font-bold text-sm sm:text-base text-white mb-1">
-                  Multi-Color Flexo Ruling & Precision Lines
+              <div className="p-4 rounded-2xl bg-[#151f52]/90 backdrop-blur-md border border-white/15 shadow-lg group-hover:bg-[#151f52] transition-colors">
+                <h3 className="font-headline font-bold text-sm sm:text-base text-white mb-1 flex items-center justify-between">
+                  <span>Multi-Color Flexo Ruling &amp; Precision Lines</span>
+                  <span className="text-xs text-[#f0e846] opacity-0 group-hover:opacity-100 transition-opacity">&rarr;</span>
                 </h3>
                 <p className="text-xs text-white/75 font-body leading-relaxed">
                   Simultaneous 2-sided line and margin ruling with water-based non-bleed inks, electronic web guiding, and automated sheet counting.
@@ -161,9 +181,13 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
           </div>
 
           {/* 3. Bottom Left: Precision Slitting & Cutting (6 cols) */}
-          <div className="lg:col-span-6 rounded-3xl bg-[#151f52] border border-white/15 overflow-hidden shadow-xl relative min-h-[280px] sm:min-h-[320px] flex flex-col justify-between group hover:-translate-y-1 transition-all duration-300">
+          <div
+            onClick={() => openPhotoModal('cutting')}
+            className="lg:col-span-6 rounded-3xl bg-[#151f52] border border-white/15 overflow-hidden shadow-xl relative min-h-[280px] sm:min-h-[320px] flex flex-col justify-between group hover:-translate-y-1 hover:border-[#f0e846]/50 transition-all duration-300 cursor-pointer"
+            title="Click to view cutting & sizing machines"
+          >
             <img
-              src="/infra/cutting-area.png"
+              src="/assets/factory-interior-cutting.jpg"
               alt="Precision paper slitting, cutting, and trimming line"
               loading="lazy"
               decoding="async"
@@ -174,17 +198,19 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
             <div className="relative z-10 p-5 flex items-center justify-between">
               <span className="px-3 py-1 rounded-full bg-[#151f52]/80 backdrop-blur-md text-[11px] font-mono text-white/90 border border-white/15 flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#f0e846]" />
-                SLITTING & TRIMMING
+                SLITTING &amp; TRIMMING
               </span>
-              <span className="text-xs font-mono text-white/70 bg-black/50 px-2.5 py-1 rounded-md backdrop-blur-xs">
-                ±0.5mm Tolerance
+              <span className="text-xs font-mono text-white/70 bg-black/50 px-2.5 py-1 rounded-md backdrop-blur-xs flex items-center gap-1.5">
+                <Eye className="w-3 h-3 text-[#f0e846]" />
+                <span>&plusmn;0.5mm Tolerance</span>
               </span>
             </div>
 
             <div className="relative z-10 p-5 pt-0">
-              <div className="p-4 rounded-2xl bg-[#151f52]/90 backdrop-blur-md border border-white/15 shadow-lg">
-                <h3 className="font-headline font-bold text-sm sm:text-base text-white mb-1">
-                  Automated Reel-to-Sheet Slitting & Shears
+              <div className="p-4 rounded-2xl bg-[#151f52]/90 backdrop-blur-md border border-white/15 shadow-lg group-hover:bg-[#151f52] transition-colors">
+                <h3 className="font-headline font-bold text-sm sm:text-base text-white mb-1 flex items-center justify-between">
+                  <span>Automated Reel-to-Sheet Slitting &amp; Shears</span>
+                  <span className="text-xs text-[#f0e846] opacity-0 group-hover:opacity-100 transition-opacity">&rarr;</span>
                 </h3>
                 <p className="text-xs text-white/75 font-body leading-relaxed">
                   High-speed rotary sheeting ensuring razor-sharp, burr-free edges and exact square millimeter dimensional accuracy.
@@ -194,9 +220,13 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
           </div>
 
           {/* 4. Bottom Right: Heavy Paper Rolls Stocking (6 cols) */}
-          <div className="lg:col-span-6 rounded-3xl bg-[#151f52] border border-white/15 overflow-hidden shadow-xl relative min-h-[280px] sm:min-h-[320px] flex flex-col justify-between group hover:-translate-y-1 transition-all duration-300">
+          <div
+            onClick={() => openPhotoModal('warehouse')}
+            className="lg:col-span-6 rounded-3xl bg-[#151f52] border border-white/15 overflow-hidden shadow-xl relative min-h-[280px] sm:min-h-[320px] flex flex-col justify-between group hover:-translate-y-1 hover:border-[#f0e846]/50 transition-all duration-300 cursor-pointer"
+            title="Click to view jumbo reel storage"
+          >
             <img
-              src="/infra/rolls-stocking.png"
+              src="/assets/factory-warehouse-reels.jpg"
               alt="Controlled paper rolls warehouse inventory"
               loading="lazy"
               decoding="async"
@@ -209,15 +239,17 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#ff740e]" />
                 RAW REEL WAREHOUSE
               </span>
-              <span className="text-xs font-mono text-white/70 bg-black/50 px-2.5 py-1 rounded-md backdrop-blur-xs">
-                54 to 120 GSM
+              <span className="text-xs font-mono text-white/70 bg-black/50 px-2.5 py-1 rounded-md backdrop-blur-xs flex items-center gap-1.5">
+                <Eye className="w-3 h-3 text-[#f0e846]" />
+                <span>54 to 120 GSM</span>
               </span>
             </div>
 
             <div className="relative z-10 p-5 pt-0">
-              <div className="p-4 rounded-2xl bg-[#151f52]/90 backdrop-blur-md border border-white/15 shadow-lg">
-                <h3 className="font-headline font-bold text-sm sm:text-base text-white mb-1">
-                  Parent Paper Reel Inventory & Conditioning
+              <div className="p-4 rounded-2xl bg-[#151f52]/90 backdrop-blur-md border border-white/15 shadow-lg group-hover:bg-[#151f52] transition-colors">
+                <h3 className="font-headline font-bold text-sm sm:text-base text-white mb-1 flex items-center justify-between">
+                  <span>Parent Paper Reel Inventory &amp; Conditioning</span>
+                  <span className="text-xs text-[#f0e846] opacity-0 group-hover:opacity-100 transition-opacity">&rarr;</span>
                 </h3>
                 <p className="text-xs text-white/75 font-body leading-relaxed">
                   Climate-controlled raw paper stock warehouse holding virgin wood pulp and FSC-certified parent reels for uninterrupted export production.
@@ -236,7 +268,7 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
             <div className="flex items-center gap-2.5">
               <span className="w-3 h-3 rounded-full bg-[#ff740e] animate-pulse" />
               <h3 className="font-headline font-bold text-sm sm:text-base text-white">
-                Pustam Factory Converting & Production Tour
+                Pustam Factory Converting &amp; Production Tour
               </h3>
             </div>
             <div className="flex items-center gap-2">
@@ -244,8 +276,8 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
                 1080p HD Video
               </span>
               <button
-                onClick={() => setIsVideoOpen(true)}
-                className="inline-flex items-center gap-1.5 text-xs text-[#f0e846] hover:text-white transition-colors bg-white/10 hover:bg-white/20 px-3 py-1 rounded-md border border-white/15"
+                onClick={() => openPhotoModal('aerial')}
+                className="inline-flex items-center gap-1.5 text-xs text-[#f0e846] hover:text-white transition-colors bg-white/10 hover:bg-white/20 px-3 py-1 rounded-md border border-white/15 cursor-pointer"
                 title="Open in full screen theater modal"
               >
                 <Maximize2 className="w-3.5 h-3.5" />
@@ -259,8 +291,8 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
             {isPlayingInline ? (
               <video
                 ref={videoRef}
-                src="/infra/facility-tour.mp4"
-                poster="/infra/cutting-area.png"
+                src="/assets/facility-tour.mp4"
+                poster="/assets/factory-interior-cutting.jpg"
                 controls
                 autoPlay
                 playsInline
@@ -275,7 +307,7 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
               >
                 {/* Poster Background */}
                 <img
-                  src="/infra/cutting-area.png"
+                  src="/assets/factory-interior-cutting.jpg"
                   alt="Factory machinery video poster"
                   loading="lazy"
                   decoding="async"
@@ -312,7 +344,7 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
             </div>
             <div className="flex items-center gap-2">
               <Cpu className="w-4 h-4 text-[#ff740e] shrink-0" />
-              <span>Rotary Slitting & Cutting</span>
+              <span>Rotary Slitting &amp; Cutting</span>
             </div>
             <div className="flex items-center gap-2">
               <PackageCheck className="w-4 h-4 text-[#f0e846] shrink-0" />
@@ -328,8 +360,12 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
 
       </div>
 
-      {/* Video Modal Player (Theater View) */}
-      <VideoModal isOpen={isVideoOpen} onClose={() => setIsVideoOpen(false)} />
+      {/* Video Modal Player (Theater View with linked active photo) */}
+      <VideoModal
+        isOpen={isVideoOpen}
+        onClose={() => setIsVideoOpen(false)}
+        initialPhoto={selectedPhoto}
+      />
     </section>
   );
 };

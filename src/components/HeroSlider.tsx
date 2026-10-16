@@ -86,7 +86,7 @@ const PRODUCT_COLLAGE = [
 // ─────────────────────────────────────────────────────────────
 const FACTORY_COLLAGE = [
   {
-    image: '/Infra/factory-ruling-printing-line.jpg',
+    image: '/assets/factory-ruling-printing-line.jpg',
     alt: 'Multi-Line Flexo Ruling & Converting Floor',
     tilt: '-rotate-1',
     offset: 'translate-y-1',
@@ -94,7 +94,7 @@ const FACTORY_COLLAGE = [
     height: 'h-56 sm:h-72 lg:h-[390px]',
   },
   {
-    image: '/Infra/factory-interior-cutting.jpg',
+    image: '/assets/factory-interior-cutting.jpg',
     alt: 'Precision Automated Paper Guillotine Cutting',
     tilt: 'rotate-1.5',
     offset: '-translate-y-1',
@@ -102,7 +102,7 @@ const FACTORY_COLLAGE = [
     height: 'h-36 sm:h-44 lg:h-[185px]',
   },
   {
-    image: '/Infra/factory-warehouse-reels.jpg',
+    image: '/assets/factory-warehouse-reels.jpg',
     alt: 'Jumbo Reel Warehouse Logistics & Staging',
     tilt: '-rotate-1.5',
     offset: 'translate-y-1',
@@ -110,7 +110,7 @@ const FACTORY_COLLAGE = [
     height: 'h-36 sm:h-44 lg:h-[185px]',
   },
   {
-    image: '/Infra/factory-aerial-facility.jpg',
+    image: '/assets/factory-aerial-facility.jpg',
     alt: 'Palghar Industrial Manufacturing Campus',
     tilt: 'rotate-1',
     offset: '-translate-y-1',

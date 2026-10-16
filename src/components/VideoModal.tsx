@@ -6,6 +6,7 @@ import { WhatsAppIcon } from './WhatsAppIcon';
 interface VideoModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialPhoto?: PhotoKey;
 }
 
 type PhotoKey = 'ruling' | 'cutting' | 'warehouse' | 'aerial';
@@ -44,8 +45,14 @@ const PHOTOS: Record<PhotoKey, PhotoInfo> = {
   },
 };
 
-export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose }) => {
-  const [activePhoto, setActivePhoto] = useState<PhotoKey>('ruling');
+export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose, initialPhoto = 'ruling' }) => {
+  const [activePhoto, setActivePhoto] = useState<PhotoKey>(initialPhoto);
+
+  React.useEffect(() => {
+    if (initialPhoto) {
+      setActivePhoto(initialPhoto);
+    }
+  }, [initialPhoto, isOpen]);
 
   if (!isOpen) return null;
 
