@@ -1,141 +1,82 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   ChevronLeft,
   ChevronRight,
   ArrowRight,
   ExternalLink,
+  Sparkles,
+  Factory,
   Play,
   Layers,
-  Factory,
-  Video as VideoIcon,
+  Video,
 } from 'lucide-react';
 
 interface HeroSliderProps {
   onNavigate: (page: 'home' | 'contact', sectionId?: string) => void;
 }
 
-// ─────────────────────────────────────────────────────────────
-// 1. All 7 Products from public/products/Products/ (Pure Dynamic Imagery, No Info)
-// ─────────────────────────────────────────────────────────────
+// 1. All products collage from /products/Products
 const PRODUCT_COLLAGE = [
-  {
-    src: '/products/Products/Exercise Books.jpg',
-    alt: 'Pustam Exercise Books',
-    // Desktop layout (organic scattered coordinates & rotations)
-    desktopClass: 'lg:left-[2%] lg:top-[12%] lg:w-[24%] lg:-rotate-6 lg:z-10',
-    // Mobile / Tablet layout
-    mobileClass: 'left-[2%] top-[6%] w-[48%] -rotate-6 z-10',
-  },
-  {
-    src: '/products/Products/Counter Books.jpg',
-    alt: 'Pustam Counter Books',
-    desktopClass: 'lg:left-[16%] lg:top-[28%] lg:w-[25%] lg:rotate-5 lg:z-20',
-    mobileClass: 'right-[2%] top-[4%] w-[50%] rotate-5 z-15',
-  },
-  {
-    src: '/products/Products/Composition Books.jpg',
-    alt: 'Pustam Composition Books',
-    desktopClass: 'lg:left-[30%] lg:top-[8%] lg:w-[24%] lg:-rotate-4 lg:z-15',
-    mobileClass: 'left-[4%] top-[34%] w-[49%] rotate-3 z-15',
-  },
-  {
-    src: '/products/Products/Double wire notebook.jpg',
-    alt: 'Pustam Double Wire Notebook',
-    desktopClass: 'lg:left-[43%] lg:top-[22%] lg:w-[26%] lg:rotate-2 lg:z-30',
-    mobileClass: 'left-[24%] top-[22%] w-[54%] -rotate-2 z-25',
-  },
-  {
-    src: '/products/Products/Spiral Notebooks.jpg',
-    alt: 'Pustam Spiral Notebooks',
-    desktopClass: 'lg:left-[57%] lg:top-[10%] lg:w-[24%] lg:-rotate-5 lg:z-20',
-    mobileClass: 'right-[4%] top-[34%] w-[48%] -rotate-5 z-20',
-  },
-  {
-    src: '/products/Products/handbound.jpg',
-    alt: 'Pustam Handbound Registers',
-    desktopClass: 'lg:left-[70%] lg:top-[26%] lg:w-[25%] lg:rotate-6 lg:z-15',
-    mobileClass: 'left-[3%] bottom-[6%] w-[48%] -rotate-4 z-15',
-  },
-  {
-    src: '/products/Products/Notepads.jpg',
-    alt: 'Pustam Notepads',
-    desktopClass: 'lg:left-[80%] lg:top-[12%] lg:w-[23%] lg:-rotate-4 lg:z-10',
-    mobileClass: 'right-[3%] bottom-[8%] w-[50%] rotate-6 z-20',
-  },
+  { name: 'Exercise Books', image: '/products/Products/Exercise Books.jpg', tag: 'Pinned Books' },
+  { name: 'Counter Books', image: '/products/Products/Counter Books.jpg', tag: 'Hardcover' },
+  { name: 'Composition Books', image: '/products/Products/Composition Books.jpg', tag: 'Marble Flex' },
+  { name: 'Spiral Notebooks', image: '/products/Products/Spiral Notebooks.jpg', tag: 'Single Coil' },
+  { name: 'Double Wire Notebooks', image: '/products/Products/Double wire notebook.jpg', tag: 'Twin Loop' },
+  { name: 'Notepads & Legal Pads', image: '/products/Products/Notepads.jpg', tag: 'Head Gummed' },
+  { name: 'Hardbound Registers', image: '/products/Products/handbound.jpg', tag: 'Section Sewn' },
 ];
 
-// ─────────────────────────────────────────────────────────────
-// 2. Factory Machineries from public/Infra/ (Pure Industrial Imagery, No Text/Video)
-// ─────────────────────────────────────────────────────────────
+// 2. Factory machinery images from /public/Infra (no video)
 const FACTORY_COLLAGE = [
   {
-    src: '/Infra/factory-ruling-printing-line.jpg',
-    alt: 'High Speed Ruling & Flexo Printing Line',
-    desktopClass: 'lg:left-[16%] lg:top-[10%] lg:w-[48%] lg:-rotate-2 lg:z-25',
-    mobileClass: 'left-[4%] top-[6%] w-[78%] -rotate-3 z-15',
+    title: 'Multi-Line Flexo Ruling & Converting Floor',
+    subtitle: 'Continuous reel-to-sheet converting and ruling at industrial velocity',
+    image: '/Infra/factory-ruling-printing-line.jpg',
+    tag: 'Flexo Ruling Line',
   },
   {
-    src: '/Infra/factory-interior-cutting.jpg',
-    alt: 'High Precision Paper Cutting Machinery',
-    desktopClass: 'lg:left-[3%] lg:top-[30%] lg:w-[35%] lg:rotate-4 lg:z-15',
-    mobileClass: 'right-[4%] top-[26%] w-[72%] rotate-4 z-20',
+    title: 'Precision Automated Paper Guillotine Cutting',
+    subtitle: 'Computer-controlled cutting blocks for uniform notebook stacks',
+    image: '/Infra/factory-interior-cutting.jpg',
+    tag: 'Cutting & Sizing',
   },
   {
-    src: '/Infra/factory-warehouse-reels.jpg',
-    alt: 'Raw Material Reel Warehouse',
-    desktopClass: 'lg:right-[4%] lg:top-[18%] lg:w-[36%] lg:-rotate-4 lg:z-20',
-    mobileClass: 'left-[6%] top-[50%] w-[70%] -rotate-2 z-20',
+    title: 'Jumbo Reel Warehouse Logistics & Staging',
+    subtitle: 'Forklift-handled reel storage supporting continuous operations',
+    image: '/Infra/factory-warehouse-reels.jpg',
+    tag: 'Warehouse & Logistics',
   },
   {
-    src: '/Infra/factory-aerial-facility.jpg',
-    alt: 'Palghar Manufacturing Facility Aerial View',
-    desktopClass: 'lg:left-[38%] lg:bottom-[8%] lg:w-[40%] lg:rotate-3 lg:z-30',
-    mobileClass: 'right-[5%] bottom-[8%] w-[76%] rotate-3 z-25',
+    title: 'Palghar Industrial Manufacturing Campus',
+    subtitle: 'Purpose-built converting compound in Maharashtra, India',
+    image: '/Infra/factory-aerial-facility.jpg',
+    tag: 'Palghar Campus',
   },
 ];
 
 const YOUTUBE_URL = 'https://youtube.com/@twofoldstationery?si=ooO3KW5As5621baS';
-const SLIDE_DURATION = 6000; // 6 seconds per slide
 
 export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [progress, setProgress] = useState(0);
-
-  // Drag & Swipe handling
-  const touchStartX = useRef<number | null>(null);
-  const isDragging = useRef<boolean>(false);
-  const dragStartX = useRef<number>(0);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const timerRef = useRef<any>(null);
 
   const totalSlides = 3;
 
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    setProgress(0);
-  }, [totalSlides]);
-
-  const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-    setProgress(0);
-  }, [totalSlides]);
-
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
-    setProgress(0);
   };
 
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight') nextSlide();
-      if (e.key === 'ArrowLeft') prevSlide();
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [nextSlide, prevSlide]);
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  };
 
-  // Video playback sync
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  };
+
+  // Video autoplay/pause sync based on active slide
   useEffect(() => {
     if (videoRef.current) {
       if (currentSlide === 2) {
@@ -147,296 +88,410 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
     }
   }, [currentSlide]);
 
-  // Auto-slide Timer & Live Progress Bar
+  // Autoplay slider (pauses on hover)
   useEffect(() => {
-    if (isPaused) return;
-
-    const intervalTime = 50; // Update progress bar every 50ms
-    const step = (intervalTime / (currentSlide === 2 ? 8500 : SLIDE_DURATION)) * 100;
-
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          nextSlide();
-          return 0;
-        }
-        return prev + step;
-      });
-    }, intervalTime);
-
-    return () => clearInterval(interval);
-  }, [isPaused, currentSlide, nextSlide]);
-
-  // Touch Swipe Handlers (Mobile)
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setIsPaused(true);
-    touchStartX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    setIsPaused(false);
-    if (touchStartX.current === null) return;
-    const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (diff > 50) nextSlide();
-    else if (diff < -50) prevSlide();
-    touchStartX.current = null;
-  };
-
-  // Mouse Drag Handlers (Desktop)
-  const handleMouseDown = (e: React.MouseEvent) => {
-    isDragging.current = true;
-    dragStartX.current = e.clientX;
-  };
-
-  const handleMouseUp = (e: React.MouseEvent) => {
-    if (!isDragging.current) return;
-    isDragging.current = false;
-    const diff = dragStartX.current - e.clientX;
-    if (diff > 60) nextSlide();
-    else if (diff < -60) prevSlide();
-  };
+    if (!isPaused) {
+      const slideDuration = currentSlide === 2 ? 8500 : 6500;
+      timerRef.current = setInterval(() => {
+        nextSlide();
+      }, slideDuration);
+    }
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [isPaused, currentSlide]);
 
   return (
     <section
-      className="relative w-full h-[84vh] sm:h-[88vh] lg:h-[92vh] min-h-[560px] bg-[#070b20] overflow-hidden select-none cursor-grab active:cursor-grabbing"
+      className="relative w-full min-h-[86vh] sm:min-h-[88vh] lg:min-h-[92vh] flex items-center justify-center bg-[#0d163d] overflow-hidden select-none"
       onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => {
-        setIsPaused(false);
-        isDragging.current = false;
-      }}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
+      onTouchEnd={() => setIsPaused(false)}
     >
-      {/* Dynamic Background Deep Cosmic & Radial Atmosphere */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0c133a] via-[#070b20] to-[#040612] pointer-events-none" />
-      <div className="absolute -top-32 left-1/4 w-[750px] h-[450px] bg-[#283890]/25 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute -bottom-32 right-1/4 w-[650px] h-[400px] bg-[#ff740e]/15 rounded-full blur-[130px] pointer-events-none" />
+      {/* Ambient Brand Glow Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#121c4e] via-[#0d163d] to-[#070b24]" />
+      <div className="absolute top-1/4 left-1/4 w-[600px] h-[350px] bg-[#283890]/35 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-[450px] h-[300px] bg-[#ff740e]/10 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Top Slider Progress Bar (Shows real auto-sliding progress) */}
-      <div className="absolute top-0 left-0 right-0 z-40 h-1 bg-white/10">
-        <div
-          className="h-full bg-gradient-to-r from-[#f0e846] via-[#ff740e] to-[#ff0000] transition-[width] duration-75 ease-linear"
-          style={{ width: `${progress}%` }}
-        />
+      {/* ─────────────────────────────────────────────────────────────
+          SLIDE 1: PURE PRODUCT COLLAGE (All images from public/products/Products)
+          ───────────────────────────────────────────────────────────── */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex items-center justify-center ${
+          currentSlide === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+        }`}
+      >
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16 sm:pt-20 pb-20 sm:pb-24">
+          
+          {/* Header Badge */}
+          <div className="flex items-center justify-between gap-3 mb-3 sm:mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#f0e846] text-xs font-semibold backdrop-blur-md">
+              <Sparkles className="w-3.5 h-3.5 text-[#f0e846]" />
+              <span className="tracking-wide uppercase font-headline">
+                Complete Product Range · 7 Core Stationery Categories
+              </span>
+            </div>
+
+            <button
+              onClick={() => onNavigate('home', 'products')}
+              className="hidden sm:inline-flex items-center gap-1.5 text-xs text-white/80 hover:text-[#f0e846] transition-colors font-semibold"
+            >
+              <span>View Full Catalog</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          {/* 7-Card Bento Product Collage Grid */}
+          <div className="grid grid-cols-12 gap-2.5 sm:gap-3.5 lg:gap-4">
+            
+            {/* Top Row: 3 Wide Cards (col-span-4 each) */}
+            {PRODUCT_COLLAGE.slice(0, 3).map((item) => (
+              <div
+                key={item.name}
+                onClick={() => onNavigate('home', 'products')}
+                className="col-span-12 sm:col-span-4 h-36 sm:h-44 lg:h-52 group relative rounded-2xl overflow-hidden bg-[#151f52] border border-white/15 hover:border-[#f0e846]/70 shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+              >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  loading="eager"
+                  className="w-full h-full object-cover object-center group-hover:scale-108 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
+                <div className="absolute bottom-2.5 left-3 right-3 flex items-end justify-between pointer-events-none">
+                  <div>
+                    <span className="text-[10px] text-[#f0e846] font-mono uppercase tracking-wider block mb-0.5">
+                      {item.tag}
+                    </span>
+                    <h3 className="text-white text-xs sm:text-sm font-headline font-bold drop-shadow">
+                      {item.name}
+                    </h3>
+                  </div>
+                  <div className="w-6 h-6 rounded-full bg-white/10 group-hover:bg-[#f0e846] group-hover:text-[#283890] text-white flex items-center justify-center transition-colors">
+                    <ArrowRight className="w-3 h-3" />
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* Bottom Row: 4 Cards (col-span-3 each) */}
+            {PRODUCT_COLLAGE.slice(3, 7).map((item) => (
+              <div
+                key={item.name}
+                onClick={() => onNavigate('home', 'products')}
+                className="col-span-6 sm:col-span-3 h-32 sm:h-40 lg:h-44 group relative rounded-2xl overflow-hidden bg-[#151f52] border border-white/15 hover:border-[#f0e846]/70 shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+              >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  loading="lazy"
+                  className="w-full h-full object-cover object-center group-hover:scale-108 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
+                <div className="absolute bottom-2 left-2.5 right-2.5 flex items-end justify-between pointer-events-none">
+                  <div>
+                    <span className="text-[9px] sm:text-[10px] text-[#f0e846] font-mono uppercase tracking-wider block">
+                      {item.tag}
+                    </span>
+                    <h3 className="text-white text-[11px] sm:text-xs font-headline font-bold drop-shadow line-clamp-1">
+                      {item.name}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            ))}
+
+          </div>
+
+        </div>
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          REAL HORIZONTAL SLIDING TRACK
+          SLIDE 2: FACTORY & MACHINERIES COLLAGE (Images from public/Infra, no video)
           ───────────────────────────────────────────────────────────── */}
       <div
-        className="flex w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+        className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex items-center justify-center ${
+          currentSlide === 1 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+        }`}
       >
-
-        {/* ══════════════════════════════════════════════════════════════
-            SLIDE 1: PURE DYNAMIC RANDOM PRODUCT IMAGES COLLAGE ONLY
-            (Zero text, Zero info boxes — organic scattered montage)
-            ══════════════════════════════════════════════════════════════ */}
-        <div className="w-full shrink-0 min-w-full h-full relative flex items-center justify-center p-3 sm:p-6 lg:p-10 overflow-hidden">
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16 sm:pt-20 pb-20 sm:pb-24">
           
-          {/* Subtle Ambient Spotlight behind the collage */}
-          <div className="absolute w-[80%] h-[70%] bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+          {/* Header Badge */}
+          <div className="flex items-center justify-between gap-3 mb-3 sm:mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#f0e846] text-xs font-semibold backdrop-blur-md">
+              <Factory className="w-3.5 h-3.5 text-[#ff740e]" />
+              <span className="tracking-wide uppercase font-headline">
+                Palghar Converting Campus · 25 MT / Day Machinery Infrastructure
+              </span>
+            </div>
 
-          {/* Scattered Dynamic Collage Canvas */}
-          <div className="relative w-full max-w-[1440px] h-[74vh] sm:h-[78vh] lg:h-[82vh] max-h-[720px] flex items-center justify-center">
-            {PRODUCT_COLLAGE.map((item, idx) => (
-              <div
-                key={idx}
-                onClick={() => onNavigate('home', 'products')}
-                className={`absolute ${item.desktopClass} ${item.mobileClass} rounded-2xl sm:rounded-3xl overflow-hidden bg-white shadow-[0_20px_50px_rgba(0,0,0,0.65)] border-2 sm:border-4 border-white/90 hover:rotate-0 hover:scale-115 hover:z-50 hover:shadow-[0_30px_70px_rgba(255,116,14,0.4)] transition-all duration-300 cursor-pointer group`}
-                title="Explore Pustam Products"
-              >
-                <div className="w-full h-full overflow-hidden bg-white">
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    loading={idx < 3 ? 'eager' : 'lazy'}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-              </div>
-            ))}
+            <button
+              onClick={() => onNavigate('home', 'factory')}
+              className="hidden sm:inline-flex items-center gap-1.5 text-xs text-white/80 hover:text-[#f0e846] transition-colors font-semibold"
+            >
+              <span>Explore Infrastructure</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
           </div>
 
-        </div>
+          {/* 4-Card Industrial Bento Collage */}
+          <div className="grid grid-cols-12 gap-3 sm:gap-4 lg:gap-5">
+            
+            {/* Left Main Hero Machinery Card (7 cols) */}
+            <div
+              onClick={() => onNavigate('home', 'factory')}
+              className="col-span-12 lg:col-span-7 h-56 sm:h-72 lg:h-[400px] group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#151f52] border border-white/15 hover:border-[#f0e846]/70 shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+            >
+              <img
+                src={FACTORY_COLLAGE[0].image}
+                alt={FACTORY_COLLAGE[0].title}
+                loading="lazy"
+                className="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 pointer-events-none">
+                <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#ff740e] text-white text-[10px] font-mono font-bold uppercase mb-1.5 shadow">
+                  {FACTORY_COLLAGE[0].tag}
+                </span>
+                <h3 className="text-white font-headline font-bold text-base sm:text-xl lg:text-2xl drop-shadow mb-1">
+                  {FACTORY_COLLAGE[0].title}
+                </h3>
+                <p className="text-white/80 text-xs sm:text-sm font-body max-w-xl hidden sm:block">
+                  {FACTORY_COLLAGE[0].subtitle}
+                </p>
+              </div>
+            </div>
 
-        {/* ══════════════════════════════════════════════════════════════
-            SLIDE 2: PURE DYNAMIC RANDOM FACTORY MACHINERY COLLAGE ONLY
-            (Zero text, Zero info boxes — organic scattered industrial montage)
-            ══════════════════════════════════════════════════════════════ */}
-        <div className="w-full shrink-0 min-w-full h-full relative flex items-center justify-center p-3 sm:p-6 lg:p-10 overflow-hidden">
-          
-          {/* Subtle Ambient Spotlight behind machinery collage */}
-          <div className="absolute w-[80%] h-[70%] bg-[#ff740e]/10 rounded-full blur-3xl pointer-events-none" />
-
-          {/* Scattered Dynamic Industrial Machinery Canvas */}
-          <div className="relative w-full max-w-[1440px] h-[74vh] sm:h-[78vh] lg:h-[82vh] max-h-[720px] flex items-center justify-center">
-            {FACTORY_COLLAGE.map((item, idx) => (
+            {/* Right Column (5 cols) */}
+            <div className="col-span-12 lg:col-span-5 flex flex-col gap-3 sm:gap-4">
+              
+              {/* Top Tile: Precision Cutting Line */}
               <div
-                key={idx}
                 onClick={() => onNavigate('home', 'factory')}
-                className={`absolute ${item.desktopClass} ${item.mobileClass} rounded-2xl sm:rounded-3xl overflow-hidden bg-[#11193d] shadow-[0_22px_55px_rgba(0,0,0,0.75)] border-2 sm:border-4 border-white/90 hover:rotate-0 hover:scale-110 hover:z-50 hover:shadow-[0_30px_75px_rgba(40,56,144,0.6)] transition-all duration-300 cursor-pointer group`}
-                title="View Factory Infrastructure"
+                className="h-32 sm:h-38 lg:h-[190px] group relative rounded-2xl overflow-hidden bg-[#151f52] border border-white/15 hover:border-[#f0e846]/70 shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
               >
-                <div className="w-full h-full overflow-hidden bg-[#11193d]">
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-700"
-                  />
+                <img
+                  src={FACTORY_COLLAGE[1].image}
+                  alt={FACTORY_COLLAGE[1].title}
+                  loading="lazy"
+                  className="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3 pointer-events-none">
+                  <span className="text-[10px] text-[#f0e846] font-mono uppercase tracking-wider block">
+                    {FACTORY_COLLAGE[1].tag}
+                  </span>
+                  <h4 className="text-white font-headline font-bold text-xs sm:text-sm drop-shadow">
+                    {FACTORY_COLLAGE[1].title}
+                  </h4>
                 </div>
               </div>
-            ))}
+
+              {/* Bottom 2 Split Tiles: Warehouse Reels & Palghar Campus */}
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                {FACTORY_COLLAGE.slice(2, 4).map((item) => (
+                  <div
+                    key={item.title}
+                    onClick={() => onNavigate('home', 'factory')}
+                    className="h-32 sm:h-38 lg:h-[194px] group relative rounded-2xl overflow-hidden bg-[#151f52] border border-white/15 hover:border-[#f0e846]/70 shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+                    <div className="absolute bottom-2.5 left-2.5 right-2.5 pointer-events-none">
+                      <span className="text-[9px] sm:text-[10px] text-[#f0e846] font-mono uppercase tracking-wider block">
+                        {item.tag}
+                      </span>
+                      <h4 className="text-white font-headline font-bold text-[11px] sm:text-xs drop-shadow line-clamp-1">
+                        {item.title}
+                      </h4>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+
           </div>
 
         </div>
+      </div>
 
-        {/* ══════════════════════════════════════════════════════════════
-            SLIDE 3: VIDEO TOUR + ONE LINE HEADLINE + YOUTUBE CTA LINK
-            (Plays video & redirects to YouTube on click)
-            ══════════════════════════════════════════════════════════════ */}
-        <div className="w-full shrink-0 min-w-full h-full relative flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 overflow-hidden">
+      {/* ─────────────────────────────────────────────────────────────
+          SLIDE 3: VIDEO TOUR + ONE LINE + CTA BUTTON (Redirects to YouTube)
+          ───────────────────────────────────────────────────────────── */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex items-center justify-center ${
+          currentSlide === 2 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+        }`}
+      >
+        {/* Full-bleed ambient backdrop video */}
+        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none overflow-hidden">
+          <video
+            src="/assets/facility-tour.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover blur-sm"
+          />
+        </div>
+
+        <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16 sm:pt-20 pb-20 sm:pb-24 flex flex-col items-center text-center">
           
-          {/* Ambient blurred backdrop video */}
-          <div className="absolute inset-0 z-0 opacity-25 pointer-events-none overflow-hidden">
+          {/* Tagline Pill */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-600/20 border border-red-500/40 text-red-200 text-xs font-semibold mb-3 sm:mb-4 backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-[#ff0000] animate-pulse" />
+            <span className="tracking-wide uppercase font-headline">
+              Official Production Video Tour
+            </span>
+          </div>
+
+          {/* ONE LINE OF HEADLINE TEXT (as requested) */}
+          <h1 className="font-headline font-bold text-2xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-tight max-w-3xl mb-4 sm:mb-6 drop-shadow-md">
+            Watch Our High-Speed Paper Converting & Notebook Manufacturing Tour
+          </h1>
+
+          {/* Interactive Cinema Video Frame (Clicking redirects to YouTube channel) */}
+          <div
+            onClick={() => window.open(YOUTUBE_URL, '_blank', 'noopener,noreferrer')}
+            className="relative max-w-2xl sm:max-w-3xl w-full aspect-video rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 border-white/20 group cursor-pointer hover:border-[#ff0000] hover:shadow-red-600/30 transition-all duration-300"
+            title="Click to watch on YouTube"
+          >
             <video
+              ref={videoRef}
               src="/assets/facility-tour.mp4"
               autoPlay
               loop
               muted
               playsInline
-              className="w-full h-full object-cover blur-lg scale-110"
+              className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
             />
+
+            {/* Top YouTube live badge */}
+            <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-white text-xs font-semibold shadow">
+              <span className="w-2 h-2 rounded-full bg-[#ff0000] animate-pulse" />
+              <span>Twofold Stationery · YouTube Channel</span>
+            </div>
+
+            {/* Glowing Red Play Center Overlay */}
+            <div className="absolute inset-0 bg-black/35 group-hover:bg-black/15 transition-colors flex items-center justify-center">
+              <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-[#ff0000] text-white flex items-center justify-center shadow-2xl shadow-red-600/60 group-hover:scale-115 transition-transform duration-300">
+                <Play className="w-7 h-7 sm:w-10 sm:h-10 fill-white text-white translate-x-0.5" />
+              </div>
+            </div>
+
+            {/* Bottom-right Direct Link Badge */}
+            <div className="absolute bottom-3 right-3 z-20 px-3 py-1.5 rounded-lg bg-black/75 backdrop-blur-md border border-white/15 text-[11px] sm:text-xs text-white font-headline font-semibold flex items-center gap-1.5 group-hover:bg-[#ff0000] transition-colors">
+              <span>Open on YouTube</span>
+              <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+            </div>
           </div>
 
-          <div className="relative z-20 max-w-4xl mx-auto w-full flex flex-col items-center text-center">
-
-            {/* ONE SINGLE LINE AS REQUESTED */}
-            <h1 className="font-headline font-bold text-2xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-snug max-w-3xl mb-4 sm:mb-6 drop-shadow-md">
-              Watch Our High-Speed Paper Converting &amp; Notebook Manufacturing Tour
-            </h1>
-
-            {/* Cinema Video Player (Clicking redirects to YouTube channel) */}
-            <div
-              onClick={() => window.open(YOUTUBE_URL, '_blank', 'noopener,noreferrer')}
-              className="relative max-w-2xl sm:max-w-3xl w-full aspect-video rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.8)] border-2 sm:border-3 border-white/25 group cursor-pointer hover:border-[#ff0000] hover:shadow-red-600/40 transition-all duration-300"
-              title="Click to watch full video on YouTube"
+          {/* CTA Buttons Row (as requested) */}
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-5 sm:mt-7">
+            
+            {/* Primary CTA: Watch on YouTube */}
+            <a
+              href={YOUTUBE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-[#ff0000] hover:bg-[#d90000] text-white font-headline font-bold text-xs sm:text-sm tracking-wide flex items-center justify-center gap-2.5 shadow-xl shadow-red-600/30 hover:shadow-red-600/50 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 min-h-[46px]"
             >
-              <video
-                ref={videoRef}
-                src="/assets/facility-tour.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-700"
-              />
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 fill-current shrink-0" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              <span>Watch on YouTube</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
 
-              {/* YouTube Channel Badge */}
-              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-white/15 text-white text-xs font-semibold shadow">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#ff0000] animate-pulse" />
-                <span>Twofold Stationery · Factory Tour</span>
-              </div>
-
-              {/* Center Play Overlay Icon */}
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-[#ff0000] text-white flex items-center justify-center shadow-2xl shadow-red-600/60 group-hover:scale-115 transition-transform duration-300">
-                  <Play className="w-7 h-7 sm:w-10 sm:h-10 fill-white text-white translate-x-0.5" />
-                </div>
-              </div>
-
-              {/* Bottom Right Direct Link */}
-              <div className="absolute bottom-3 right-3 z-20 px-3 py-1.5 rounded-lg bg-black/80 backdrop-blur-md border border-white/15 text-[11px] sm:text-xs text-white font-headline font-semibold flex items-center gap-1.5 group-hover:bg-[#ff0000] transition-colors">
-                <span>Watch on YouTube</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </div>
-            </div>
-
-            {/* CTA BUTTONS ROW (Redirects to YouTube) */}
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-5 sm:mt-7">
-              <a
-                href={YOUTUBE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-[#ff0000] hover:bg-[#d90000] text-white font-headline font-bold text-xs sm:text-sm tracking-wide flex items-center justify-center gap-2.5 shadow-xl shadow-red-600/30 hover:shadow-red-600/50 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 min-h-[46px]"
-              >
-                <svg className="w-4 h-4 sm:w-5 sm:h-5 fill-current shrink-0" viewBox="0 0 24 24">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                </svg>
-                <span>Watch on YouTube</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-
-              <button
-                onClick={() => onNavigate('contact')}
-                className="px-6 sm:px-7 py-3.5 sm:py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-headline font-semibold text-xs sm:text-sm border border-white/20 hover:border-[#f0e846] transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 backdrop-blur-sm min-h-[46px] flex items-center justify-center gap-2"
-              >
-                <span>Partner With Us</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
-
+            {/* Secondary CTA: Partner With Us */}
+            <button
+              onClick={() => onNavigate('contact')}
+              className="px-6 sm:px-7 py-3.5 sm:py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-headline font-semibold text-xs sm:text-sm border border-white/20 hover:border-[#f0e846] transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 backdrop-blur-sm min-h-[46px] flex items-center justify-center gap-2"
+            >
+              <span>Partner With Us</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
-        </div>
 
+        </div>
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          REAL SLIDER CONTROLS (Left/Right Floating Nav + Bottom Pills)
+          SLIDER CONTROLS & NAVIGATION STRIP
           ───────────────────────────────────────────────────────────── */}
-      
-      {/* Floating Left Navigation Arrow Button */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-40 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/60 hover:bg-[#ff740e] text-white border border-white/25 backdrop-blur-md flex items-center justify-center shadow-2xl transition-all duration-200 hover:scale-110 active:scale-95"
-        aria-label="Previous Slide"
-      >
-        <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
-      </button>
+      <div className="absolute bottom-3 right-3 sm:bottom-5 sm:right-6 lg:right-10 z-30 flex items-center gap-1.5 sm:gap-2.5 bg-[#0d163d]/90 backdrop-blur-md p-1.5 sm:p-2 rounded-2xl border border-white/15 shadow-2xl">
+        
+        {/* Slide 1 Pill Button */}
+        <button
+          onClick={() => goToSlide(0)}
+          className={`px-3 py-1.5 rounded-xl text-xs font-headline font-semibold flex items-center gap-1.5 transition-all duration-200 ${
+            currentSlide === 0
+              ? 'bg-[#283890] text-[#f0e846] border border-[#f0e846]/40 shadow'
+              : 'text-white/60 hover:text-white hover:bg-white/5'
+          }`}
+          aria-label="Slide 1: Products Collage"
+        >
+          <Layers className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">01 Products</span>
+          <span className="sm:hidden">01</span>
+        </button>
 
-      {/* Floating Right Navigation Arrow Button */}
-      <button
-        onClick={nextSlide}
-        className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-40 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/60 hover:bg-[#ff740e] text-white border border-white/25 backdrop-blur-md flex items-center justify-center shadow-2xl transition-all duration-200 hover:scale-110 active:scale-95"
-        aria-label="Next Slide"
-      >
-        <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
-      </button>
+        {/* Slide 2 Pill Button */}
+        <button
+          onClick={() => goToSlide(1)}
+          className={`px-3 py-1.5 rounded-xl text-xs font-headline font-semibold flex items-center gap-1.5 transition-all duration-200 ${
+            currentSlide === 1
+              ? 'bg-[#283890] text-[#f0e846] border border-[#f0e846]/40 shadow'
+              : 'text-white/60 hover:text-white hover:bg-white/5'
+          }`}
+          aria-label="Slide 2: Factory Machineries"
+        >
+          <Factory className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">02 Factory</span>
+          <span className="sm:hidden">02</span>
+        </button>
 
-      {/* Bottom Center Slide Selector Bar */}
-      <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-1.5 sm:gap-2.5 bg-black/70 backdrop-blur-lg px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full border border-white/20 shadow-2xl">
-        {[
-          { label: 'Products', icon: Layers, idx: 0 },
-          { label: 'Factory', icon: Factory, idx: 1 },
-          { label: 'Video Tour', icon: VideoIcon, idx: 2 },
-        ].map((item) => {
-          const Icon = item.icon;
-          const isActive = currentSlide === item.idx;
-          return (
-            <button
-              key={item.idx}
-              onClick={() => goToSlide(item.idx)}
-              className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs font-headline font-semibold transition-all duration-300 flex items-center gap-1.5 sm:gap-2 ${
-                isActive
-                  ? item.idx === 2
-                    ? 'bg-[#ff0000] text-white shadow-lg shadow-red-600/40'
-                    : 'bg-[#ff740e] text-white shadow-lg shadow-orange-600/40'
-                  : 'text-white/60 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              <Icon className="w-3.5 h-3.5" />
-              <span>{item.label}</span>
-              {isActive && (
-                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-              )}
-            </button>
-          );
-        })}
+        {/* Slide 3 Pill Button */}
+        <button
+          onClick={() => goToSlide(2)}
+          className={`px-3 py-1.5 rounded-xl text-xs font-headline font-semibold flex items-center gap-1.5 transition-all duration-200 ${
+            currentSlide === 2
+              ? 'bg-[#ff0000] text-white border border-red-400/40 shadow-lg shadow-red-600/30'
+              : 'text-white/60 hover:text-white hover:bg-white/5'
+          }`}
+          aria-label="Slide 3: Video Tour"
+        >
+          <Video className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">03 Video Tour</span>
+          <span className="sm:hidden">03</span>
+        </button>
+
+        {/* Manual Arrow Controls */}
+        <div className="flex items-center gap-1 border-l border-white/15 pl-1.5 sm:pl-2">
+          <button
+            onClick={prevSlide}
+            className="p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+
       </div>
-
     </section>
   );
 };
