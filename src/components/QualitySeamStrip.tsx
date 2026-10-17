@@ -34,10 +34,10 @@ export const QualitySeamStrip: React.FC = () => {
             </div>
             <div>
               <div className="font-headline font-bold text-sm text-white">
-                Dual-Side Web Ruling
+                3 Color Flexo Printing
               </div>
               <p className="text-xs text-white/60 font-body mt-0.5">
-                Synchronized flexo ruling lines with non-bleed water inks.
+                Synchronized 3-color flexo printing lines with non-bleed water inks.
               </p>
             </div>
           </div>

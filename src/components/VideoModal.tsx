@@ -20,25 +20,25 @@ interface PhotoInfo {
 
 const PHOTOS: Record<PhotoKey, PhotoInfo> = {
   ruling: {
-    url: '/assets/factory-ruling-printing-line.jpg',
+    url: '/Infra/factory-ruling-printing-line.jpg',
     label: 'Ruling & Printing',
     tag: 'FLEXO RULING & CONTINUOUS WEB UNWIND',
     description: 'High-speed web ruling cylinders running continuous reels with precise line margin accuracy and instant ink drying.',
   },
   cutting: {
-    url: '/assets/factory-interior-cutting.jpg',
+    url: '/Infra/factory-interior-cutting.jpg',
     label: 'Cutting Line',
     tag: 'PRECISION PAPER CUTTING & INSPECTION',
     description: 'Heavy-duty industrial paper guillotines converting paper blocks into uniform notebook stacks with active manual checks.',
   },
   warehouse: {
-    url: '/assets/factory-warehouse-reels.jpg',
+    url: '/Infra/factory-warehouse-reels.jpg',
     label: 'Logistics Warehouse',
     tag: 'JUMBO REEL STAGING & DISPATCH BAY',
     description: 'High-ceiling raw material storage, forklift transit, and export container staging for worldwide shipment.',
   },
   aerial: {
-    url: '/assets/factory-aerial-facility.jpg',
+    url: '/Infra/factory-aerial-facility.jpg',
     label: 'Palghar Plant',
     tag: 'PALGHAR MANUFACTURING INFRASTRUCTURE',
     description: 'Our dedicated manufacturing premises in Palghar Udyog Nagar supporting 25 metric tonnes of daily paper conversion.',

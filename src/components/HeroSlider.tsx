@@ -53,23 +53,23 @@ const PRODUCT_IMAGES = [
 // ─────────────────────────────────────────────────────────────
 const FACTORY_IMAGES = [
   {
-    image: '/assets/factory-aerial-facility.jpg',
+    image: '/Infra/factory-aerial-facility.jpg',
     alt: 'Palghar Manufacturing Plant Campus',
   },
   {
-    image: '/assets/infra-flexo-ruling.jpg',
+    image: '/Infra/infra-flexo-ruling.jpg',
     alt: 'High-Speed Web Ruling and Converting Press',
   },
   {
-    image: '/assets/infra-automated-binding.jpg',
+    image: '/Infra/infra-automated-binding.jpg',
     alt: 'Automated Multi-Head Spine Stitching and Trimming Line',
   },
   {
-    image: '/assets/infra-reels-storage.jpg',
+    image: '/Infra/infra-reels-storage.jpg',
     alt: 'Parent Paper Reel Storage and Raw Materials Warehouse',
   },
   {
-    image: '/assets/infra-guillotine-cutting.jpg',
+    image: '/Infra/infra-guillotine-cutting.jpg',
     alt: 'Heavy-Duty Industrial Guillotine Paper Cutting Machine',
   },
 ];

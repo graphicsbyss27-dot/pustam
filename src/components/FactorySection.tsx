@@ -10,35 +10,35 @@ const YOUTUBE_URL = 'https://youtube.com/@twofoldstationery?si=ooO3KW5As5621baS'
 
 const INFRA_IMAGES = [
   {
-    image: '/assets/infra-reels-storage.jpg',
+    image: '/Infra/infra-reels-storage.jpg',
     alt: 'Parent Reel Inventory Warehouse',
   },
   {
-    image: '/assets/infra-flexo-ruling.jpg',
+    image: '/Infra/infra-flexo-ruling.jpg',
     alt: 'High-Speed Web Ruling and Converting Press',
   },
   {
-    image: '/assets/infra-spine-stitching.jpg',
+    image: '/Infra/infra-spine-stitching.jpg',
     alt: 'Automated Spine Wire Stitching Line',
   },
   {
-    image: '/assets/infra-digital-console.jpg',
+    image: '/Infra/infra-digital-console.jpg',
     alt: 'Digital Operator Control Console',
   },
   {
-    image: '/assets/infra-quality-inspection.jpg',
-    alt: 'In-Process Quality and Spec Inspection',
+    image: '/Infra/infra-carton-packing.jpg',
+    alt: 'Finished Goods Carton Packing & Export Packaging',
   },
   {
-    image: '/assets/infra-warehouse-forklift.jpg',
+    image: '/Infra/infra-warehouse-forklift.jpg',
     alt: 'Palletized Storage and Forklift Logistics',
   },
   {
-    image: '/assets/infra-automated-binding.jpg',
+    image: '/Infra/infra-automated-binding.jpg',
     alt: 'Automated Multi-Head Spine Binding Line',
   },
   {
-    image: '/assets/infra-guillotine-cutting.jpg',
+    image: '/Infra/infra-guillotine-cutting.jpg',
     alt: 'Precision Industrial Guillotine Cutting',
   },
 ];

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, MapPin, Mail, ArrowUp, ArrowRight, Globe, Award, Package } from 'lucide-react';
+import { Phone, MapPin, Mail, ArrowUp, ArrowRight, Package } from 'lucide-react';
 import { PustamLogo } from './PustamLogo';
 import { COMPANY_DETAILS } from '../data/websiteData';
 import { WhatsAppIcon } from './WhatsAppIcon';
@@ -33,8 +33,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   ];
 
   const credentials = [
-    { icon: Award, label: 'GSTIN', value: COMPANY_DETAILS.gstin },
-    { icon: Globe, label: 'IEC', value: 'BNZPC4332C' },
     { icon: Package, label: 'UDYAM', value: 'UDYAM-MH-17-0069099' },
   ];
 
