@@ -108,6 +108,17 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
                 src={item.image}
                 alt={item.alt}
                 loading="lazy"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (!target.dataset.tried) {
+                    target.dataset.tried = '1';
+                    if (item.image.includes('rolls-stocking')) {
+                      target.src = '/assets/rolls-stocking.png';
+                    } else if (item.image.startsWith('/Infra/')) {
+                      target.src = item.image.replace('/Infra/', '/infra/');
+                    }
+                  }
+                }}
                 className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
