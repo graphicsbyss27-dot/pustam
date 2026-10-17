@@ -26,8 +26,8 @@ const INFRA_IMAGES = [
     alt: 'Digital Operator Control Console',
   },
   {
-    image: '/Infra/infra-carton-packing.jpg',
-    alt: 'Finished Goods Carton Packing & Export Packaging',
+    image: '/Infra/rolls-stocking.png',
+    alt: 'Paper Rolls Stocking & Loading Bay Warehouse',
   },
   {
     image: '/Infra/infra-warehouse-forklift.jpg',
