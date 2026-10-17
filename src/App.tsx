@@ -26,6 +26,20 @@ export function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight > 0) {
+        setScrollProgress(Math.min(Math.max((scrollTop / docHeight) * 100, 0), 100));
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const triggerLoader = (onLoaded?: () => void) => {
     if (timerRef.current) clearTimeout(timerRef.current);
     setIsLoading(true);
@@ -76,6 +90,14 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-[#283890] text-white flex flex-col justify-between selection:bg-[#f0e846] selection:text-[#283890]">
+      {/* Persistent Top Scroll Reading Progress Bar */}
+      <div className="fixed top-0 left-0 right-0 h-[2.5px] z-[99990] pointer-events-none overflow-hidden">
+        <div
+          className="h-full bg-gradient-to-r from-[#283890] via-[#ff740e] to-[#f0e846] transition-all duration-150 ease-out shadow-[0_0_10px_rgba(255,116,14,0.8)]"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+
       {/* Dynamic Top Section / Page Loading Bar */}
       {isLoading && (
         <div

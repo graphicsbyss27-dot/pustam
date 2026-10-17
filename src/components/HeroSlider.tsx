@@ -4,124 +4,79 @@ import {
   ChevronRight,
   ArrowRight,
   Factory,
-  Play,
   Layers,
-  Video,
+  Sparkles,
 } from 'lucide-react';
+import { COMPANY_DETAILS } from '../data/websiteData';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 interface HeroSliderProps {
   onNavigate: (page: 'home' | 'contact', sectionId?: string) => void;
 }
 
 // ─────────────────────────────────────────────────────────────
-// 1. All 7 Products from public/products/Products
-// (Asymmetric photo collage with natural tilts, staggered heights, but NO OVERLAPS)
+// 1. All 7 Products (Pure images, no text/data)
 // ─────────────────────────────────────────────────────────────
-const PRODUCT_COLLAGE = [
-  // Row 1: 3 cards with varied heights & organic tilts
+const PRODUCT_IMAGES = [
   {
     image: '/products/Products/Exercise Books.jpg',
     alt: 'Exercise Books',
-    tilt: '-rotate-2',
-    offset: '-translate-y-1.5',
-    colSpan: 'col-span-12 sm:col-span-4 lg:col-span-4',
-    height: 'h-44 sm:h-52 lg:h-60',
   },
   {
     image: '/products/Products/Counter Books.jpg',
     alt: 'Counter Books',
-    tilt: 'rotate-2',
-    offset: 'translate-y-2',
-    colSpan: 'col-span-12 sm:col-span-4 lg:col-span-4',
-    height: 'h-48 sm:h-56 lg:h-68',
   },
   {
     image: '/products/Products/Composition Books.jpg',
     alt: 'Composition Books',
-    tilt: '-rotate-1.5',
-    offset: '-translate-y-2',
-    colSpan: 'col-span-12 sm:col-span-4 lg:col-span-4',
-    height: 'h-44 sm:h-52 lg:h-60',
   },
-
-  // Row 2: 4 cards with varied heights & organic tilts
   {
     image: '/products/Products/Double wire notebook.jpg',
     alt: 'Double Wire Notebooks',
-    tilt: 'rotate-1.5',
-    offset: 'translate-y-1',
-    colSpan: 'col-span-6 sm:col-span-3 lg:col-span-3',
-    height: 'h-40 sm:h-48 lg:h-56',
   },
   {
     image: '/products/Products/Spiral Notebooks.jpg',
     alt: 'Spiral Notebooks',
-    tilt: '-rotate-2',
-    offset: '-translate-y-1.5',
-    colSpan: 'col-span-6 sm:col-span-3 lg:col-span-3',
-    height: 'h-44 sm:h-52 lg:h-62',
   },
   {
     image: '/products/Products/Notepads.jpg',
     alt: 'Notepads & Legal Pads',
-    tilt: 'rotate-2',
-    offset: 'translate-y-2',
-    colSpan: 'col-span-6 sm:col-span-3 lg:col-span-3',
-    height: 'h-40 sm:h-48 lg:h-56',
   },
   {
     image: '/products/Products/handbound.jpg',
     alt: 'Handbound Registers',
-    tilt: '-rotate-1',
-    offset: '-translate-y-1',
-    colSpan: 'col-span-6 sm:col-span-3 lg:col-span-3',
-    height: 'h-44 sm:h-52 lg:h-62',
   },
 ];
 
 // ─────────────────────────────────────────────────────────────
-// 2. Factory machinery images from public/Infra (no video)
-// (Asymmetric industrial collage with subtle tilts & varied heights, NO OVERLAPS)
+// 2. Factory Images (Pure industrial photography, no text/data)
 // ─────────────────────────────────────────────────────────────
-const FACTORY_COLLAGE = [
-  {
-    image: '/assets/factory-ruling-printing-line.jpg',
-    alt: 'Multi-Line Flexo Ruling & Converting Floor',
-    tilt: '-rotate-1',
-    offset: 'translate-y-1',
-    colSpan: 'col-span-12 lg:col-span-7',
-    height: 'h-56 sm:h-72 lg:h-[390px]',
-  },
-  {
-    image: '/assets/factory-interior-cutting.jpg',
-    alt: 'Precision Automated Paper Guillotine Cutting',
-    tilt: 'rotate-1.5',
-    offset: '-translate-y-1',
-    colSpan: 'col-span-12 lg:col-span-5',
-    height: 'h-36 sm:h-44 lg:h-[185px]',
-  },
-  {
-    image: '/assets/factory-warehouse-reels.jpg',
-    alt: 'Jumbo Reel Warehouse Logistics & Staging',
-    tilt: '-rotate-1.5',
-    offset: 'translate-y-1',
-    colSpan: 'col-span-6 lg:col-span-5',
-    height: 'h-36 sm:h-44 lg:h-[185px]',
-  },
+const FACTORY_IMAGES = [
   {
     image: '/assets/factory-aerial-facility.jpg',
-    alt: 'Palghar Industrial Manufacturing Campus',
-    tilt: 'rotate-1',
-    offset: '-translate-y-1',
-    colSpan: 'col-span-6 lg:col-span-5',
-    height: 'h-36 sm:h-44 lg:h-[185px]',
+    alt: 'Palghar Manufacturing Plant Campus',
+  },
+  {
+    image: '/assets/infra-flexo-ruling.jpg',
+    alt: 'High-Speed Web Ruling and Converting Press',
+  },
+  {
+    image: '/assets/infra-automated-binding.jpg',
+    alt: 'Automated Multi-Head Spine Stitching and Trimming Line',
+  },
+  {
+    image: '/assets/infra-reels-storage.jpg',
+    alt: 'Parent Paper Reel Storage and Raw Materials Warehouse',
+  },
+  {
+    image: '/assets/infra-guillotine-cutting.jpg',
+    alt: 'Heavy-Duty Industrial Guillotine Paper Cutting Machine',
   },
 ];
 
 export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
   const timerRef = useRef<any>(null);
 
   const totalSlides = 3;
@@ -138,22 +93,10 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
     setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
   };
 
-  // Video autoplay/pause sync based on active slide
-  useEffect(() => {
-    if (videoRef.current) {
-      if (currentSlide === 2) {
-        videoRef.current.currentTime = 0;
-        videoRef.current.play().catch(() => {});
-      } else {
-        videoRef.current.pause();
-      }
-    }
-  }, [currentSlide]);
-
   // Autoplay slider (pauses on hover)
   useEffect(() => {
     if (!isPaused) {
-      const slideDuration = currentSlide === 2 ? 8500 : 6500;
+      const slideDuration = 6500;
       timerRef.current = setInterval(() => {
         nextSlide();
       }, slideDuration);
@@ -165,189 +108,507 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
 
   return (
     <section
-      className="relative w-full min-h-[86vh] sm:min-h-[88vh] lg:min-h-[92vh] flex items-center justify-center bg-[#070b20] overflow-hidden select-none"
+      className="relative w-full h-[84vh] sm:h-[86vh] lg:h-[88vh] max-h-[850px] min-h-[580px] flex items-center justify-center bg-[#070b20] overflow-hidden select-none"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={() => setIsPaused(true)}
       onTouchEnd={() => setIsPaused(false)}
     >
+      {/* ─────────────────────────────────────────────────────────────
+          GLOBAL KEYFRAME ANIMATIONS (GPU Accelerated)
+          ───────────────────────────────────────────────────────────── */}
+      <style>{`
+        /* Foil Shimmer effect */
+        @keyframes foilShimmer {
+          0% { transform: translateX(-160%) skewX(-25deg); }
+          50% { transform: translateX(260%) skewX(-25deg); }
+          100% { transform: translateX(260%) skewX(-25deg); }
+        }
+        .animate-foil-shimmer {
+          animation: foilShimmer 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        /* Continuous paper wave ribbon animation */
+        @keyframes waveFlow1 {
+          0% { stroke-dashoffset: 0; }
+          100% { stroke-dashoffset: -800; }
+        }
+        .animate-wave-flow-1 {
+          stroke-dasharray: 12, 16;
+          animation: waveFlow1 22s linear infinite;
+        }
+        @keyframes waveFlow2 {
+          0% { stroke-dashoffset: 0; }
+          100% { stroke-dashoffset: 800; }
+        }
+        .animate-wave-flow-2 {
+          stroke-dasharray: 8, 12;
+          animation: waveFlow2 26s linear infinite;
+        }
+
+        /* Breathing Aura & Ambient Lighting */
+        @keyframes auraBreath {
+          0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.35; }
+          50% { transform: scale(1.15) translate(20px, -15px); opacity: 0.65; }
+        }
+        .animate-aura-1 {
+          animation: auraBreath 8s ease-in-out infinite;
+        }
+        @keyframes auraBreath2 {
+          0%, 100% { transform: scale(1.1) translate(0, 0); opacity: 0.3; }
+          50% { transform: scale(0.92) translate(-25px, 20px); opacity: 0.6; }
+        }
+        .animate-aura-2 {
+          animation: auraBreath2 10s ease-in-out infinite;
+        }
+
+        /* Floating Golden Foil Dust Particles */
+        @keyframes floatDust1 {
+          0% { transform: translateY(0px) rotate(0deg); opacity: 0.2; }
+          50% { transform: translateY(-35px) rotate(180deg); opacity: 0.85; }
+          100% { transform: translateY(-70px) rotate(360deg); opacity: 0.1; }
+        }
+        .animate-dust-1 {
+          animation: floatDust1 7s ease-in-out infinite;
+        }
+        @keyframes floatDust2 {
+          0% { transform: translateY(0px) rotate(0deg); opacity: 0.15; }
+          50% { transform: translateY(-45px) rotate(-180deg); opacity: 0.9; }
+          100% { transform: translateY(-90px) rotate(-360deg); opacity: 0.1; }
+        }
+        .animate-dust-2 {
+          animation: floatDust2 9s ease-in-out infinite 1.5s;
+        }
+
+        /* Slide 1: Flowing Notebook Ruled Lines Motion */
+        @keyframes flowRuling {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(32px); }
+        }
+        .animate-flow-ruling {
+          animation: flowRuling 6s linear infinite;
+        }
+
+        /* Slide 2: Precision Industrial Laser Beam Sweep */
+        @keyframes laserSweep {
+          0% { transform: translateY(-100%); opacity: 0; }
+          15% { opacity: 0.8; }
+          85% { opacity: 0.8; }
+          100% { transform: translateY(800%); opacity: 0; }
+        }
+        .animate-laser-sweep {
+          animation: laserSweep 5s ease-in-out infinite;
+        }
+
+        /* Target Bracket Pulse for White-Label Box */
+        @keyframes targetPulse {
+          0%, 100% { transform: scale(1); opacity: 0.85; }
+          50% { transform: scale(1.02); opacity: 1; filter: drop-shadow(0 0 12px #f0e846); }
+        }
+        .animate-target-box {
+          animation: targetPulse 2.8s ease-in-out infinite;
+        }
+      `}</style>
+
       {/* Deep Ambient Cosmic Glow Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0c133a] via-[#070b20] to-[#040612] pointer-events-none" />
-      <div className="absolute top-1/4 left-1/4 w-[650px] h-[380px] bg-[#283890]/25 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-[500px] h-[320px] bg-[#ff740e]/12 rounded-full blur-[130px] pointer-events-none" />
 
       {/* ─────────────────────────────────────────────────────────────
-          SLIDE 1: DYNAMIC PRODUCT IMAGES COLLAGE (NO OVERLAPS)
-          All 7 product photos from public/products/Products
+          SLIDE 1: PURE PRODUCT IMAGES MERGED COLLAGE + MOTION BACKGROUND
+          - Motion: Flowing notebook blue ruling lines & drifting stardust
           ───────────────────────────────────────────────────────────── */}
       <div
-        className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex items-center justify-center ${
+        className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex items-center justify-center overflow-hidden ${
           currentSlide === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
         }`}
       >
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-14 sm:pt-16 pb-20 sm:pb-24">
-          
-          {/* Dynamic Asymmetric Non-Overlapping Collage Grid */}
-          <div className="grid grid-cols-12 gap-3 sm:gap-4 lg:gap-5 items-center">
-            {PRODUCT_COLLAGE.map((item, idx) => (
-              <div
-                key={idx}
-                onClick={() => onNavigate('home', 'products')}
-                className={`${item.colSpan} ${item.height} ${item.tilt} ${item.offset} p-1.5 sm:p-2 bg-white rounded-2xl sm:rounded-3xl shadow-[0_15px_35px_rgba(0,0,0,0.55)] border-2 sm:border-3 border-white/80 hover:rotate-0 hover:scale-105 hover:shadow-[0_25px_50px_rgba(255,116,14,0.35)] transition-all duration-300 cursor-pointer group`}
-                title="View Pustam Products"
-              >
-                <div className="w-full h-full rounded-xl sm:rounded-2xl overflow-hidden bg-white">
-                  <img
-                    src={item.image}
-                    alt={item.alt}
-                    loading={idx < 3 ? 'eager' : 'lazy'}
-                    className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500"
-                  />
-                </div>
-              </div>
-            ))}
+        {/* Slide 1 Motion Background Layer */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="animate-aura-1 absolute top-1/4 left-1/4 w-[600px] h-[350px] bg-[#283890]/30 rounded-full blur-[120px]" />
+          <div className="animate-aura-2 absolute bottom-1/4 right-1/4 w-[450px] h-[300px] bg-[#ff740e]/15 rounded-full blur-[110px]" />
+
+          {/* Flowing Notebook Ruled Lines */}
+          <div className="absolute inset-0 opacity-15 overflow-hidden">
+            <svg className="w-full h-[150%] animate-flow-ruling" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="ruledLines" width="100%" height="32" patternUnits="userSpaceOnUse">
+                  <line x1="0" y1="0" x2="100%" y2="0" stroke="#38bdf8" strokeWidth="1" strokeDasharray="6 8" />
+                  <line x1="0" y1="31" x2="100%" y2="31" stroke="#f0e846" strokeWidth="0.5" opacity="0.4" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#ruledLines)" />
+            </svg>
           </div>
 
+          <div className="animate-dust-1 absolute top-[25%] left-[15%] w-2 h-2 rounded-full bg-[#f0e846] shadow-[0_0_10px_#f0e846]" />
+          <div className="animate-dust-2 absolute top-[60%] right-[18%] w-2 h-2 rounded-full bg-[#38bdf8] shadow-[0_0_10px_#38bdf8]" />
         </div>
-      </div>
 
-      {/* ─────────────────────────────────────────────────────────────
-          SLIDE 2: DYNAMIC FACTORY MACHINERY COLLAGE (NO OVERLAPS)
-          Photos from public/Infra (no video)
-          ───────────────────────────────────────────────────────────── */}
-      <div
-        className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex items-center justify-center ${
-          currentSlide === 1 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-        }`}
-      >
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-14 sm:pt-16 pb-20 sm:pb-24">
-          
-          {/* 4-Image Asymmetric Industrial Collage Grid */}
-          <div className="grid grid-cols-12 gap-3 sm:gap-4 lg:gap-5 items-center">
+        {/* Slide 1 Content: Pure Product Mosaic Collage */}
+        <div className="relative z-20 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full h-full pt-4 sm:pt-6 pb-16 sm:pb-20 flex items-center justify-center">
+          <div className="w-full h-full max-h-[70vh] grid grid-cols-12 gap-2 sm:gap-3.5 p-2 sm:p-3 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm shadow-2xl">
             
-            {/* Main Flexo Ruling Line Card */}
-            <div
-              onClick={() => onNavigate('home', 'factory')}
-              className={`${FACTORY_COLLAGE[0].colSpan} ${FACTORY_COLLAGE[0].height} ${FACTORY_COLLAGE[0].tilt} ${FACTORY_COLLAGE[0].offset} p-1.5 sm:p-2 bg-white/90 rounded-2xl sm:rounded-3xl shadow-[0_20px_45px_rgba(0,0,0,0.65)] border-2 sm:border-3 border-white/80 hover:rotate-0 hover:scale-104 transition-all duration-300 cursor-pointer group`}
-              title="Flexo Ruling Line"
-            >
-              <div className="w-full h-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#11193d]">
+            {/* Left Dominant Column (2 products) */}
+            <div className="col-span-4 sm:col-span-3 flex flex-col gap-2 sm:gap-3.5 h-full">
+              <div
+                onClick={() => onNavigate('home', 'products')}
+                className="flex-1 rounded-2xl overflow-hidden bg-white shadow-lg border border-white/40 cursor-pointer group hover:scale-[1.02] hover:shadow-orange-500/20 transition-all duration-300"
+                title="View Exercise Books"
+              >
                 <img
-                  src={FACTORY_COLLAGE[0].image}
-                  alt={FACTORY_COLLAGE[0].alt}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  src={PRODUCT_IMAGES[0].image}
+                  alt={PRODUCT_IMAGES[0].alt}
+                  loading="eager"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div
+                onClick={() => onNavigate('home', 'products')}
+                className="flex-1 rounded-2xl overflow-hidden bg-white shadow-lg border border-white/40 cursor-pointer group hover:scale-[1.02] hover:shadow-orange-500/20 transition-all duration-300"
+                title="View Spiral Notebooks"
+              >
+                <img
+                  src={PRODUCT_IMAGES[4].image}
+                  alt={PRODUCT_IMAGES[4].alt}
+                  loading="eager"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
             </div>
 
-            {/* Right Column Supporting Machineries */}
-            <div className="col-span-12 lg:col-span-5 flex flex-col gap-3 sm:gap-4">
+            {/* Center Big Feature Item (1 large hero showcase) */}
+            <div
+              onClick={() => onNavigate('home', 'products')}
+              className="col-span-4 sm:col-span-4 h-full rounded-2xl overflow-hidden bg-white shadow-2xl border-2 border-white/60 cursor-pointer group hover:scale-[1.02] hover:shadow-blue-500/30 transition-all duration-300 relative"
+              title="View Counter Books"
+            >
+              <img
+                src={PRODUCT_IMAGES[1].image}
+                alt={PRODUCT_IMAGES[1].alt}
+                loading="eager"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+
+            {/* Center-Right Column (2 products) */}
+            <div className="col-span-4 sm:col-span-3 flex flex-col gap-2 sm:gap-3.5 h-full">
+              <div
+                onClick={() => onNavigate('home', 'products')}
+                className="flex-1 rounded-2xl overflow-hidden bg-white shadow-lg border border-white/40 cursor-pointer group hover:scale-[1.02] hover:shadow-orange-500/20 transition-all duration-300"
+                title="View Composition Books"
+              >
+                <img
+                  src={PRODUCT_IMAGES[2].image}
+                  alt={PRODUCT_IMAGES[2].alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div
+                onClick={() => onNavigate('home', 'products')}
+                className="flex-1 rounded-2xl overflow-hidden bg-white shadow-lg border border-white/40 cursor-pointer group hover:scale-[1.02] hover:shadow-orange-500/20 transition-all duration-300"
+                title="View Double Wire Notebooks"
+              >
+                <img
+                  src={PRODUCT_IMAGES[3].image}
+                  alt={PRODUCT_IMAGES[3].alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </div>
+
+            {/* Far Right Stack Column (2 products) */}
+            <div className="hidden sm:flex sm:col-span-2 flex-col gap-2 sm:gap-3.5 h-full">
+              <div
+                onClick={() => onNavigate('home', 'products')}
+                className="flex-1 rounded-2xl overflow-hidden bg-white shadow-lg border border-white/40 cursor-pointer group hover:scale-[1.02] hover:shadow-orange-500/20 transition-all duration-300"
+                title="View Notepads"
+              >
+                <img
+                  src={PRODUCT_IMAGES[5].image}
+                  alt={PRODUCT_IMAGES[5].alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div
+                onClick={() => onNavigate('home', 'products')}
+                className="flex-1 rounded-2xl overflow-hidden bg-white shadow-lg border border-white/40 cursor-pointer group hover:scale-[1.02] hover:shadow-orange-500/20 transition-all duration-300"
+                title="View Handbound Registers"
+              >
+                <img
+                  src={PRODUCT_IMAGES[6].image}
+                  alt={PRODUCT_IMAGES[6].alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* ─────────────────────────────────────────────────────────────
+          SLIDE 2: PURE INFRASTRUCTURE IMAGES + INDUSTRIAL MOTION BACKGROUND
+          - Motion: Precision Laser Beam Sweep + CAD Blueprint Grid
+          ───────────────────────────────────────────────────────────── */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex items-center justify-center overflow-hidden ${
+          currentSlide === 1 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+        }`}
+      >
+        {/* Slide 2 Motion Background Layer */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="animate-aura-1 absolute top-1/3 left-1/3 w-[550px] h-[350px] bg-[#ff740e]/20 rounded-full blur-[130px]" />
+          <div className="animate-aura-2 absolute bottom-10 right-10 w-[600px] h-[400px] bg-[#283890]/35 rounded-full blur-[120px]" />
+
+          {/* Technical Blueprint Grid */}
+          <div
+            className="absolute inset-0 opacity-[0.08]"
+            style={{
+              backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
+              backgroundSize: '40px 40px',
+            }}
+          />
+
+          {/* Precision Laser Scanning Beam */}
+          <div className="animate-laser-sweep absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#ff740e] to-transparent shadow-[0_0_15px_#ff740e]" />
+          
+          <div className="animate-dust-1 absolute top-[30%] left-[20%] w-2 h-2 rounded-full bg-[#ff740e] shadow-[0_0_10px_#ff740e]" />
+          <div className="animate-dust-2 absolute top-[70%] right-[15%] w-2 h-2 rounded-full bg-[#f0e846] shadow-[0_0_10px_#f0e846]" />
+        </div>
+
+        {/* Slide 2 Content: Pure Infrastructure Mosaic */}
+        <div className="relative z-20 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full h-full pt-4 sm:pt-6 pb-16 sm:pb-20 flex items-center justify-center">
+          <div className="w-full h-full max-h-[70vh] grid grid-cols-12 gap-2 sm:gap-3.5 p-2 sm:p-3 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm shadow-2xl">
+            
+            {/* Left Major Showcase: Palghar Manufacturing Plant */}
+            <div
+              onClick={() => onNavigate('home', 'factory')}
+              className="col-span-12 sm:col-span-6 h-full rounded-2xl overflow-hidden bg-[#11193d] shadow-2xl border border-white/30 cursor-pointer group hover:scale-[1.01] hover:border-[#ff740e]/60 transition-all duration-300"
+              title="Palghar Manufacturing Plant"
+            >
+              <img
+                src={FACTORY_IMAGES[0].image}
+                alt={FACTORY_IMAGES[0].alt}
+                loading="lazy"
+                className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-700"
+              />
+            </div>
+
+            {/* Right Supporting 4-Grid of Industrial Photos */}
+            <div className="col-span-12 sm:col-span-6 grid grid-cols-2 gap-2 sm:gap-3.5 h-full">
               
-              {/* Precision Cutting */}
+              {/* Flexo Web Ruling */}
               <div
                 onClick={() => onNavigate('home', 'factory')}
-                className={`w-full ${FACTORY_COLLAGE[1].height} ${FACTORY_COLLAGE[1].tilt} ${FACTORY_COLLAGE[1].offset} p-1.5 sm:p-2 bg-white/90 rounded-2xl sm:rounded-3xl shadow-[0_15px_35px_rgba(0,0,0,0.55)] border-2 sm:border-3 border-white/80 hover:rotate-0 hover:scale-104 transition-all duration-300 cursor-pointer group`}
-                title="Precision Cutting Line"
+                className="rounded-2xl overflow-hidden bg-[#11193d] shadow-lg border border-white/20 cursor-pointer group hover:scale-[1.02] hover:border-[#f0e846]/60 transition-all duration-300"
+                title="High-Speed Web Ruling Line"
               >
-                <div className="w-full h-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#11193d]">
-                  <img
-                    src={FACTORY_COLLAGE[1].image}
-                    alt={FACTORY_COLLAGE[1].alt}
-                    loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
+                <img
+                  src={FACTORY_IMAGES[1].image}
+                  alt={FACTORY_IMAGES[1].alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
               </div>
 
-              {/* Bottom 2 Split Tiles: Reels & Aerial Campus */}
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                {FACTORY_COLLAGE.slice(2, 4).map((item, idx) => (
-                  <div
-                    key={idx}
-                    onClick={() => onNavigate('home', 'factory')}
-                    className={`w-full ${item.height} ${item.tilt} ${item.offset} p-1.5 sm:p-2 bg-white/90 rounded-2xl sm:rounded-3xl shadow-[0_15px_35px_rgba(0,0,0,0.55)] border-2 sm:border-3 border-white/80 hover:rotate-0 hover:scale-105 transition-all duration-300 cursor-pointer group`}
-                    title={item.alt}
-                  >
-                    <div className="w-full h-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#11193d]">
-                      <img
-                        src={item.image}
-                        alt={item.alt}
-                        loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                    </div>
-                  </div>
-                ))}
+              {/* Automated Spine Stitching */}
+              <div
+                onClick={() => onNavigate('home', 'factory')}
+                className="rounded-2xl overflow-hidden bg-[#11193d] shadow-lg border border-white/20 cursor-pointer group hover:scale-[1.02] hover:border-[#f0e846]/60 transition-all duration-300"
+                title="Automated Spine Stitching Line"
+              >
+                <img
+                  src={FACTORY_IMAGES[2].image}
+                  alt={FACTORY_IMAGES[2].alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+
+              {/* Raw Reel Storage */}
+              <div
+                onClick={() => onNavigate('home', 'factory')}
+                className="rounded-2xl overflow-hidden bg-[#11193d] shadow-lg border border-white/20 cursor-pointer group hover:scale-[1.02] hover:border-[#f0e846]/60 transition-all duration-300"
+                title="Parent Reel Storage Warehouse"
+              >
+                <img
+                  src={FACTORY_IMAGES[3].image}
+                  alt={FACTORY_IMAGES[3].alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+
+              {/* Precision Cutting Line */}
+              <div
+                onClick={() => onNavigate('home', 'factory')}
+                className="rounded-2xl overflow-hidden bg-[#11193d] shadow-lg border border-white/20 cursor-pointer group hover:scale-[1.02] hover:border-[#f0e846]/60 transition-all duration-300"
+                title="Precision Guillotine Cutting"
+              >
+                <img
+                  src={FACTORY_IMAGES[4].image}
+                  alt={FACTORY_IMAGES[4].alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
               </div>
 
             </div>
 
           </div>
-
         </div>
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          SLIDE 3: VIDEO TOUR SNIPPET (No redirect, self-contained preview)
+          SLIDE 3: BUILD YOUR BRAND WITH US (SIMPLE, RECTANGULAR & ANIMATED)
+          - No excess data
+          - Clean horizontal rectangular white-label notebook showcase
+          - "YOUR LOGO FITS HERE" target frame with foil shimmer
+          - Motion background (paper ribbons + gold dust + aura)
           ───────────────────────────────────────────────────────────── */}
       <div
-        className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex items-center justify-center ${
+        className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex items-center justify-center overflow-hidden ${
           currentSlide === 2 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
         }`}
       >
-        {/* Full-bleed ambient backdrop video */}
-        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none overflow-hidden">
-          <video
-            src="/assets/facility-tour.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover blur-sm"
-          />
-        </div>
+        {/* Slide 3 Animated Motion Layer */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {/* Breathing Aurora Light Centerpiece */}
+          <div className="animate-aura-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] sm:w-[950px] h-[550px] bg-gradient-to-tr from-[#283890]/40 via-[#f0e846]/15 to-[#ff740e]/25 rounded-full blur-[140px]" />
+          <div className="animate-aura-2 absolute top-1/3 right-1/4 w-[450px] h-[350px] bg-[#38bdf8]/20 rounded-full blur-[110px]" />
 
-        <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-6 sm:pt-8 pb-24 sm:pb-28 flex flex-col items-center justify-center text-center my-auto">
-          
-          {/* Headline */}
-          <h1 className="font-headline font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white tracking-tight leading-snug max-w-2xl mb-3 sm:mb-4 drop-shadow-md">
-            High-Speed Paper Converting &amp; Notebook Manufacturing Tour
-          </h1>
-
-          {/* Interactive Cinema Video Frame (Pure Clean Video) */}
-          <div
-            className="relative max-w-xl sm:max-w-2xl w-full max-h-[38vh] sm:max-h-[44vh] aspect-video rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border-2 sm:border-3 border-white/25 group hover:border-[#f0e846]/80 transition-all duration-300"
-            title="Pustam Manufacturing Tour"
-          >
-            <video
-              ref={videoRef}
-              src="/assets/facility-tour.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700"
-            />
+          {/* Floating Gold Foil Particles */}
+          <div className="absolute inset-0">
+            <div className="animate-dust-1 absolute top-[18%] left-[12%] w-2 h-2 rounded-full bg-[#f0e846] shadow-[0_0_12px_#f0e846]" />
+            <div className="animate-dust-2 absolute top-[65%] left-[16%] w-1.5 h-1.5 rounded-full bg-[#ff740e] shadow-[0_0_10px_#ff740e]" />
+            <div className="animate-dust-1 absolute top-[28%] right-[16%] w-2.5 h-2.5 rounded-full bg-[#f0e846] shadow-[0_0_15px_#f0e846]" />
+            <div className="animate-dust-2 absolute top-[72%] right-[20%] w-1.5 h-1.5 rounded-full bg-[#38bdf8] shadow-[0_0_10px_#38bdf8]" />
+            <div className="animate-dust-1 absolute top-[48%] left-[8%] w-1 h-1 rounded-full bg-white shadow-[0_0_8px_white]" />
+            <div className="animate-dust-2 absolute top-[52%] right-[10%] w-2 h-2 rounded-full bg-[#f0e846] shadow-[0_0_12px_#f0e846]" />
           </div>
 
-          {/* CTA Buttons Row — Internal navigation, clear of bottom selector bar */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5 mt-3 sm:mt-4 mb-1">
+          {/* Flowing Paper Web Ribbons */}
+          <svg
+            className="absolute inset-0 w-full h-full opacity-40 sm:opacity-50"
+            viewBox="0 0 1440 600"
+            fill="none"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <linearGradient id="goldWebGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#283890" stopOpacity="0.1" />
+                <stop offset="30%" stopColor="#f0e846" stopOpacity="0.8" />
+                <stop offset="70%" stopColor="#ff740e" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#283890" stopOpacity="0.1" />
+              </linearGradient>
+              <linearGradient id="cyanWebGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.1" />
+                <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#f0e846" stopOpacity="0.1" />
+              </linearGradient>
+            </defs>
+
+            <path
+              d="M -100 280 C 300 120, 600 440, 1000 240 C 1200 140, 1400 320, 1600 220"
+              stroke="url(#goldWebGrad3)"
+              strokeWidth="2.5"
+              className="animate-wave-flow-1"
+            />
+            <path
+              d="M -100 340 C 250 480, 700 160, 1100 380 C 1300 480, 1450 260, 1600 360"
+              stroke="url(#cyanWebGrad3)"
+              strokeWidth="1.8"
+              className="animate-wave-flow-2"
+            />
+          </svg>
+        </div>
+
+        {/* Slide 3 Foreground Content: Simple & Rectangular */}
+        <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full pt-4 sm:pt-6 pb-16 sm:pb-20 flex flex-col justify-center items-center">
+          
+          {/* SINGLE-LINE HEADLINE */}
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="font-headline font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-tight">
+              Build Your Brand <span className="text-[#f0e846]">With Us.</span>
+            </h2>
+          </div>
+
+          {/* ── SIMPLE RECTANGULAR WHITE-LABEL NOTEBOOK CANVAS ── */}
+          <div className="relative w-full max-w-3xl rounded-3xl bg-gradient-to-r from-[#0f172a]/95 via-[#151f52]/95 to-[#1e2b70]/95 border-2 border-white/20 p-6 sm:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.85)] flex flex-col items-center justify-center text-center overflow-hidden mb-6 sm:mb-8">
+            
+            {/* Animated Foil Shimmer sweeping across the rectangle */}
+            <div
+              className="animate-foil-shimmer absolute inset-0 pointer-events-none"
+              style={{
+                background: 'linear-gradient(90deg, transparent 0%, rgba(240, 232, 70, 0.45) 50%, transparent 100%)',
+                width: '60%',
+                filter: 'blur(10px)',
+              }}
+            />
+
+            {/* Notebook Spine / Bound Edge Left Accent */}
+            <div className="absolute left-0 top-0 bottom-0 w-4 bg-gradient-to-r from-black/70 via-white/10 to-transparent border-r border-white/15 pointer-events-none" />
+
+            {/* Top Minimal Pill */}
+            <div className="relative z-10 mb-4 sm:mb-5">
+              <span className="px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md text-[11px] font-mono font-medium tracking-widest text-[#f0e846] border border-[#f0e846]/30 uppercase">
+                WHITE-LABEL NOTEBOOK OEM
+              </span>
+            </div>
+
+            {/* Central Animated Target Box: "YOUR LOGO FITS HERE" */}
+            <div className="animate-target-box relative z-10 w-full max-w-md p-5 sm:p-7 rounded-2xl bg-black/40 backdrop-blur-md border-2 border-dashed border-[#f0e846]/70 shadow-2xl">
+              
+              {/* Corner Registration Brackets */}
+              <div className="absolute -top-1.5 -left-1.5 w-3.5 h-3.5 border-t-2 border-l-2 border-white" />
+              <div className="absolute -top-1.5 -right-1.5 w-3.5 h-3.5 border-t-2 border-r-2 border-white" />
+              <div className="absolute -bottom-1.5 -left-1.5 w-3.5 h-3.5 border-b-2 border-l-2 border-white" />
+              <div className="absolute -bottom-1.5 -right-1.5 w-3.5 h-3.5 border-b-2 border-r-2 border-white" />
+
+              <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-2 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center">
+                <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-[#f0e846] animate-pulse" />
+              </div>
+
+              <div className="font-headline font-bold text-lg sm:text-2xl tracking-wider uppercase text-white drop-shadow">
+                YOUR LOGO FITS HERE
+              </div>
+
+              <div className="text-xs sm:text-sm font-mono text-[#f0e846] tracking-wide mt-1">
+                Custom Foil · Deboss · Any GSM · Retail Packaging
+              </div>
+            </div>
+
+            {/* Subtle bottom note */}
+            <div className="relative z-10 mt-4 text-[11px] font-mono text-white/50 tracking-wider">
+              100% PRIVATE LABEL NOTEBOOK MANUFACTURING
+            </div>
+
+          </div>
+
+          {/* ── SIMPLE STRAIGHTFORWARD CTAs ── */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md">
             <button
-              onClick={() => onNavigate('home', 'factory')}
-              className="px-5 sm:px-7 py-2.5 sm:py-3 rounded-xl bg-[#ff740e] hover:bg-[#e06307] text-white font-headline font-bold text-xs sm:text-sm tracking-wide flex items-center justify-center gap-2 shadow-xl shadow-orange-600/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 min-h-[42px]"
+              onClick={() => onNavigate('contact')}
+              className="w-full sm:w-auto px-7 py-3 rounded-xl bg-[#f0e846] hover:bg-[#ff740e] text-[#151f52] hover:text-white font-headline font-bold text-xs sm:text-sm tracking-wide shadow-xl shadow-yellow-500/25 transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2"
             >
-              <span>Explore Inside Pustam</span>
+              <span>Start Brand Inquiry</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
-            <button
-              onClick={() => onNavigate('contact')}
-              className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-headline font-semibold text-xs sm:text-sm border border-white/20 hover:border-[#f0e846] transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 backdrop-blur-sm min-h-[42px] flex items-center justify-center gap-2"
+            <a
+              href={COMPANY_DETAILS.contact.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-headline font-semibold text-xs sm:text-sm transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30"
+              title="WhatsApp Us"
             >
-              <span>Partner With Us</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+              <WhatsAppIcon className="w-4 h-4 object-contain rounded-sm" />
+              <span>WhatsApp OEM Desk</span>
+            </a>
           </div>
 
         </div>
@@ -360,27 +621,27 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
       {/* Floating Left Navigation Arrow Button */}
       <button
         onClick={prevSlide}
-        className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-[#ff740e] text-white border border-white/25 backdrop-blur-md flex items-center justify-center shadow-2xl transition-all duration-200 hover:scale-110 active:scale-95"
+        className="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-[#ff740e] text-white border border-white/20 backdrop-blur-md flex items-center justify-center shadow-2xl transition-all duration-200 hover:scale-110 active:scale-95"
         aria-label="Previous Slide"
       >
-        <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
+        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
       </button>
 
       {/* Floating Right Navigation Arrow Button */}
       <button
         onClick={nextSlide}
-        className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-[#ff740e] text-white border border-white/25 backdrop-blur-md flex items-center justify-center shadow-2xl transition-all duration-200 hover:scale-110 active:scale-95"
+        className="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-[#ff740e] text-white border border-white/20 backdrop-blur-md flex items-center justify-center shadow-2xl transition-all duration-200 hover:scale-110 active:scale-95"
         aria-label="Next Slide"
       >
-        <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
+        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
       </button>
 
       {/* Bottom Center Slide Selector Bar */}
-      <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-1.5 sm:gap-2.5 bg-black/80 backdrop-blur-lg px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full border border-white/20 shadow-2xl">
+      <div className="absolute bottom-2.5 sm:bottom-3.5 left-1/2 -translate-x-1/2 z-40 flex items-center gap-1.5 sm:gap-2.5 bg-black/80 backdrop-blur-lg px-2.5 sm:px-4 py-1.5 rounded-full border border-white/20 shadow-2xl">
         {[
           { label: 'Products', icon: Layers, idx: 0 },
-          { label: 'Factory', icon: Factory, idx: 1 },
-          { label: 'Factory Tour', icon: Video, idx: 2 },
+          { label: 'Infrastructure', icon: Factory, idx: 1 },
+          { label: 'Build Your Brand', icon: Sparkles, idx: 2 },
         ].map((item) => {
           const Icon = item.icon;
           const isActive = currentSlide === item.idx;
@@ -390,14 +651,16 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
               onClick={() => goToSlide(item.idx)}
               className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs font-headline font-semibold transition-all duration-300 flex items-center gap-1.5 sm:gap-2 ${
                 isActive
-                  ? 'bg-[#ff740e] text-white shadow-lg shadow-orange-600/40'
+                  ? item.idx === 2
+                    ? 'bg-[#f0e846] text-[#151f52] shadow-lg shadow-yellow-500/40'
+                    : 'bg-[#ff740e] text-white shadow-lg shadow-orange-600/40'
                   : 'text-white/60 hover:text-white hover:bg-white/10'
               }`}
             >
               <Icon className="w-3.5 h-3.5" />
               <span>{item.label}</span>
               {isActive && (
-                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
               )}
             </button>
           );

@@ -3,12 +3,13 @@ import {
   Phone,
   Mail,
   MapPin,
-  Navigation,
   Send,
   CheckCircle2,
   PhoneCall,
   ArrowLeft,
   Sparkles,
+  Navigation,
+  ExternalLink,
 } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { COMPANY_DETAILS } from '../data/websiteData';
@@ -206,38 +207,52 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Map Card */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
+            {/* Location & Directions Card */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-5">
               <div className="flex items-center justify-between">
-                <h3 className="font-headline font-bold text-lg text-[#151f52]">
-                  Plant &amp; Office Location
-                </h3>
-                <span className="text-xs text-slate-400 font-medium">Palghar Campus</span>
+                <div>
+                  <h3 className="font-headline font-bold text-lg text-[#151f52]">
+                    Plant &amp; Facility Location
+                  </h3>
+                  <span className="text-xs text-slate-500 font-body">Palghar Udyog Nagar Campus</span>
+                </div>
+                <div className="w-8 h-8 rounded-lg bg-[#283890]/8 flex items-center justify-center text-[#283890]">
+                  <MapPin className="w-4 h-4" />
+                </div>
               </div>
 
-              {/* Map iframe */}
-              <div className="relative h-56 sm:h-64 rounded-2xl overflow-hidden border border-slate-100">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3752.6!2d72.7785!3d19.6973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be71a6e6b6a6b6b%3A0x0!2sPalghar%20Udyog%20Nagar!5e0!3m2!1sen!2sin!4v1"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Pustam Paper Products – Palghar Udyog Nagar"
-                  className="absolute inset-0 w-full h-full"
-                />
+              {/* Styled Location Pin Graphic */}
+              <div className="relative h-44 rounded-2xl bg-gradient-to-br from-[#151f52] to-[#283890] overflow-hidden flex items-center justify-center p-4 border border-slate-100 shadow-inner">
+                {/* Background grid lines */}
+                <div className="absolute inset-0 bg-grid-pattern opacity-25" />
+                
+                {/* Ambient pulse */}
+                <div className="relative z-10 flex flex-col items-center text-center">
+                  <div className="relative mb-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ff740e] opacity-70" />
+                    <div className="w-12 h-12 rounded-full bg-[#ff740e] text-white flex items-center justify-center shadow-xl border-2 border-white/60">
+                      <MapPin className="w-6 h-6" />
+                    </div>
+                  </div>
+                  <div className="font-headline font-bold text-sm text-white drop-shadow">
+                    Pustam Paper Products
+                  </div>
+                  <div className="text-[11px] font-mono text-white/70">
+                    Palghar, Maharashtra, India
+                  </div>
+                </div>
               </div>
 
+              {/* Get Directions Button - Redirects directly to exact coordinates */}
               <a
                 href={contact.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3 px-4 rounded-xl bg-[#283890] hover:bg-[#1e2b70] text-white font-headline font-bold text-xs sm:text-sm tracking-wide transition-all shadow flex items-center justify-center gap-2 group cursor-pointer"
+                className="w-full py-3.5 px-5 rounded-xl bg-[#283890] hover:bg-[#ff740e] text-white font-headline font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-md flex items-center justify-center gap-2 group"
               >
-                <span>Get Directions</span>
                 <Navigation className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                <span>Get Directions</span>
+                <ExternalLink className="w-3.5 h-3.5 text-white/70" />
               </a>
             </div>
           </div>
