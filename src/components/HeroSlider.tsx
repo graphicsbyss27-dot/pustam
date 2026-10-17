@@ -3,8 +3,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ArrowRight,
-  Factory,
-  Layers,
   Sparkles,
 } from 'lucide-react';
 import { COMPANY_DETAILS } from '../data/websiteData';
@@ -636,36 +634,6 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
         <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
       </button>
 
-      {/* Bottom Center Slide Selector Bar */}
-      <div className="absolute bottom-2.5 sm:bottom-3.5 left-1/2 -translate-x-1/2 z-40 flex items-center gap-1.5 sm:gap-2.5 bg-black/80 backdrop-blur-lg px-2.5 sm:px-4 py-1.5 rounded-full border border-white/20 shadow-2xl">
-        {[
-          { label: 'Products', icon: Layers, idx: 0 },
-          { label: 'Infrastructure', icon: Factory, idx: 1 },
-          { label: 'Build Your Brand', icon: Sparkles, idx: 2 },
-        ].map((item) => {
-          const Icon = item.icon;
-          const isActive = currentSlide === item.idx;
-          return (
-            <button
-              key={item.idx}
-              onClick={() => goToSlide(item.idx)}
-              className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs font-headline font-semibold transition-all duration-300 flex items-center gap-1.5 sm:gap-2 ${
-                isActive
-                  ? item.idx === 2
-                    ? 'bg-[#f0e846] text-[#151f52] shadow-lg shadow-yellow-500/40'
-                    : 'bg-[#ff740e] text-white shadow-lg shadow-orange-600/40'
-                  : 'text-white/60 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              <Icon className="w-3.5 h-3.5" />
-              <span>{item.label}</span>
-              {isActive && (
-                <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
-              )}
-            </button>
-          );
-        })}
-      </div>
 
     </section>
   );
