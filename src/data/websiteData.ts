@@ -164,7 +164,7 @@ export const PRODUCTS_PLACEHOLDERS: ProductPlaceholderItem[] = [
     number: "07",
     name: "Drawing Books (Pinned and Spiral)",
     description: "High-bulk cartridge paper drawing and sketch books, available in both staple-pinned and spiral-bound formats for art and education.",
-    image: "/products/drawing-sketch-book.png",
+    image: "/products/Sketchbook_.jpg",
     accent: "yellow",
   },
 ];
