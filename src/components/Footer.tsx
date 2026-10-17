@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, MapPin, Mail, ArrowUp, ArrowRight, Package } from 'lucide-react';
+import { Phone, MapPin, Mail, ArrowUp, ArrowRight } from 'lucide-react';
 import { PustamLogo } from './PustamLogo';
 import { COMPANY_DETAILS } from '../data/websiteData';
 import { WhatsAppIcon } from './WhatsAppIcon';
@@ -30,10 +30,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
     { label: 'Export & Reach', id: 'export' },
     { label: 'Certifications', id: 'certifications' },
     { label: 'White-Label OEM', id: 'white-label' },
-  ];
-
-  const credentials = [
-    { icon: Package, label: 'UDYAM', value: 'UDYAM-MH-17-0069099' },
   ];
 
   return (
@@ -95,17 +91,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <span>Send Enquiry</span>
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
               </button>
-            </div>
-
-            {/* Credentials */}
-            <div className="flex flex-col gap-2 pt-2">
-              {credentials.map(({ icon: Icon, label, value }) => (
-                <div key={label} className="flex items-center gap-2 text-[11px] text-white/40 font-mono">
-                  <Icon className="w-3 h-3 text-white/30 shrink-0" />
-                  <span className="text-white/30">{label}:</span>
-                  <span className="text-white/55">{value}</span>
-                </div>
-              ))}
             </div>
           </div>
 
