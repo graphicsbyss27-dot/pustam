@@ -1,34 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowUp } from 'lucide-react';
 import { COMPANY_DETAILS } from '../data/websiteData';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const FloatingActions: React.FC = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const circleRef = useRef<SVGCircleElement>(null);
   const { contact } = COMPANY_DETAILS;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (docHeight > 0) {
-        const progress = Math.min(Math.max((scrollTop / docHeight) * 100, 0), 100);
-        setScrollProgress(progress);
-      }
-      setShowScrollTop(scrollTop > 300);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   // SVG circular stroke calculation for 44px circle (radius 18)
   const radius = 18;
   const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (scrollProgress / 100) * circumference;
+
+  useEffect(() => {
+    let ticking = false;
+
+    const updateScrollProgress = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      
+      if (circleRef.current && docHeight > 0) {
+        const progress = Math.min(Math.max(scrollTop / docHeight, 0), 1);
+        const offset = circumference - progress * circumference;
+        circleRef.current.style.strokeDashoffset = offset.toFixed(2);
+      }
+
+      const shouldShow = scrollTop > 320;
+      setShowScrollTop((prev) => (prev !== shouldShow ? shouldShow : prev));
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollProgress);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    updateScrollProgress();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [circumference]);
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
     <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-3 pointer-events-none">
@@ -41,7 +55,7 @@ export const FloatingActions: React.FC = () => {
             ? 'opacity-100 translate-y-0'
             : 'opacity-0 translate-y-4 pointer-events-none'
         }`}
-        title={`Scroll to Top (${Math.round(scrollProgress)}%)`}
+        title="Scroll to Top"
         aria-label="Scroll to top"
       >
         {/* Circular Progress SVG */}
@@ -55,6 +69,7 @@ export const FloatingActions: React.FC = () => {
             strokeWidth="2.5"
           />
           <circle
+            ref={circleRef}
             cx="22"
             cy="22"
             r={radius}
@@ -62,9 +77,8 @@ export const FloatingActions: React.FC = () => {
             stroke="#ff740e"
             strokeWidth="2.5"
             strokeDasharray={circumference}
-            strokeDashoffset={strokeDashoffset}
-            strokeLinecap="round"
-            className="transition-all duration-150 ease-out"
+            style={{ strokeDashoffset: circumference }}
+            className="transition-none"
           />
         </svg>
 

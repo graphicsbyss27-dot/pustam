@@ -26,17 +26,34 @@ export function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const progressBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false;
+
+    const updateScrollProgress = () => {
+      if (!progressBarRef.current) {
+        ticking = false;
+        return;
+      }
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (docHeight > 0) {
-        setScrollProgress(Math.min(Math.max((scrollTop / docHeight) * 100, 0), 100));
+        const progress = Math.min(Math.max((scrollTop / docHeight) * 100, 0), 100);
+        progressBarRef.current.style.transform = `scaleX(${progress / 100})`;
+      }
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollProgress);
+        ticking = true;
       }
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
+    updateScrollProgress();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -90,11 +107,12 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-[#070b20] text-white flex flex-col justify-between selection:bg-[#f0e846] selection:text-[#070b20]">
-      {/* Persistent Top Scroll Reading Progress Bar */}
+      {/* Persistent Top Scroll Reading Progress Bar (Hardware-accelerated zero-rerender) */}
       <div className="fixed top-0 left-0 right-0 h-[2.5px] z-[99990] pointer-events-none overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-[#283890] via-[#ff740e] to-[#f0e846] transition-all duration-150 ease-out shadow-[0_0_10px_rgba(255,116,14,0.8)]"
-          style={{ width: `${scrollProgress}%` }}
+          ref={progressBarRef}
+          className="h-full w-full bg-gradient-to-r from-[#283890] via-[#ff740e] to-[#f0e846] origin-left shadow-[0_0_10px_rgba(255,116,14,0.8)] will-change-transform"
+          style={{ transform: 'scaleX(0)' }}
         />
       </div>
 

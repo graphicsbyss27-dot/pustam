@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ExternalLink, Play, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
@@ -144,6 +144,41 @@ const INFRA_IMAGES: InfraTile[] = [
 export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) => {
   const { ref, isVisible } = useScrollReveal();
 
+  // High-performance continuous parallax: drives subtle image translation via CSS variable
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.innerWidth < 768) {
+      return;
+    }
+
+    let ticking = false;
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (!node) return;
+          const rect = node.getBoundingClientRect();
+          const vh = window.innerHeight;
+          // Only compute when within or adjacent to viewport
+          if (rect.bottom > -100 && rect.top < vh + 100) {
+            const center = rect.top + rect.height / 2;
+            const dist = (vh / 2) - center;
+            const shift = Math.max(-18, Math.min(18, dist * 0.035));
+            node.style.setProperty('--parallax-y', `${shift.toFixed(1)}px`);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [ref]);
+
   return (
     <section
       id="factory"
@@ -154,7 +189,7 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
     >
       {/* Subtle ambient light accents with parallax float */}
       <div className="absolute top-1/4 right-0 w-[600px] h-[500px] bg-[#283890]/5 rounded-full blur-[140px] pointer-events-none parallax-float-slow" />
-      <div className="absolute bottom-10 left-0 w-[500px] h-[400px] bg-[#ff740e]/5 rounded-full blur-[140px] pointer-events-none parallax-float-fast" />
+      <div className="absolute bottom-10 left-0 w-[500px] h-[400px] bg-[#ff740e]/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -200,32 +235,48 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
 
         {/* Balanced Bento Architecture Gallery (No text overlays, 100% balanced width, zero blank space) */}
         <div className="bento-infra-grid mb-12">
-          {INFRA_IMAGES.map((item, idx) => (
-            <div
-              key={idx}
-              className={`w-full ${item.colSpanClass}`}
-            >
+          {INFRA_IMAGES.map((item, idx) => {
+            // Apply subtle restrained parallax to key feature rows (alternate slightly for organic depth)
+            const hasParallax = idx === 0 || idx === 6 || idx === 10 || idx === 15;
+            const parallaxSpeed = idx % 2 === 0 ? 0.04 : -0.04;
+
+            return (
               <div
-                className={`relative w-full ${item.heightClass} overflow-hidden rounded-2xl md:rounded-3xl bg-slate-100 border border-slate-200/90 shadow-sm hover:shadow-2xl hover:border-[#283890]/40 transition-all duration-500 hover:-translate-y-1 group`}
+                key={idx}
+                className={`w-full ${item.colSpanClass}`}
               >
-                <img
-                  src={item.image}
-                  alt={item.alt}
-                  loading="lazy"
-                  onError={(e) => {
-                    const target = e.currentTarget;
-                    if (!target.dataset.tried) {
-                      target.dataset.tried = '1';
-                      if (item.image.startsWith('/Infra/')) {
-                        target.src = item.image.replace('/Infra/', '/infra/');
+                <div
+                  className={`relative w-full ${item.heightClass} overflow-hidden rounded-2xl md:rounded-3xl bg-slate-100 border border-slate-200/90 shadow-sm hover:shadow-2xl hover:border-[#283890]/40 transition-all duration-500 hover:-translate-y-1 group`}
+                >
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    loading={idx < 4 ? 'eager' : 'lazy'}
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (!target.dataset.tried) {
+                        target.dataset.tried = '1';
+                        if (item.image.startsWith('/Infra/')) {
+                          target.src = item.image.replace('/Infra/', '/infra/');
+                        }
                       }
+                    }}
+                    className={`w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out ${
+                      hasParallax ? 'will-change-transform scale-[1.04]' : ''
+                    }`}
+                    style={
+                      hasParallax
+                        ? {
+                            transform: `translate3d(0, var(--parallax-y, 0px), 0)`,
+                            transition: 'transform 0.1s cubic-bezier(0.2, 0, 0.2, 1)',
+                          }
+                        : undefined
                     }
-                  }}
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Video Redirect Banner to YouTube */}

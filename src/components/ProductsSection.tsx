@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowRight, Sparkles, BookOpen } from 'lucide-react';
 import { PRODUCTS_PLACEHOLDERS } from '../data/websiteData';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -9,6 +9,40 @@ interface ProductsSectionProps {
 
 export const ProductsSection: React.FC<ProductsSectionProps> = ({ onNavigate }) => {
   const { ref: sectionRef, isVisible } = useScrollReveal();
+
+  // High-performance continuous parallax for product card imagery
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.innerWidth < 768) {
+      return;
+    }
+
+    let ticking = false;
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (!node) return;
+          const rect = node.getBoundingClientRect();
+          const vh = window.innerHeight;
+          if (rect.bottom > -100 && rect.top < vh + 100) {
+            const center = rect.top + rect.height / 2;
+            const dist = (vh / 2) - center;
+            const shift = Math.max(-16, Math.min(16, dist * 0.03));
+            node.style.setProperty('--product-parallax-y', `${shift.toFixed(1)}px`);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [sectionRef]);
 
   const handleInquiry = () => {
     if (onNavigate) {
@@ -135,8 +169,12 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ onNavigate }) 
                     <img
                       src={product.image}
                       alt={product.name}
-                      loading="lazy"
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                      loading={idx < 2 ? 'eager' : 'lazy'}
+                      className="w-full h-full object-cover object-center scale-[1.05] group-hover:scale-110 transition-transform duration-700 ease-out will-change-transform"
+                      style={{
+                        transform: `translate3d(0, var(--product-parallax-y, 0px), 0)`,
+                        transition: 'transform 0.12s cubic-bezier(0.2, 0, 0.2, 1)',
+                      }}
                     />
                   </div>
 
