@@ -197,49 +197,6 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
           </div>
         </div>
 
-        {/* Featured 3D Automated Factory Illustration Banner */}
-        <div className="mb-10 rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-8 backdrop-blur-xl relative overflow-hidden shadow-xl shadow-blue-950/5 group hover:border-[#283890]/30 transition-all duration-500">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
-            <div className="lg:col-span-7 relative rounded-2xl overflow-hidden border border-slate-200 h-64 sm:h-80 md:h-96 bg-slate-100">
-              <img
-                src="/assets/illustrations/automated-factory-3d.jpg"
-                alt="Pustam 3D Automated Converting Line"
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-white/60 text-xs text-[#151f52] font-mono font-semibold shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                Synchronized Flexo Ruling &amp; Wire-O Binding Line
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 space-y-4">
-              <div className="font-mono text-xs uppercase tracking-wider text-[#283890] font-bold">
-                High-Volume Manufacturing Floor
-              </div>
-              <h3 className="font-headline font-bold text-2xl sm:text-3xl text-[#151f52]">
-                Reel-to-Book Continuous Workflow
-              </h3>
-              <p className="font-body text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Raw pulp reels enter our automated rotary slitters, pass synchronized 3-color ruling cylinders, and feed into automated counting, cross-cutting, and spine pressing without manual handling.
-              </p>
-
-              <div className="pt-2 grid grid-cols-2 gap-4 border-t border-slate-100 text-xs text-slate-700">
-                <div>
-                  <div className="font-headline font-bold text-xl text-[#151f52]">±0.5 mm</div>
-                  <div className="text-slate-500">Cut Precision</div>
-                </div>
-                <div>
-                  <div className="font-headline font-bold text-xl text-[#ff740e]">100% QC</div>
-                  <div className="text-slate-500">Batch Inspection</div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
 
         {/* Balanced Bento Architecture Gallery (No text overlays, 100% balanced width, zero blank space) */}
         <div className="bento-infra-grid mb-12">
