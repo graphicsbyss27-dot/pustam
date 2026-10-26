@@ -93,18 +93,82 @@
   scrollbar-width: none;
 }
 
-/* Section scroll reveal & loading entrance animations — hardware-accelerated for 60fps */
+/* ==========================================================================
+   CREATIVE SCROLL-TRIGGERED SECTION REVEAL SYSTEM
+   Coordinated sequence: Eyebrow -> Main Heading -> Description -> Visuals -> Cards -> CTAs
+   - Mask Wipe Reveal: Left-to-right / Bottom-to-top clipping masks
+   - Staggered Text Reveal: Upward translation with cubic-bezier easing
+   - Staggered Card Entrance: Progressive delays with subtle scale and lift
+   ========================================================================== */
+
+/* Base container: Children start hidden until .reveal-visible is added */
 .reveal-fade-up {
   position: relative;
-  opacity: 0;
-  transform: translate3d(0, 20px, 0);
-  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.reveal-visible {
+/* 1. Staggered Text & Content Reveals */
+.reveal-fade-up .seq-item {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-visible .seq-item {
   opacity: 1;
   transform: translate3d(0, 0, 0);
+}
+
+/* Coordinated sequence delays (70ms - 100ms progression) */
+.reveal-visible .seq-delay-1 { transition-delay: 40ms; }
+.reveal-visible .seq-delay-2 { transition-delay: 110ms; }
+.reveal-visible .seq-delay-3 { transition-delay: 180ms; }
+.reveal-visible .seq-delay-4 { transition-delay: 260ms; }
+.reveal-visible .seq-delay-5 { transition-delay: 340ms; }
+.reveal-visible .seq-delay-6 { transition-delay: 420ms; }
+.reveal-visible .seq-delay-7 { transition-delay: 500ms; }
+.reveal-visible .seq-delay-8 { transition-delay: 580ms; }
+
+/* 2. Mask Wipe Image Reveal (Clipping mask removes from left-to-right or bottom-to-top) */
+.mask-wipe-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.mask-wipe-right {
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  transition: clip-path 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-visible .mask-wipe-right,
+.mask-wipe-right.revealed {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.mask-wipe-up {
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-visible .mask-wipe-up,
+.mask-wipe-up.revealed {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* 3. Staggered Card Entrance */
+.reveal-fade-up .card-entrance {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0) scale(0.985);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
+}
+
+.reveal-visible .card-entrance {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
 }
 
 /* Restrained, GPU-composited Parallax Image Container & Layer */

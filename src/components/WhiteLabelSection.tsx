@@ -36,7 +36,7 @@ export const WhiteLabelSection: React.FC<WhiteLabelSectionProps> = ({ onNavigate
           <div className="lg:col-span-7 space-y-6">
 
             {/* Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/10 backdrop-blur-md shadow-inner">
+            <div className="seq-item seq-delay-1 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/10 backdrop-blur-md shadow-inner">
               <span className="w-2 h-2 rounded-full bg-[#f0e846]" />
               <span className="text-[#f0e846] font-headline font-semibold text-xs tracking-widest uppercase">
                 WHITE-LABEL MANUFACTURING
@@ -44,7 +44,7 @@ export const WhiteLabelSection: React.FC<WhiteLabelSectionProps> = ({ onNavigate
             </div>
 
             {/* Headline */}
-            <h2 className="font-headline font-bold text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-[1.12]">
+            <h2 className="seq-item seq-delay-2 font-headline font-bold text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-[1.12]">
               Create Your Brand <br className="hidden sm:inline" />
               <span className="bg-gradient-to-r from-[#f0e846] via-white to-[#ff740e] bg-clip-text text-transparent">
                 With Our Machinery.
@@ -52,12 +52,12 @@ export const WhiteLabelSection: React.FC<WhiteLabelSectionProps> = ({ onNavigate
             </h2>
 
             {/* Description */}
-            <p className="font-body text-sm sm:text-base text-slate-400 leading-relaxed max-w-xl">
+            <p className="seq-item seq-delay-3 font-body text-sm sm:text-base text-slate-400 leading-relaxed max-w-xl">
               Partner with Pustam Paper Products to produce paper stationery under your proprietary branding. We manage paper procurement, printing, converting, finishing, and container logistics so you can focus on building your brand equity.
             </p>
 
             {/* Feature List with glowing tick badges */}
-            <ul className="space-y-3.5 pt-2">
+            <ul className="seq-item seq-delay-4 space-y-3.5 pt-2">
               {features.map((feature, index) => (
                 <li key={index} className="flex items-start gap-3">
                   <div className="w-5 h-5 rounded-full bg-white/[0.06] border border-[#f0e846]/30 flex items-center justify-center shrink-0 mt-0.5 text-[#f0e846]">
@@ -69,7 +69,7 @@ export const WhiteLabelSection: React.FC<WhiteLabelSectionProps> = ({ onNavigate
             </ul>
 
             {/* CTA */}
-            <div className="pt-4">
+            <div className="seq-item seq-delay-5 pt-4">
               <button
                 onClick={() => onNavigate && onNavigate('contact')}
                 className="btn-apple-base btn-apple-primary px-8 py-4 text-sm tracking-wide gap-2.5 group min-h-[48px]"
@@ -82,7 +82,7 @@ export const WhiteLabelSection: React.FC<WhiteLabelSectionProps> = ({ onNavigate
           </div>
 
           {/* RIGHT: Visual Bento Card */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5 card-entrance seq-delay-5">
             <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#0e163d]/90 via-[#0a1030]/90 to-[#070b20] border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-xl group hover:border-[#f0e846]/40 transition-all duration-500">
               
               {/* Glow Accent */}

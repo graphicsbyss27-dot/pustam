@@ -106,26 +106,26 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ onNavigate }) 
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
           <div className="max-w-2xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/10 backdrop-blur-md shadow-inner">
+            <div className="seq-item seq-delay-1 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/10 backdrop-blur-md shadow-inner">
               <span className="w-2 h-2 rounded-full bg-[#f0e846]" />
               <span className="text-[#f0e846] font-headline font-semibold text-xs tracking-widest uppercase">
                 PRODUCT SHOWCASE
               </span>
             </div>
 
-            <h2 className="font-headline font-bold text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-[1.12]">
+            <h2 className="seq-item seq-delay-2 font-headline font-bold text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-[1.12]">
               Engineered Notebooks <br className="hidden sm:inline" />
               <span className="bg-gradient-to-r from-[#f0e846] via-white to-[#ff740e] bg-clip-text text-transparent">
                 For Every Sector
               </span>
             </h2>
 
-            <p className="font-body text-sm sm:text-base text-slate-400 leading-relaxed max-w-xl">
+            <p className="seq-item seq-delay-3 font-body text-sm sm:text-base text-slate-400 leading-relaxed max-w-xl">
               Explore our core notebook formats manufactured at 25 MT/day capacity. Clean craftsmanship, premium paper opacity, and global export packaging.
             </p>
           </div>
 
-          <div className="shrink-0">
+          <div className="shrink-0 seq-item seq-delay-4">
             <button
               onClick={handleInquiry}
               className="btn-apple-base btn-apple-primary px-6 py-3.5 text-xs sm:text-sm tracking-wide gap-2"
@@ -140,11 +140,13 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ onNavigate }) 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-7 mb-14">
           {PRODUCTS_PLACEHOLDERS.map((product, idx) => {
             const layout = getCardLayout(idx);
+            // Stagger card entrance progressively (delay 2 to 8)
+            const staggerClass = `seq-delay-${Math.min(idx + 2, 8)}`;
 
             return (
               <div
                 key={product.id}
-                className={`group rounded-3xl bg-gradient-to-b from-white/[0.07] via-white/[0.03] to-white/[0.01] border border-white/10 hover:border-[#f0e846]/50 p-5 sm:p-6 backdrop-blur-xl transition-all duration-400 hover:shadow-2xl hover:shadow-[#283890]/20 hover:-translate-y-1.5 flex flex-col justify-between ${layout.colSpan}`}
+                className={`card-entrance ${staggerClass} group rounded-3xl bg-gradient-to-b from-white/[0.07] via-white/[0.03] to-white/[0.01] border border-white/10 hover:border-[#f0e846]/50 p-5 sm:p-6 backdrop-blur-xl transition-all duration-400 hover:shadow-2xl hover:shadow-[#283890]/20 hover:-translate-y-1.5 flex flex-col justify-between ${layout.colSpan}`}
               >
                 <div>
                   {/* Card Header (Product Index & Tag) */}
@@ -164,13 +166,13 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ onNavigate }) 
                     </div>
                   </div>
 
-                  {/* Clean Product Photography Display (No website-generated text overlays inside) */}
-                  <div className={`relative w-full ${layout.imageHeight} rounded-2xl overflow-hidden bg-slate-900 border border-white/10 mb-5`}>
+                  {/* Clean Product Photography Display with Mask Wipe Reveal */}
+                  <div className={`mask-wipe-container relative w-full ${layout.imageHeight} rounded-2xl overflow-hidden bg-slate-900 border border-white/10 mb-5`}>
                     <img
                       src={product.image}
                       alt={product.name}
                       loading={idx < 2 ? 'eager' : 'lazy'}
-                      className="w-full h-full object-cover object-center scale-[1.05] group-hover:scale-110 transition-transform duration-700 ease-out will-change-transform"
+                      className="mask-wipe-up w-full h-full object-cover object-center scale-[1.05] group-hover:scale-110 transition-transform duration-700 ease-out will-change-transform"
                       style={{
                         transform: `translate3d(0, var(--product-parallax-y, 0px), 0)`,
                         transition: 'transform 0.12s cubic-bezier(0.2, 0, 0.2, 1)',

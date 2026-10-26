@@ -50,36 +50,36 @@ export const CertificationsSection: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        {/* Header */}
+        {/* Header (Coordinated sequence) */}
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#283890]/8 border border-[#283890]/15 backdrop-blur-md mb-4 shadow-sm">
+          <div className="seq-item seq-delay-1 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#283890]/8 border border-[#283890]/15 backdrop-blur-md mb-4 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-[#283890] animate-pulse" />
             <span className="text-[#283890] font-headline font-bold text-xs tracking-widest uppercase">
               STATUTORY TRUST &amp; COMPLIANCE
             </span>
           </div>
 
-          <h2 className="font-headline font-bold text-3xl sm:text-5xl md:text-6xl text-[#151f52] tracking-tight leading-[1.12]">
+          <h2 className="seq-item seq-delay-2 font-headline font-bold text-3xl sm:text-5xl md:text-6xl text-[#151f52] tracking-tight leading-[1.12]">
             Certified &amp; Registered <br className="hidden sm:inline" />
             <span className="bg-gradient-to-r from-[#283890] via-[#1e2b70] to-[#ff740e] bg-clip-text text-transparent">
               Global Paper Partner
             </span>
           </h2>
 
-          <p className="mt-5 font-body text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
+          <p className="seq-item seq-delay-3 mt-5 font-body text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
             Fully accredited under Indian statutory authorities for corporate transparency, legal trade clearance, and frictionless container exports.
           </p>
         </div>
 
         {/* Cards — clicking opens PDF directly */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {certificates.map((cert) => (
+          {certificates.map((cert, idx) => (
             <a
               key={cert.code}
               href={cert.pdfUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-7 rounded-3xl bg-white border border-slate-200/90 hover:border-[#283890]/40 hover:shadow-2xl hover:shadow-blue-950/10 transition-all duration-300 flex flex-col justify-between cursor-pointer group hover:-translate-y-1.5 shadow-lg shadow-blue-950/5"
+              className={`card-entrance seq-delay-${idx + 4} p-7 rounded-3xl bg-white border border-slate-200/90 hover:border-[#283890]/40 hover:shadow-2xl hover:shadow-blue-950/10 transition-all duration-300 flex flex-col justify-between cursor-pointer group hover:-translate-y-1.5 shadow-lg shadow-blue-950/5`}
             >
               <div>
                 {/* Icon + Badge */}

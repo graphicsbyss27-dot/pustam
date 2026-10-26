@@ -193,30 +193,30 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
+        {/* Section Header (Coordinated sequence) */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
           <div className="max-w-2xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#283890]/8 border border-[#283890]/15 backdrop-blur-md shadow-sm">
+            <div className="seq-item seq-delay-1 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#283890]/8 border border-[#283890]/15 backdrop-blur-md shadow-sm">
               <span className="w-2 h-2 rounded-full bg-[#283890]" />
               <span className="text-[#283890] font-headline font-bold text-xs tracking-widest uppercase">
                 MANUFACTURING INFRASTRUCTURE
               </span>
             </div>
 
-            <h2 className="font-headline font-bold text-3xl sm:text-5xl md:text-6xl text-[#151f52] tracking-tight leading-[1.12]">
+            <h2 className="seq-item seq-delay-2 font-headline font-bold text-3xl sm:text-5xl md:text-6xl text-[#151f52] tracking-tight leading-[1.12]">
               Where Paper <br className="hidden sm:inline" />
               <span className="bg-gradient-to-r from-[#283890] via-[#1e2b70] to-[#ff740e] bg-clip-text text-transparent">
                 Takes Industrial Shape
               </span>
             </h2>
 
-            <p className="font-body text-sm sm:text-base text-slate-600 leading-relaxed pt-1">
+            <p className="seq-item seq-delay-3 font-body text-sm sm:text-base text-slate-600 leading-relaxed pt-1">
               Operating across our 30,000+ sq. ft. purpose-built converting plant in Palghar, Maharashtra. Converting 25 metric tonnes of paper daily with synchronized automation.
             </p>
           </div>
 
           {/* Quick Metrics Badges */}
-          <div className="flex flex-wrap gap-2.5 pt-1 md:pt-0 shrink-0">
+          <div className="seq-item seq-delay-4 flex flex-wrap gap-2.5 pt-1 md:pt-0 shrink-0">
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-slate-700 text-xs font-mono font-medium border border-slate-200/90 shadow-sm">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#283890]" />
               30,000+ Sq. Ft.
@@ -233,20 +233,22 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
         </div>
 
 
-        {/* Balanced Bento Architecture Gallery (No text overlays, 100% balanced width, zero blank space) */}
+        {/* Balanced Bento Architecture Gallery (Progressive entrance + mask wipe reveals) */}
         <div className="bento-infra-grid mb-12">
           {INFRA_IMAGES.map((item, idx) => {
-            // Apply subtle restrained parallax to key feature rows (alternate slightly for organic depth)
+            // Apply subtle restrained parallax to key feature rows
             const hasParallax = idx === 0 || idx === 6 || idx === 10 || idx === 15;
-            const parallaxSpeed = idx % 2 === 0 ? 0.04 : -0.04;
+            const staggerClass = `seq-delay-${Math.min((idx % 6) + 2, 8)}`;
+            // Feature items get smooth mask wipe reveal
+            const isWipeItem = idx === 0 || idx === 5 || idx === 6 || idx === 10;
 
             return (
               <div
                 key={idx}
-                className={`w-full ${item.colSpanClass}`}
+                className={`card-entrance ${staggerClass} w-full ${item.colSpanClass}`}
               >
                 <div
-                  className={`relative w-full ${item.heightClass} overflow-hidden rounded-2xl md:rounded-3xl bg-slate-100 border border-slate-200/90 shadow-sm hover:shadow-2xl hover:border-[#283890]/40 transition-all duration-500 hover:-translate-y-1 group`}
+                  className={`mask-wipe-container relative w-full ${item.heightClass} overflow-hidden rounded-2xl md:rounded-3xl bg-slate-100 border border-slate-200/90 shadow-sm hover:shadow-2xl hover:border-[#283890]/40 transition-all duration-500 hover:-translate-y-1 group`}
                 >
                   <img
                     src={item.image}
@@ -262,8 +264,8 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
                       }
                     }}
                     className={`w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out ${
-                      hasParallax ? 'will-change-transform scale-[1.04]' : ''
-                    }`}
+                      isWipeItem ? 'mask-wipe-right' : ''
+                    } ${hasParallax ? 'will-change-transform scale-[1.04]' : ''}`}
                     style={
                       hasParallax
                         ? {

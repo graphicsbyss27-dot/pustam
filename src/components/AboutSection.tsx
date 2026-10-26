@@ -32,23 +32,23 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        {/* Section Header with Light Pill Badge */}
+        {/* Section Header with Light Pill Badge (Coordinated entrance sequence) */}
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#283890]/8 border border-[#283890]/15 backdrop-blur-md mb-4 shadow-sm">
+          <div className="seq-item seq-delay-1 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#283890]/8 border border-[#283890]/15 backdrop-blur-md mb-4 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-[#283890] animate-pulse" />
             <span className="text-[#283890] font-headline font-bold text-xs tracking-widest uppercase">
               ABOUT PUSTAM PAPER PRODUCTS
             </span>
           </div>
 
-          <h2 className="font-headline font-bold text-3xl sm:text-5xl md:text-6xl text-[#151f52] tracking-tight leading-[1.12]">
+          <h2 className="seq-item seq-delay-2 font-headline font-bold text-3xl sm:text-5xl md:text-6xl text-[#151f52] tracking-tight leading-[1.12]">
             Engineering Notebooks <br className="hidden sm:inline" />
             <span className="bg-gradient-to-r from-[#283890] via-[#1e2b70] to-[#ff740e] bg-clip-text text-transparent">
               With Industrial Purpose
             </span>
           </h2>
 
-          <p className="mt-5 font-body text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
+          <p className="seq-item seq-delay-3 mt-5 font-body text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
             Established in 2016 in Palghar, India. We power recognized Indian brands, retailers, and merchant exporters with dedicated, precision-controlled notebook manufacturing and 25 MT/day conversion capacity.
           </p>
         </div>
@@ -57,7 +57,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6">
 
           {/* Bento Item 1: High-Capacity Flagship Metric Card (7 cols) */}
-          <div className="md:col-span-7 rounded-3xl bg-white/90 border border-slate-200/90 p-7 sm:p-9 relative overflow-hidden backdrop-blur-xl group hover:border-[#283890]/40 transition-all duration-500 shadow-xl shadow-blue-950/5 flex flex-col justify-between">
+          <div className="card-entrance seq-delay-4 md:col-span-7 rounded-3xl bg-white/90 border border-slate-200/90 p-7 sm:p-9 relative overflow-hidden backdrop-blur-xl group hover:border-[#283890]/40 transition-all duration-500 shadow-xl shadow-blue-950/5 flex flex-col justify-between">
             <div className="absolute top-0 right-0 w-80 h-80 bg-[#283890]/5 rounded-full blur-3xl pointer-events-none group-hover:bg-[#283890]/10 transition-all duration-700" />
             
             <div className="relative z-10">
@@ -103,12 +103,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
           </div>
 
           {/* Bento Item 2: 3D Papercraft Illustration Showcase (5 cols) */}
-          <div className="md:col-span-5 rounded-3xl bg-white/90 border border-slate-200/90 overflow-hidden relative group hover:border-[#ff740e]/40 transition-all duration-500 shadow-xl shadow-blue-950/5 flex flex-col">
-            <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-slate-100">
+          <div className="card-entrance seq-delay-5 md:col-span-5 rounded-3xl bg-white/90 border border-slate-200/90 overflow-hidden relative group hover:border-[#ff740e]/40 transition-all duration-500 shadow-xl shadow-blue-950/5 flex flex-col">
+            <div className="mask-wipe-container relative h-64 sm:h-72 w-full overflow-hidden bg-slate-100">
               <img
                 src="/assets/illustrations/notebook-craft-3d.jpg"
                 alt="Pustam 3D Notebook Crafting"
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                className="mask-wipe-right w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
@@ -136,7 +136,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
           </div>
 
           {/* Bento Item 3: Paper Grade Versatility (4 cols) */}
-          <div className="md:col-span-4 rounded-3xl bg-white/90 border border-slate-200/90 p-6 sm:p-7 backdrop-blur-xl hover:border-slate-300 transition-all duration-300 shadow-xl shadow-blue-950/5 flex flex-col justify-between group">
+          <div className="card-entrance seq-delay-6 md:col-span-4 rounded-3xl bg-white/90 border border-slate-200/90 p-6 sm:p-7 backdrop-blur-xl hover:border-slate-300 transition-all duration-300 shadow-xl shadow-blue-950/5 flex flex-col justify-between group">
             <div>
               <div className="w-10 h-10 rounded-2xl bg-[#ff740e]/10 border border-[#ff740e]/20 flex items-center justify-center text-[#ff740e] mb-5 group-hover:scale-110 transition-transform">
                 <Sparkles className="w-5 h-5" />
@@ -154,7 +154,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
           </div>
 
           {/* Bento Item 4: Global Shipping Network (4 cols) */}
-          <div className="md:col-span-4 rounded-3xl bg-white/90 border border-slate-200/90 p-6 sm:p-7 backdrop-blur-xl hover:border-slate-300 transition-all duration-300 shadow-xl shadow-blue-950/5 flex flex-col justify-between group">
+          <div className="card-entrance seq-delay-7 md:col-span-4 rounded-3xl bg-white/90 border border-slate-200/90 p-6 sm:p-7 backdrop-blur-xl hover:border-slate-300 transition-all duration-300 shadow-xl shadow-blue-950/5 flex flex-col justify-between group">
             <div>
               <div className="w-10 h-10 rounded-2xl bg-[#283890]/10 border border-[#283890]/20 flex items-center justify-center text-[#283890] mb-5 group-hover:scale-110 transition-transform">
                 <Globe className="w-5 h-5" />
@@ -172,7 +172,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
           </div>
 
           {/* Bento Item 5: White Label Co-Creation (4 cols) */}
-          <div className="md:col-span-4 rounded-3xl bg-white/90 border border-slate-200/90 p-6 sm:p-7 backdrop-blur-xl hover:border-slate-300 transition-all duration-300 shadow-xl shadow-blue-950/5 flex flex-col justify-between group">
+          <div className="card-entrance seq-delay-8 md:col-span-4 rounded-3xl bg-white/90 border border-slate-200/90 p-6 sm:p-7 backdrop-blur-xl hover:border-slate-300 transition-all duration-300 shadow-xl shadow-blue-950/5 flex flex-col justify-between group">
             <div>
               <div className="w-10 h-10 rounded-2xl bg-[#ff740e]/10 border border-[#ff740e]/20 flex items-center justify-center text-[#ff740e] mb-5 group-hover:scale-110 transition-transform">
                 <Tag className="w-5 h-5" />

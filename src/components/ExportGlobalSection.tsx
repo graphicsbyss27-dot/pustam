@@ -106,7 +106,7 @@ export const ExportGlobalSection: React.FC<ExportGlobalSectionProps> = ({ onNavi
           <div className="lg:col-span-5 space-y-7">
 
             {/* Main Headline */}
-            <div>
+            <div className="seq-item seq-delay-1">
               <h2 className="text-4xl sm:text-5xl lg:text-[56px] font-headline font-bold text-slate-900 tracking-tight leading-[1.12]">
                 Made in India.{' '}
                 <span className="inline-block text-3xl sm:text-4xl lg:text-[46px] align-middle ml-1 drop-shadow-sm">
@@ -118,7 +118,7 @@ export const ExportGlobalSection: React.FC<ExportGlobalSectionProps> = ({ onNavi
             </div>
 
             {/* Narrative description */}
-            <p className="font-body text-sm sm:text-base text-slate-600 leading-relaxed max-w-lg">
+            <p className="seq-item seq-delay-2 font-body text-sm sm:text-base text-slate-600 leading-relaxed max-w-lg">
               Pustam Paper Products seamlessly supplies high-volume paper stationery as per
               customized specifications to international brands, retailers, and distributors
               across the globe.
@@ -128,7 +128,7 @@ export const ExportGlobalSection: React.FC<ExportGlobalSectionProps> = ({ onNavi
             <div className="w-full h-px bg-slate-200/90" />
 
             {/* Highlights (Clean capability metrics, no specific country lists) */}
-            <div className="grid grid-cols-2 gap-6 sm:gap-8">
+            <div className="seq-item seq-delay-3 grid grid-cols-2 gap-6 sm:gap-8">
               <div>
                 <div className="font-headline font-bold text-3xl sm:text-4xl text-slate-900 tracking-tight">
                   Worldwide
@@ -149,7 +149,7 @@ export const ExportGlobalSection: React.FC<ExportGlobalSectionProps> = ({ onNavi
             </div>
 
             {/* CTA */}
-            <div className="pt-2">
+            <div className="seq-item seq-delay-4 pt-2">
               <button
                 onClick={() => onNavigate && onNavigate('contact')}
                 className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#283890] hover:bg-[#ff740e] text-white font-headline font-semibold text-xs sm:text-sm tracking-wide transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0"
@@ -162,7 +162,7 @@ export const ExportGlobalSection: React.FC<ExportGlobalSectionProps> = ({ onNavi
           </div>
 
           {/* RIGHT: Minimalist Interactive World Map (Antarctica excluded, points on continent lands) */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 card-entrance seq-delay-4">
             <div className="relative w-full rounded-2xl bg-white/70 border border-slate-100 p-2 sm:p-4 shadow-sm hover:shadow-md transition-shadow duration-300">
 
               <style>{`
