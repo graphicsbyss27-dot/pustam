@@ -101,22 +101,20 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out navbar-header bg-white ${
-        scrolled
-          ? 'scrolled py-2 sm:py-2.5 shadow-md border-b border-slate-200'
-          : 'py-3 sm:py-3.5 shadow-sm border-b border-slate-100'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 pointer-events-none pt-3 sm:pt-4 px-4 sm:px-6">
+      <div
+        className={`max-w-6xl mx-auto px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl pointer-events-auto transition-all duration-300 flex items-center justify-between navbar-pill-glass ${
+          scrolled ? 'scrolled shadow-2xl' : 'shadow-xl'
+        }`}
+      >
 
-        {/* LEFT: Logo Badge */}
+        {/* LEFT: Logo Badge with clean matching rounded-xl */}
         <button
           onClick={() => handleLinkClick()}
           className="flex items-center focus:outline-none group shrink-0"
           aria-label="Pustam Paper Products Home"
         >
-          <div className="px-3 sm:px-4 py-1.5 rounded-xl bg-[#283890] shadow-md shadow-[#283890]/20 border border-[#3b4cb8] flex items-center group-hover:scale-105 group-hover:shadow-lg group-hover:border-[#f0e846]/60 transition-all duration-200">
+          <div className="p-1 rounded-xl bg-transparent transition-all duration-200 group-hover:scale-105 flex items-center">
             <PustamLogo size="sm" />
           </div>
         </button>
@@ -147,7 +145,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
         <div className="hidden lg:flex items-center">
           <button
             onClick={handleContactClick}
-            className="px-5 py-2.5 rounded-xl bg-[#283890] hover:bg-[#ff740e] text-white font-headline font-semibold text-xs sm:text-sm tracking-wide transition-all duration-200 shadow-sm hover:shadow-md flex items-center gap-1.5 hover:-translate-y-0.5 active:translate-y-0"
+            className="btn-apple-base btn-apple-primary px-5 py-2.5 text-xs sm:text-sm gap-1.5"
           >
             <span>Contact Us</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -158,17 +156,17 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
         <div className="flex lg:hidden items-center">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2.5 rounded-xl bg-slate-100 text-slate-800 hover:bg-slate-200 border border-slate-200 focus:outline-none transition-colors"
+            className="w-10 h-10 rounded-2xl bg-black/[0.05] text-slate-800 hover:bg-black/[0.08] border border-black/10 backdrop-blur-md focus:outline-none transition-all flex items-center justify-center active:scale-95"
             aria-label="Toggle Navigation Menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6 text-[#283890]" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-6 h-6 text-[#ff740e]" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
       {/* MOBILE: Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white navbar-drawer border-t border-slate-200 px-4 sm:px-6 pt-3 pb-6 space-y-1.5 mt-2 shadow-2xl animate-fadeIn">
+        <div className="lg:hidden navbar-drawer rounded-2xl border border-white/80 px-4 sm:px-6 pt-3 pb-6 space-y-1.5 mt-2 shadow-2xl animate-fadeIn pointer-events-auto">
           {[
             { label: 'Home', id: undefined },
             { label: 'About', id: 'about' },
@@ -180,20 +178,21 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
             <button
               key={label}
               onClick={() => handleLinkClick(id)}
-              className={`block w-full text-left py-3 px-4 rounded-xl text-sm font-semibold min-h-[44px] flex items-center transition-all duration-150 ${
+              className={`block w-full text-left py-3 px-4 rounded-xl text-sm font-semibold min-h-[44px] flex items-center justify-between transition-all duration-150 ${
                 isActive(id)
-                  ? 'bg-[#283890]/8 text-[#283890] border-l-2 border-[#ff740e]'
-                  : 'text-slate-800 hover:bg-slate-100 hover:text-[#283890]'
+                  ? 'bg-[#283890]/10 text-[#283890] font-bold border-l-2 border-[#ff740e]'
+                  : 'text-slate-700 hover:bg-black/5 hover:text-[#283890]'
               }`}
             >
-              {label}
+              <span>{label}</span>
+              {isActive(id) && <span className="w-2 h-2 rounded-full bg-[#ff740e]" />}
             </button>
           ))}
 
           <div className="pt-3 border-t border-slate-200">
             <button
               onClick={handleContactClick}
-              className="w-full py-3.5 px-4 rounded-xl bg-[#283890] hover:bg-[#ff740e] text-white font-headline font-bold text-sm flex items-center justify-center gap-2 shadow transition-all duration-200 min-h-[48px]"
+              className="btn-apple-base btn-apple-primary w-full py-3.5 px-4 text-sm gap-2 min-h-[48px]"
             >
               <span>Contact Us</span>
               <ArrowRight className="w-4 h-4" />

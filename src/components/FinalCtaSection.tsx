@@ -51,7 +51,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onNavigate }) 
           {/* Button 1: Contact Us */}
           <button
             onClick={() => onNavigate('contact')}
-            className="w-full sm:w-auto px-8 py-3.5 sm:py-4 rounded-xl bg-[#f0e846] hover:bg-[#ff740e] text-[#283890] hover:text-white font-headline font-bold text-sm sm:text-base tracking-wide transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-xl shadow-black/25 flex items-center justify-center gap-2.5 group min-h-[48px]"
+            className="btn-apple-base btn-apple-primary w-full sm:w-auto px-8 py-3.5 sm:py-4 text-sm sm:text-base tracking-wide gap-2.5 group min-h-[48px]"
           >
             <span>Partner With Us</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -62,12 +62,11 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onNavigate }) 
             href={contact.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto px-7 py-3.5 sm:py-4 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-headline font-semibold text-sm sm:text-base tracking-wide transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-xl flex items-center justify-center gap-2.5 min-h-[48px]"
+            className="btn-apple-base btn-apple-whatsapp w-full sm:w-auto px-7 py-3.5 sm:py-4 text-sm sm:text-base tracking-wide gap-2.5 min-h-[48px]"
           >
-            <WhatsAppIcon className="w-5 h-5 rounded-md object-contain shrink-0" />
+            <WhatsAppIcon className="w-5 h-5 object-contain" />
             <span>WhatsApp Us</span>
           </a>
-
         </div>
 
         {/* Trust Note */}

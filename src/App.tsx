@@ -89,7 +89,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#283890] text-white flex flex-col justify-between selection:bg-[#f0e846] selection:text-[#283890]">
+    <div className="min-h-screen bg-[#070b20] text-white flex flex-col justify-between selection:bg-[#f0e846] selection:text-[#070b20]">
       {/* Persistent Top Scroll Reading Progress Bar */}
       <div className="fixed top-0 left-0 right-0 h-[2.5px] z-[99990] pointer-events-none overflow-hidden">
         <div

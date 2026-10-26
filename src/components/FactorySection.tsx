@@ -8,38 +8,136 @@ interface FactorySectionProps {
 
 const YOUTUBE_URL = 'https://youtube.com/@twofoldstationery?si=ooO3KW5As5621baS';
 
-const INFRA_IMAGES = [
+interface InfraTile {
+  image: string;
+  alt: string;
+  colSpanClass: string;
+  heightClass: string;
+}
+
+// 17 real facility photographs curated into a balanced 12-column Bento architecture
+// Row 1: 8 + 4 = 12
+// Row 2: 4 + 4 + 4 = 12
+// Row 3: 4 + 8 = 12
+// Row 4: 4 + 4 + 4 = 12
+// Row 5: 6 + 6 = 12
+// Row 6: 4 + 4 + 4 = 12
+// Total = 17 items perfectly covering 100% width with ZERO blank spaces
+const INFRA_IMAGES: InfraTile[] = [
+  // Row 1 (12 cols total): Featured Aerial (8) + Machine (4)
   {
-    image: '/Infra/infra-reels-storage.jpg',
-    alt: 'Parent Reel Inventory Warehouse',
+    image: '/Infra/Final Images Infra/factory-aerial-facility.jpg',
+    alt: 'Pustam Infrastructure Facility Aerial View',
+    colSpanClass: 'lg:col-span-8',
+    heightClass: 'h-72 sm:h-80 md:h-[380px]',
   },
   {
-    image: '/Infra/infra-flexo-ruling.jpg',
-    alt: 'High-Speed Web Ruling and Converting Press',
+    image: '/Infra/Final Images Infra/WhatsApp Image 2026-10-26 at 17.30.28.jpeg',
+    alt: 'Manufacturing Facility Machinery',
+    colSpanClass: 'lg:col-span-4',
+    heightClass: 'h-72 sm:h-80 md:h-[380px]',
+  },
+
+  // Row 2 (12 cols total): 4 + 4 + 4
+  {
+    image: '/Infra/Final Images Infra/WhatsApp Image 2026-10-26 at 17.30.32.jpeg',
+    alt: 'Manufacturing Facility Machinery',
+    colSpanClass: 'lg:col-span-4',
+    heightClass: 'h-64 sm:h-72 md:h-80',
   },
   {
-    image: '/Infra/infra-spine-stitching.jpg',
-    alt: 'Automated Spine Wire Stitching Line',
+    image: '/Infra/Final Images Infra/WhatsApp Image 2026-10-26 at 17.30.34 (1).jpeg',
+    alt: 'Production Unit Floor',
+    colSpanClass: 'lg:col-span-4',
+    heightClass: 'h-64 sm:h-72 md:h-80',
   },
   {
-    image: '/Infra/infra-digital-console.jpg',
-    alt: 'Digital Operator Control Console',
+    image: '/Infra/Final Images Infra/WhatsApp Image 2026-10-26 at 17.30.34.jpeg',
+    alt: 'Industrial Manufacturing Line',
+    colSpanClass: 'lg:col-span-4',
+    heightClass: 'h-64 sm:h-72 md:h-80',
+  },
+
+  // Row 3 (12 cols total): Rotary Unit (4) + Wide Cutting Facility (8)
+  {
+    image: '/Infra/Final Images Infra/WhatsApp Image 2026-10-26 at 17.30.35.jpeg',
+    alt: 'Production Machinery',
+    colSpanClass: 'lg:col-span-4',
+    heightClass: 'h-72 sm:h-80 md:h-[380px]',
   },
   {
-    image: '/Infra/rolls-stocking.png',
-    alt: 'Paper Rolls Stocking & Loading Bay Warehouse',
+    image: '/Infra/Final Images Infra/factory-interior-cutting.jpg',
+    alt: 'Pustam Factory Production Floor and Cutting Line',
+    colSpanClass: 'lg:col-span-8',
+    heightClass: 'h-72 sm:h-80 md:h-[380px]',
+  },
+
+  // Row 4 (12 cols total): 4 + 4 + 4
+  {
+    image: '/Infra/Final Images Infra/WhatsApp Image 2026-10-26 at 17.30.36.jpeg',
+    alt: 'Manufacturing Operations',
+    colSpanClass: 'lg:col-span-4',
+    heightClass: 'h-64 sm:h-72 md:h-80',
   },
   {
-    image: '/Infra/infra-warehouse-forklift.jpg',
-    alt: 'Palletized Storage and Forklift Logistics',
+    image: '/Infra/Final Images Infra/WhatsApp Image 2026-10-26 at 17.30.38 (1).jpeg',
+    alt: 'Industrial Paper Processing Line',
+    colSpanClass: 'lg:col-span-4',
+    heightClass: 'h-64 sm:h-72 md:h-80',
   },
   {
-    image: '/Infra/infra-automated-binding.jpg',
-    alt: 'Automated Multi-Head Spine Binding Line',
+    image: '/Infra/Final Images Infra/WhatsApp Image 2026-10-26 at 17.30.39.jpeg',
+    alt: 'Plant Production Section',
+    colSpanClass: 'lg:col-span-4',
+    heightClass: 'h-64 sm:h-72 md:h-80',
+  },
+
+  // Row 5 (12 cols total): 6 + 6
+  {
+    image: '/Infra/Final Images Infra/WhatsApp Image 2026-10-26 at 17.30.42.jpeg',
+    alt: 'Factory Machine Area',
+    colSpanClass: 'lg:col-span-6',
+    heightClass: 'h-64 sm:h-72 md:h-80',
   },
   {
-    image: '/Infra/infra-guillotine-cutting.jpg',
-    alt: 'Precision Industrial Guillotine Cutting',
+    image: '/Infra/Final Images Infra/WhatsApp Image 2026-10-26 at 17.30.45.jpeg',
+    alt: 'Plant Operations Section',
+    colSpanClass: 'lg:col-span-6',
+    heightClass: 'h-64 sm:h-72 md:h-80',
+  },
+
+  // Row 6 (12 cols total): 4 + 4 + 4
+  {
+    image: '/Infra/Final Images Infra/WhatsApp Image 2026-10-26 at 17.30.47.jpeg',
+    alt: 'Factory Equipment Installation',
+    colSpanClass: 'lg:col-span-4',
+    heightClass: 'h-64 sm:h-72 md:h-80',
+  },
+  {
+    image: '/Infra/Final Images Infra/WhatsApp Image 2026-10-26 at 17.31.14 (1).jpeg',
+    alt: 'Production Facility Section',
+    colSpanClass: 'lg:col-span-4',
+    heightClass: 'h-64 sm:h-72 md:h-80',
+  },
+  {
+    image: '/Infra/Final Images Infra/WhatsApp Image 2026-10-26 at 17.31.16 (2).jpeg',
+    alt: 'Factory Floor Operations',
+    colSpanClass: 'lg:col-span-4',
+    heightClass: 'h-64 sm:h-72 md:h-80',
+  },
+
+  // Row 7 (12 cols total): 6 + 6
+  {
+    image: '/Infra/Final Images Infra/WhatsApp Image 2026-10-26 at 17.31.16.jpeg',
+    alt: 'Production Line Unit',
+    colSpanClass: 'lg:col-span-6',
+    heightClass: 'h-64 sm:h-72 md:h-80',
+  },
+  {
+    image: '/Infra/Final Images Infra/WhatsApp Image 2026-10-26 at 17.31.17 (1).jpeg',
+    alt: 'Quality Assurance & Certification Area',
+    colSpanClass: 'lg:col-span-6',
+    heightClass: 'h-64 sm:h-72 md:h-80',
   },
 ];
 
@@ -50,83 +148,130 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
     <section
       id="factory"
       ref={ref}
-      className={`py-20 sm:py-28 bg-white relative overflow-hidden border-t border-slate-100 scroll-mt-16 select-none reveal-fade-up ${
+      className={`py-24 sm:py-32 bg-gradient-to-b from-white via-[#f8faff] to-[#edf2fb] relative overflow-hidden border-t border-slate-200/80 scroll-mt-16 select-none reveal-fade-up ${
         isVisible ? 'reveal-visible' : ''
       }`}
     >
-      {/* Subtle ambient light accents */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-slate-50 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#283890]/3 rounded-full blur-3xl pointer-events-none" />
+      {/* Subtle ambient light accents with parallax float */}
+      <div className="absolute top-1/4 right-0 w-[600px] h-[500px] bg-[#283890]/5 rounded-full blur-[140px] pointer-events-none parallax-float-slow" />
+      <div className="absolute bottom-10 left-0 w-[500px] h-[400px] bg-[#ff740e]/5 rounded-full blur-[140px] pointer-events-none parallax-float-fast" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header (Clean & uncluttered) */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-14">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
           <div className="max-w-2xl space-y-3">
-            <div className="flex items-center gap-2">
-              <span className="w-8 h-0.5 bg-[#283890]" />
-              <span className="text-[#283890] font-headline font-semibold text-xs sm:text-sm uppercase tracking-widest">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#283890]/8 border border-[#283890]/15 backdrop-blur-md shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#283890]" />
+              <span className="text-[#283890] font-headline font-bold text-xs tracking-widest uppercase">
                 MANUFACTURING INFRASTRUCTURE
               </span>
             </div>
 
-            <h2 className="font-headline font-bold text-3xl sm:text-4xl md:text-5xl text-[#151f52] tracking-tight leading-tight">
-              Where Paper <span className="text-[#283890]">Takes Shape</span>.
+            <h2 className="font-headline font-bold text-3xl sm:text-5xl md:text-6xl text-[#151f52] tracking-tight leading-[1.12]">
+              Where Paper <br className="hidden sm:inline" />
+              <span className="bg-gradient-to-r from-[#283890] via-[#1e2b70] to-[#ff740e] bg-clip-text text-transparent">
+                Takes Industrial Shape
+              </span>
             </h2>
 
             <p className="font-body text-sm sm:text-base text-slate-600 leading-relaxed pt-1">
-              Operating from our 30,000+ sq. ft. purpose-built industrial campus in Palghar, Maharashtra,
-              Pustam converts 25 metric tonnes of paper daily with automated precision.
+              Operating across our 30,000+ sq. ft. purpose-built converting plant in Palghar, Maharashtra. Converting 25 metric tonnes of paper daily with synchronized automation.
             </p>
           </div>
 
           {/* Quick Metrics Badges */}
-          <div className="flex flex-wrap gap-2 pt-1 md:pt-0 shrink-0">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-mono border border-slate-200">
+          <div className="flex flex-wrap gap-2.5 pt-1 md:pt-0 shrink-0">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-slate-700 text-xs font-mono font-medium border border-slate-200/90 shadow-sm">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#283890]" />
               30,000+ Sq. Ft.
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-mono border border-slate-200">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-slate-700 text-xs font-mono font-medium border border-slate-200/90 shadow-sm">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#ff740e]" />
               25 MT / Day
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-mono border border-slate-200">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-slate-700 text-xs font-mono font-medium border border-slate-200/90 shadow-sm">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#283890]" />
               Palghar Campus
             </span>
           </div>
         </div>
 
-        {/* 8 Pure Image Tiles (No excess text or data, clean photographic gallery) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 mb-12">
+        {/* Featured 3D Automated Factory Illustration Banner */}
+        <div className="mb-10 rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-8 backdrop-blur-xl relative overflow-hidden shadow-xl shadow-blue-950/5 group hover:border-[#283890]/30 transition-all duration-500">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div className="lg:col-span-7 relative rounded-2xl overflow-hidden border border-slate-200 h-64 sm:h-80 md:h-96 bg-slate-100">
+              <img
+                src="/assets/illustrations/automated-factory-3d.jpg"
+                alt="Pustam 3D Automated Converting Line"
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-white/60 text-xs text-[#151f52] font-mono font-semibold shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                Synchronized Flexo Ruling &amp; Wire-O Binding Line
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 space-y-4">
+              <div className="font-mono text-xs uppercase tracking-wider text-[#283890] font-bold">
+                High-Volume Manufacturing Floor
+              </div>
+              <h3 className="font-headline font-bold text-2xl sm:text-3xl text-[#151f52]">
+                Reel-to-Book Continuous Workflow
+              </h3>
+              <p className="font-body text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Raw pulp reels enter our automated rotary slitters, pass synchronized 3-color ruling cylinders, and feed into automated counting, cross-cutting, and spine pressing without manual handling.
+              </p>
+
+              <div className="pt-2 grid grid-cols-2 gap-4 border-t border-slate-100 text-xs text-slate-700">
+                <div>
+                  <div className="font-headline font-bold text-xl text-[#151f52]">±0.5 mm</div>
+                  <div className="text-slate-500">Cut Precision</div>
+                </div>
+                <div>
+                  <div className="font-headline font-bold text-xl text-[#ff740e]">100% QC</div>
+                  <div className="text-slate-500">Batch Inspection</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Balanced Bento Architecture Gallery (No text overlays, 100% balanced width, zero blank space) */}
+        <div className="bento-infra-grid mb-12">
           {INFRA_IMAGES.map((item, idx) => (
             <div
               key={idx}
-              className="group relative aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#283890]/30 transition-all duration-300 hover:-translate-y-1"
+              className={`w-full ${item.colSpanClass}`}
             >
-              <img
-                src={item.image}
-                alt={item.alt}
-                loading="lazy"
-                onError={(e) => {
-                  const target = e.currentTarget;
-                  if (!target.dataset.tried) {
-                    target.dataset.tried = '1';
-                    if (item.image.includes('rolls-stocking')) {
-                      target.src = '/assets/rolls-stocking.png';
-                    } else if (item.image.startsWith('/Infra/')) {
-                      target.src = item.image.replace('/Infra/', '/infra/');
+              <div
+                className={`relative w-full ${item.heightClass} overflow-hidden rounded-2xl md:rounded-3xl bg-slate-100 border border-slate-200/90 shadow-sm hover:shadow-2xl hover:border-[#283890]/40 transition-all duration-500 hover:-translate-y-1 group`}
+              >
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  loading="lazy"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (!target.dataset.tried) {
+                      target.dataset.tried = '1';
+                      if (item.image.startsWith('/Infra/')) {
+                        target.src = item.image.replace('/Infra/', '/infra/');
+                      }
                     }
-                  }
-                }}
-                className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                  }}
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Video Redirect Banner to YouTube (Clean, replacing heavy inline video player) */}
+        {/* Video Redirect Banner to YouTube */}
         <div className="rounded-3xl bg-gradient-to-r from-[#151f52] via-[#1e2b70] to-[#283890] p-6 sm:p-8 md:p-10 shadow-xl border border-slate-200 text-white relative overflow-hidden">
           {/* Ambient glow */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
@@ -136,7 +281,7 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
             
             {/* Left Content */}
             <div className="space-y-2.5 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-600/20 text-red-400 border border-red-500/30 text-xs font-semibold font-headline">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-600/20 text-red-300 border border-red-500/30 text-xs font-semibold font-headline">
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
                 <span>OFFICIAL YOUTUBE FACILITY TOUR</span>
               </div>
@@ -151,13 +296,13 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
               </p>
             </div>
 
-            {/* Right Buttons */}
+            {/* Right Buttons - Apple-inspired button system */}
             <div className="flex flex-wrap items-center gap-3 shrink-0">
               <a
                 href={YOUTUBE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3.5 rounded-xl bg-[#ff0000] hover:bg-[#d90000] text-white font-headline font-bold text-xs sm:text-sm tracking-wide flex items-center gap-2.5 shadow-lg shadow-red-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+                className="btn-apple-base btn-apple-youtube px-6 py-3.5 text-xs sm:text-sm tracking-wide gap-2.5"
               >
                 <Play className="w-4 h-4 fill-white shrink-0" />
                 <span>Watch on YouTube</span>
@@ -167,7 +312,7 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
               {onNavigate && (
                 <button
                   onClick={() => onNavigate('contact')}
-                  className="px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-headline font-semibold text-xs sm:text-sm border border-white/20 hover:border-white/40 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2"
+                  className="btn-apple-base btn-apple-glass px-5 py-3.5 text-xs sm:text-sm tracking-wide gap-2"
                 >
                   <span>Inquire for Manufacturing</span>
                   <ArrowRight className="w-4 h-4" />

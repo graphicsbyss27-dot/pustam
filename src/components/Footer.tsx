@@ -79,14 +79,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </a>
               <a
                 href={contact.phoneTel}
-                className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#ff740e]/15 hover:bg-[#ff740e] text-[#ff740e] hover:text-white text-xs font-semibold border border-[#ff740e]/30 hover:border-[#ff740e] transition-all duration-200"
+                className="btn-apple-base btn-apple-glass px-4 py-2.5 text-xs gap-2"
               >
                 <Phone className="w-3.5 h-3.5" />
                 <span>Call Us</span>
               </a>
               <button
                 onClick={() => onNavigate('contact')}
-                className="group inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-[#283890]/50 hover:bg-[#283890] text-white/80 hover:text-white text-xs font-semibold border border-white/10 hover:border-[#f0e846]/40 transition-all duration-200"
+                className="btn-apple-base btn-apple-primary px-4 py-2.5 text-xs gap-1.5"
               >
                 <span>Send Enquiry</span>
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />

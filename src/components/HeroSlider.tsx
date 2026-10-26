@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { COMPANY_DETAILS } from '../data/websiteData';
 import { WhatsAppIcon } from './WhatsAppIcon';
+import { Product3DCoverflow } from './Product3DCoverflow';
 
 interface HeroSliderProps {
   onNavigate: (page: 'home' | 'contact', sectionId?: string) => void;
@@ -106,7 +107,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
 
   return (
     <section
-      className="relative w-full h-[84vh] sm:h-[86vh] lg:h-[88vh] max-h-[850px] min-h-[580px] flex items-center justify-center bg-[#070b20] overflow-hidden select-none"
+      className="relative w-full h-screen min-h-[620px] max-h-[1080px] flex items-center justify-center bg-[#070b20] overflow-hidden select-none pt-16 sm:pt-20 pb-4"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={() => setIsPaused(true)}
@@ -220,131 +221,16 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
           currentSlide === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
         }`}
       >
-        {/* Slide 1 Motion Background Layer */}
+        {/* Slide 1 Clean & Minimal Ambient Background Layer */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="animate-aura-1 absolute top-1/4 left-1/4 w-[600px] h-[350px] bg-[#283890]/30 rounded-full blur-[120px]" />
-          <div className="animate-aura-2 absolute bottom-1/4 right-1/4 w-[450px] h-[300px] bg-[#ff740e]/15 rounded-full blur-[110px]" />
-
-          {/* Flowing Notebook Ruled Lines */}
-          <div className="absolute inset-0 opacity-15 overflow-hidden">
-            <svg className="w-full h-[150%] animate-flow-ruling" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <pattern id="ruledLines" width="100%" height="32" patternUnits="userSpaceOnUse">
-                  <line x1="0" y1="0" x2="100%" y2="0" stroke="#38bdf8" strokeWidth="1" strokeDasharray="6 8" />
-                  <line x1="0" y1="31" x2="100%" y2="31" stroke="#f0e846" strokeWidth="0.5" opacity="0.4" />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#ruledLines)" />
-            </svg>
-          </div>
-
-          <div className="animate-dust-1 absolute top-[25%] left-[15%] w-2 h-2 rounded-full bg-[#f0e846] shadow-[0_0_10px_#f0e846]" />
-          <div className="animate-dust-2 absolute top-[60%] right-[18%] w-2 h-2 rounded-full bg-[#38bdf8] shadow-[0_0_10px_#38bdf8]" />
+          {/* Subtle soft gradient glows for clean depth without visual noise */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-[#283890]/15 rounded-full blur-[140px]" />
+          <div className="absolute bottom-0 right-1/4 w-[400px] h-[300px] bg-[#f0e846]/5 rounded-full blur-[120px]" />
         </div>
 
-        {/* Slide 1 Content: Pure Product Mosaic Collage */}
-        <div className="relative z-20 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full h-full pt-4 sm:pt-6 pb-16 sm:pb-20 flex items-center justify-center">
-          <div className="w-full h-full max-h-[70vh] grid grid-cols-12 gap-2 sm:gap-3.5 p-2 sm:p-3 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm shadow-2xl">
-            
-            {/* Left Dominant Column (2 products) */}
-            <div className="col-span-4 sm:col-span-3 flex flex-col gap-2 sm:gap-3.5 h-full">
-              <div
-                onClick={() => onNavigate('home', 'products')}
-                className="flex-1 rounded-2xl overflow-hidden bg-white shadow-lg border border-white/40 cursor-pointer group hover:scale-[1.02] hover:shadow-orange-500/20 transition-all duration-300"
-                title="View Exercise Books"
-              >
-                <img
-                  src={PRODUCT_IMAGES[0].image}
-                  alt={PRODUCT_IMAGES[0].alt}
-                  loading="eager"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div
-                onClick={() => onNavigate('home', 'products')}
-                className="flex-1 rounded-2xl overflow-hidden bg-white shadow-lg border border-white/40 cursor-pointer group hover:scale-[1.02] hover:shadow-orange-500/20 transition-all duration-300"
-                title="View Spiral Notebooks"
-              >
-                <img
-                  src={PRODUCT_IMAGES[4].image}
-                  alt={PRODUCT_IMAGES[4].alt}
-                  loading="eager"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-            </div>
-
-            {/* Center Big Feature Item (1 large hero showcase) */}
-            <div
-              onClick={() => onNavigate('home', 'products')}
-              className="col-span-4 sm:col-span-4 h-full rounded-2xl overflow-hidden bg-white shadow-2xl border-2 border-white/60 cursor-pointer group hover:scale-[1.02] hover:shadow-blue-500/30 transition-all duration-300 relative"
-              title="View Counter Books"
-            >
-              <img
-                src={PRODUCT_IMAGES[1].image}
-                alt={PRODUCT_IMAGES[1].alt}
-                loading="eager"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-
-            {/* Center-Right Column (2 products) */}
-            <div className="col-span-4 sm:col-span-3 flex flex-col gap-2 sm:gap-3.5 h-full">
-              <div
-                onClick={() => onNavigate('home', 'products')}
-                className="flex-1 rounded-2xl overflow-hidden bg-white shadow-lg border border-white/40 cursor-pointer group hover:scale-[1.02] hover:shadow-orange-500/20 transition-all duration-300"
-                title="View Composition Books"
-              >
-                <img
-                  src={PRODUCT_IMAGES[2].image}
-                  alt={PRODUCT_IMAGES[2].alt}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div
-                onClick={() => onNavigate('home', 'products')}
-                className="flex-1 rounded-2xl overflow-hidden bg-white shadow-lg border border-white/40 cursor-pointer group hover:scale-[1.02] hover:shadow-orange-500/20 transition-all duration-300"
-                title="View Double Wire Notebooks"
-              >
-                <img
-                  src={PRODUCT_IMAGES[3].image}
-                  alt={PRODUCT_IMAGES[3].alt}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-            </div>
-
-            {/* Far Right Stack Column (2 products) */}
-            <div className="hidden sm:flex sm:col-span-2 flex-col gap-2 sm:gap-3.5 h-full">
-              <div
-                onClick={() => onNavigate('home', 'products')}
-                className="flex-1 rounded-2xl overflow-hidden bg-white shadow-lg border border-white/40 cursor-pointer group hover:scale-[1.02] hover:shadow-orange-500/20 transition-all duration-300"
-                title="View Notepads"
-              >
-                <img
-                  src={PRODUCT_IMAGES[5].image}
-                  alt={PRODUCT_IMAGES[5].alt}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div
-                onClick={() => onNavigate('home', 'products')}
-                className="flex-1 rounded-2xl overflow-hidden bg-white shadow-lg border border-white/40 cursor-pointer group hover:scale-[1.02] hover:shadow-orange-500/20 transition-all duration-300"
-                title="View Handbound Registers"
-              >
-                <img
-                  src={PRODUCT_IMAGES[6].image}
-                  alt={PRODUCT_IMAGES[6].alt}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-            </div>
-
-          </div>
+        {/* Slide 1 Content: Interactive 3D Coverflow with Horizontal Drag & Momentum */}
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full pt-6 sm:pt-8 pb-8 flex items-center justify-center">
+          <Product3DCoverflow onNavigate={onNavigate} />
         </div>
       </div>
 
@@ -588,10 +474,10 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
           </div>
 
           {/* ── SIMPLE STRAIGHTFORWARD CTAs ── */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full max-w-md">
             <button
               onClick={() => onNavigate('contact')}
-              className="w-full sm:w-auto px-7 py-3 rounded-xl bg-[#f0e846] hover:bg-[#ff740e] text-[#151f52] hover:text-white font-headline font-bold text-xs sm:text-sm tracking-wide shadow-xl shadow-yellow-500/25 transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2"
+              className="btn-apple-base btn-apple-primary w-full sm:w-auto px-7 py-3.5 text-xs sm:text-sm tracking-wide gap-2.5"
             >
               <span>Start Brand Inquiry</span>
               <ArrowRight className="w-4 h-4" />
@@ -601,7 +487,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
               href={COMPANY_DETAILS.contact.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-headline font-semibold text-xs sm:text-sm transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30"
+              className="btn-apple-base btn-apple-whatsapp w-full sm:w-auto px-6 py-3.5 text-xs sm:text-sm tracking-wide gap-2.5"
               title="WhatsApp Us"
             >
               <WhatsAppIcon className="w-4 h-4 object-contain rounded-sm" />
@@ -619,7 +505,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
       {/* Floating Left Navigation Arrow Button */}
       <button
         onClick={prevSlide}
-        className="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-[#ff740e] text-white border border-white/20 backdrop-blur-md flex items-center justify-center shadow-2xl transition-all duration-200 hover:scale-110 active:scale-95"
+        className="btn-apple-icon absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30"
         aria-label="Previous Slide"
       >
         <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -628,7 +514,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
       {/* Floating Right Navigation Arrow Button */}
       <button
         onClick={nextSlide}
-        className="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-[#ff740e] text-white border border-white/20 backdrop-blur-md flex items-center justify-center shadow-2xl transition-all duration-200 hover:scale-110 active:scale-95"
+        className="btn-apple-icon absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30"
         aria-label="Next Slide"
       >
         <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />

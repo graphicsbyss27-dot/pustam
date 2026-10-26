@@ -283,7 +283,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   </p>
                   <button
                     onClick={() => setIsSubmitted(false)}
-                    className="px-6 py-2.5 rounded-xl bg-[#ff740e] text-white font-headline font-semibold text-xs tracking-wide shadow"
+                    className="btn-apple-base btn-apple-primary px-6 py-2.5 text-xs tracking-wide"
                   >
                     Send Another Enquiry
                   </button>
@@ -383,16 +383,16 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 sm:py-4 rounded-xl bg-[#283890] hover:bg-[#ff740e] text-white font-headline font-bold text-sm sm:text-base tracking-wide transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-xl flex items-center justify-center gap-2 group disabled:opacity-50"
+                    className="btn-apple-base btn-apple-primary w-full py-4 text-sm sm:text-base tracking-wide gap-2.5 group disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <span className="flex items-center gap-2">
-                        <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span className="w-4 h-4 border-2 border-[#101738] border-t-transparent rounded-full animate-spin" />
                         Sending Enquiry...
                       </span>
                     ) : (
                       <>
-                        <span>Send Enquiry</span>
+                        <span>Send Direct Enquiry</span>
                         <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </>
                     )}

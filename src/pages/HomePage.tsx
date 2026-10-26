@@ -17,19 +17,19 @@ interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   return (
-    <div className="w-full pt-14 sm:pt-16">
+    <div className="w-full">
 
       {/* 1. Hero — Product & Manufacturing Slider */}
       <HeroSlider onNavigate={onNavigate} />
-
-      {/* Inter-Section Element: Live Industrial Capabilities Marquee Ticker */}
-      <ManufacturingTicker />
 
       {/* 2. Short About Us */}
       <AboutSection onNavigate={onNavigate} />
 
       {/* 3. Products Horizontal Scrolling Rail (7 Required Categories) */}
       <ProductsSection onNavigate={onNavigate} />
+
+      {/* Inter-Section Element: Live Industrial Capabilities Marquee Ticker (Moved downward) */}
+      <ManufacturingTicker />
 
       {/* Inter-Section Element: Precision Technical Quality Seam */}
       <QualitySeamStrip />

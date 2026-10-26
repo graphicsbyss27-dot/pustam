@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
+import React from 'react';
+import { ArrowRight, Sparkles, BookOpen } from 'lucide-react';
 import { PRODUCTS_PLACEHOLDERS } from '../data/websiteData';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
@@ -9,42 +9,6 @@ interface ProductsSectionProps {
 
 export const ProductsSection: React.FC<ProductsSectionProps> = ({ onNavigate }) => {
   const { ref: sectionRef, isVisible } = useScrollReveal();
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-
-  // Update scroll progress & arrow state
-  const handleScroll = () => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      const maxScroll = scrollWidth - clientWidth;
-      if (maxScroll > 0) {
-        setScrollProgress((scrollLeft / maxScroll) * 100);
-        setCanScrollLeft(scrollLeft > 10);
-        setCanScrollRight(scrollLeft < maxScroll - 10);
-      }
-    }
-  };
-
-  useEffect(() => {
-    const el = scrollContainerRef.current;
-    if (el) {
-      el.addEventListener('scroll', handleScroll);
-      handleScroll();
-      return () => el.removeEventListener('scroll', handleScroll);
-    }
-  }, []);
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = 380;
-      scrollContainerRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth',
-      });
-    }
-  };
 
   const handleInquiry = () => {
     if (onNavigate) {
@@ -52,134 +16,147 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ onNavigate }) 
     }
   };
 
+  // 7 products arranged into a visually balanced, creative Bento grid:
+  // Card 1 (Hero Center Pinned Exercise Books): 7 cols, larger photography spotlight
+  // Card 2 (Counter Books): 5 cols
+  // Cards 3, 4, 5: 4 cols each (equal 3-card balanced middle row)
+  // Cards 6, 7: 6 cols each (equal 2-card balanced bottom row)
+  // Total: 100% full-width grid coverage with zero gaps
+  const getCardLayout = (index: number) => {
+    switch (index) {
+      case 0:
+        return {
+          colSpan: 'lg:col-span-7',
+          imageHeight: 'h-64 sm:h-72 md:h-80',
+          isFeatured: true,
+        };
+      case 1:
+        return {
+          colSpan: 'lg:col-span-5',
+          imageHeight: 'h-64 sm:h-72 md:h-80',
+          isFeatured: false,
+        };
+      case 2:
+      case 3:
+      case 4:
+        return {
+          colSpan: 'lg:col-span-4',
+          imageHeight: 'h-52 sm:h-60',
+          isFeatured: false,
+        };
+      case 5:
+      case 6:
+      default:
+        return {
+          colSpan: 'lg:col-span-6',
+          imageHeight: 'h-56 sm:h-64',
+          isFeatured: false,
+        };
+    }
+  };
+
   return (
     <section
       id="products"
       ref={sectionRef}
-      className={`py-20 sm:py-28 bg-[#283890] relative overflow-hidden border-t border-white/10 scroll-mt-16 select-none reveal-fade-up ${
+      className={`py-24 sm:py-32 bg-[#070b20] relative overflow-hidden border-t border-white/10 scroll-mt-16 select-none reveal-fade-up ${
         isVisible ? 'reveal-visible' : ''
       }`}
     >
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[600px] h-[600px] bg-[#1e2b70]/40 rounded-full blur-3xl pointer-events-none" />
+      {/* Background Ambient Glows */}
+      <div className="absolute top-1/3 left-1/4 -translate-y-1/2 w-[700px] h-[500px] bg-[#283890]/25 rounded-full blur-[140px] pointer-events-none parallax-float-slow" />
+      <div className="absolute bottom-10 right-10 w-[500px] h-[400px] bg-[#ff740e]/15 rounded-full blur-[140px] pointer-events-none parallax-float-fast" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header with Navigation Controls */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-6">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
           <div className="max-w-2xl space-y-3">
-            {/* Small Label */}
-            <div className="flex items-center gap-2">
-              <span className="w-8 h-0.5 bg-[#f0e846]" />
-              <span className="text-[#f0e846] font-headline font-semibold text-xs sm:text-sm uppercase tracking-widest">
-                Our Range
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/10 backdrop-blur-md shadow-inner">
+              <span className="w-2 h-2 rounded-full bg-[#f0e846]" />
+              <span className="text-[#f0e846] font-headline font-semibold text-xs tracking-widest uppercase">
+                PRODUCT SHOWCASE
               </span>
             </div>
 
-            {/* Section Heading (Fredoka) */}
-            <h2 className="font-headline font-bold text-3xl sm:text-4xl md:text-5xl text-white tracking-tight">
-              Products & <span className="text-[#f0e846]">Solutions</span>
+            <h2 className="font-headline font-bold text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-[1.12]">
+              Engineered Notebooks <br className="hidden sm:inline" />
+              <span className="bg-gradient-to-r from-[#f0e846] via-white to-[#ff740e] bg-clip-text text-transparent">
+                For Every Sector
+              </span>
             </h2>
 
-            {/* Supporting Text (Be Vietnam) */}
-            <p className="font-body text-sm sm:text-base text-white/85 leading-relaxed">
-              Explore the paper products and solutions offered by Pustam.
+            <p className="font-body text-sm sm:text-base text-slate-400 leading-relaxed max-w-xl">
+              Explore our core notebook formats manufactured at 25 MT/day capacity. Clean craftsmanship, premium paper opacity, and global export packaging.
             </p>
           </div>
 
-          {/* Desktop Left / Right Navigation Controls */}
-          <div className="flex items-center gap-3">
-            <span className="text-xs text-white/60 hidden sm:inline font-mono">
-              Drag or Swipe Horizontally ›
-            </span>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => scroll('left')}
-                disabled={!canScrollLeft}
-                className={`w-11 h-11 rounded-xl border flex items-center justify-center transition-all duration-200 active:scale-95 ${
-                  canScrollLeft
-                    ? 'bg-[#151f52] hover:bg-[#f0e846] text-white hover:text-[#283890] border-white/20 shadow-md hover:-translate-y-0.5'
-                    : 'bg-[#151f52]/40 text-white/30 border-white/5 cursor-not-allowed'
-                }`}
-                aria-label="Scroll left"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => scroll('right')}
-                disabled={!canScrollRight}
-                className={`w-11 h-11 rounded-xl border flex items-center justify-center transition-all duration-200 active:scale-95 ${
-                  canScrollRight
-                    ? 'bg-[#151f52] hover:bg-[#f0e846] text-white hover:text-[#283890] border-white/20 shadow-md hover:-translate-y-0.5'
-                    : 'bg-[#151f52]/40 text-white/30 border-white/5 cursor-not-allowed'
-                }`}
-                aria-label="Scroll right"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
+          <div className="shrink-0">
+            <button
+              onClick={handleInquiry}
+              className="btn-apple-base btn-apple-primary px-6 py-3.5 text-xs sm:text-sm tracking-wide gap-2"
+            >
+              <span>Request Full Product Catalogue</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
 
-        {/* Horizontal Scrolling Product Rail */}
-        <div
-          ref={scrollContainerRef}
-          className="flex gap-4 sm:gap-6 overflow-x-auto pb-6 pt-2 no-scrollbar scroll-smooth snap-x snap-mandatory cursor-grab active:cursor-grabbing -mx-4 px-4 sm:mx-0 sm:px-0"
-          style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
-        >
-          {PRODUCTS_PLACEHOLDERS.map((item) => {
-            const isYellow = item.accent === 'yellow';
-            const accentColor = isYellow ? '#f0e846' : '#ff740e';
+        {/* Creative Bento Product Grid — All 7 categories cleanly displayed */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-7 mb-14">
+          {PRODUCTS_PLACEHOLDERS.map((product, idx) => {
+            const layout = getCardLayout(idx);
 
             return (
               <div
-                key={item.id}
-                className="flex-none w-[82vw] max-w-[320px] sm:max-w-none sm:w-[340px] md:w-[380px] snap-start rounded-3xl bg-[#151f52] border border-white/15 hover:border-white/30 transition-all duration-300 hover:-translate-y-1.5 overflow-hidden shadow-2xl flex flex-col justify-between group"
+                key={product.id}
+                className={`group rounded-3xl bg-gradient-to-b from-white/[0.07] via-white/[0.03] to-white/[0.01] border border-white/10 hover:border-[#f0e846]/50 p-5 sm:p-6 backdrop-blur-xl transition-all duration-400 hover:shadow-2xl hover:shadow-[#283890]/20 hover:-translate-y-1.5 flex flex-col justify-between ${layout.colSpan}`}
               >
                 <div>
-                  {/* Top Bar with Number */}
-                  <div className="p-5 sm:p-6 pb-3 sm:pb-4 flex items-center justify-between border-b border-white/10">
-                    <span
-                      className="font-headline font-bold text-3xl sm:text-4xl tracking-tight transition-transform duration-300 group-hover:scale-105"
-                      style={{ color: accentColor }}
-                    >
-                      {item.number}
-                    </span>
+                  {/* Card Header (Product Index & Tag) */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2.5">
+                      <span className="font-headline font-extrabold text-xl sm:text-2xl text-[#f0e846]">
+                        {product.number}
+                      </span>
+                      {layout.isFeatured && (
+                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold uppercase tracking-wider bg-[#ff740e]/20 text-[#ff740e] border border-[#ff740e]/30">
+                          Featured Line
+                        </span>
+                      )}
+                    </div>
+                    <div className="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-[#f0e846] transition-colors">
+                      <BookOpen className="w-4 h-4" />
+                    </div>
                   </div>
 
-                  {/* Product Image */}
-                  <div className="relative h-44 sm:h-56 bg-[#1e2b70] overflow-hidden">
+                  {/* Clean Product Photography Display (No website-generated text overlays inside) */}
+                  <div className={`relative w-full ${layout.imageHeight} rounded-2xl overflow-hidden bg-slate-900 border border-white/10 mb-5`}>
                     <img
-                      src={item.image}
-                      alt={item.name}
+                      src={product.image}
+                      alt={product.name}
                       loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-90"
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#151f52] via-transparent to-transparent" />
                   </div>
 
-                  {/* Product Details Content */}
-                  <div className="p-5 sm:p-6 pt-4 space-y-2">
-                    <h3 className="font-headline font-bold text-base sm:text-xl text-white group-hover:text-[#f0e846] transition-colors">
-                      {item.name}
-                    </h3>
-                    <p className="font-mono text-xs sm:text-sm text-white/75 leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
+                  {/* Clean Typography Outside the Image */}
+                  <h3 className="font-headline font-bold text-lg sm:text-xl text-white mb-2 group-hover:text-[#f0e846] transition-colors leading-snug">
+                    {product.name}
+                  </h3>
+                  <p className="font-body text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-2">
+                    {product.description}
+                  </p>
                 </div>
 
-                {/* Bottom Action Footer with Arrow Trigger */}
-                <div className="p-5 sm:p-6 pt-0">
+                {/* Single Clear Standardized Apple CTA Button */}
+                <div className="pt-5 mt-4 border-t border-white/10">
                   <button
                     onClick={handleInquiry}
-                    className="w-full py-3 px-3.5 sm:px-4 rounded-xl bg-[#1e2b70] hover:bg-[#ff740e] text-white font-headline font-semibold text-xs sm:text-sm transition-all flex items-center justify-between group/btn border border-white/10 hover:border-transparent active:scale-[0.99] min-h-[44px]"
+                    className="btn-apple-base btn-apple-glass w-full py-2.5 px-4 text-xs tracking-wide gap-2"
                   >
-                    <span>Send an Enquiry</span>
-                    <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center group-hover/btn:bg-white group-hover/btn:text-[#283890] transition-colors group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 shrink-0 ml-2">
-                      <ArrowUpRight className="w-4 h-4 transition-transform" />
-                    </div>
+                    <span>Enquire for {product.name}</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
               </div>
@@ -187,18 +164,29 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ onNavigate }) 
           })}
         </div>
 
-        {/* Visible Scroll Progress Bar Indicator */}
-        <div className="mt-8 flex items-center justify-between gap-4 max-w-md mx-auto">
-          <span className="font-mono text-xs text-white/50">01</span>
-          <div className="flex-1 h-1 bg-white/15 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-[#f0e846] transition-all duration-200 rounded-full"
-              style={{ width: `${Math.max(20, scrollProgress)}%` }}
-            />
+        {/* Bottom Banner for Custom Configurations */}
+        <div className="rounded-2xl bg-white/[0.04] border border-white/10 p-5 sm:p-6 backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-[#ff740e]/15 border border-[#ff740e]/30 flex items-center justify-center text-[#ff740e] shrink-0">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="font-headline font-bold text-sm sm:text-base text-white">
+                Custom Substrates, Bindings &amp; Cover Artworks Available
+              </div>
+              <div className="text-xs text-slate-400 font-body">
+                We manufacture to your target GSM (54 - 160 GSM), French rulings, legal headers, and branding specifications.
+              </div>
+            </div>
           </div>
-          <span className="font-mono text-xs text-white/50">
-            {PRODUCTS_PLACEHOLDERS.length.toString().padStart(2, '0')}
-          </span>
+
+          <button
+            onClick={handleInquiry}
+            className="btn-apple-base btn-apple-primary px-6 py-2.5 text-xs sm:text-sm tracking-wide gap-2 shrink-0"
+          >
+            <span>Custom Order Desk</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
 
       </div>
