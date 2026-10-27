@@ -433,10 +433,10 @@
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 9999px;
-  background: rgba(15, 23, 42, 0.65);
+  background: rgba(15, 23, 42, 0.72);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   color: #ffffff;
   box-shadow: 
     0 8px 18px -3px rgba(0, 0, 0, 0.35),
@@ -444,20 +444,22 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  transform: translate3d(0, 0, 0);
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
 }
 
 .btn-apple-icon:hover {
   background: #ff740e;
-  border-color: rgba(255, 255, 255, 0.6);
-  transform: scale(1.08);
+  border-color: rgba(255, 255, 255, 0.7);
   box-shadow: 
     0 12px 24px -4px rgba(255, 116, 14, 0.45),
     inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.85);
 }
 
 .btn-apple-icon:active {
-  transform: scale(0.95);
+  opacity: 0.9;
 }
 
 /* Balanced Bento Infrastructure Grid */
@@ -522,4 +524,59 @@
     animation: none !important;
     transform: none !important;
   }
+
+  .animate-infra-marquee {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .animate-infra-marquee-reverse {
+    animation: none !important;
+    transform: none !important;
+  }
 }
+
+/* Infrastructure Infinite Horizontal Marquee Carousel (Row 1: Leftward) */
+@keyframes infraMarquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-infra-marquee {
+  display: flex;
+  width: max-content;
+  animation: infraMarquee 45s linear infinite;
+  will-change: transform;
+}
+
+.animate-infra-marquee:hover,
+.infra-marquee-container:hover .animate-infra-marquee {
+  animation-play-state: paused;
+}
+
+/* Infrastructure Infinite Horizontal Marquee Carousel (Row 2: Rightward) */
+@keyframes infraMarqueeReverse {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-infra-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: infraMarqueeReverse 45s linear infinite;
+  will-change: transform;
+}
+
+.animate-infra-marquee-reverse:hover,
+.infra-marquee-container:hover .animate-infra-marquee-reverse {
+  animation-play-state: paused;
+}
+

@@ -233,27 +233,26 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
         </div>
 
 
-        {/* Balanced Bento Architecture Gallery (Progressive entrance + mask wipe reveals) */}
-        <div className="bento-infra-grid mb-12">
-          {INFRA_IMAGES.map((item, idx) => {
-            // Apply subtle restrained parallax to key feature rows
-            const hasParallax = idx === 0 || idx === 6 || idx === 10 || idx === 15;
-            const staggerClass = `seq-delay-${Math.min((idx % 6) + 2, 8)}`;
-            // Feature items get smooth mask wipe reveal
-            const isWipeItem = idx === 0 || idx === 5 || idx === 6 || idx === 10;
+        {/* Two-Row Opposing Direction Infinite Infrastructure Marquee (Pauses on hover) */}
+        <div className="infra-marquee-container relative w-full overflow-hidden py-2 mb-14 space-y-4 sm:space-y-5 group">
+          
+          {/* Subtle Left and Right Vignette Gradient Masks spanning both rows */}
+          <div className="absolute left-0 top-0 bottom-0 w-10 sm:w-24 md:w-36 bg-gradient-to-r from-[#f8faff] via-[#f8faff]/85 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-10 sm:w-24 md:w-36 bg-gradient-to-l from-[#edf2fb] via-[#edf2fb]/85 to-transparent z-10 pointer-events-none" />
 
-            return (
-              <div
-                key={idx}
-                className={`card-entrance ${staggerClass} w-full ${item.colSpanClass}`}
-              >
+          {/* Row 1: Leftward Scrolling Track */}
+          <div className="overflow-hidden w-full">
+            <div className="animate-infra-marquee flex items-center gap-4 sm:gap-5">
+              {[...INFRA_IMAGES, ...INFRA_IMAGES].map((item, idx) => (
                 <div
-                  className={`mask-wipe-container relative w-full ${item.heightClass} overflow-hidden rounded-2xl md:rounded-3xl bg-slate-100 border border-slate-200/90 shadow-sm hover:shadow-2xl hover:border-[#283890]/40 transition-all duration-500 hover:-translate-y-1 group`}
+                  key={`row1-${idx}`}
+                  className="w-[260px] sm:w-[320px] md:w-[380px] h-[180px] sm:h-[220px] md:h-[250px] shrink-0 overflow-hidden rounded-2xl md:rounded-3xl bg-slate-100 border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-[#283890]/40 transition-all duration-500 cursor-pointer group/card"
                 >
                   <img
                     src={item.image}
                     alt={item.alt}
                     loading={idx < 4 ? 'eager' : 'lazy'}
+                    draggable={false}
                     onError={(e) => {
                       const target = e.currentTarget;
                       if (!target.dataset.tried) {
@@ -263,22 +262,42 @@ export const FactorySection: React.FC<FactorySectionProps> = ({ onNavigate }) =>
                         }
                       }
                     }}
-                    className={`w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out ${
-                      isWipeItem ? 'mask-wipe-right' : ''
-                    } ${hasParallax ? 'will-change-transform scale-[1.04]' : ''}`}
-                    style={
-                      hasParallax
-                        ? {
-                            transform: `translate3d(0, var(--parallax-y, 0px), 0)`,
-                            transition: 'transform 0.1s cubic-bezier(0.2, 0, 0.2, 1)',
-                          }
-                        : undefined
-                    }
+                    className="w-full h-full object-cover object-center group-hover/card:scale-105 transition-transform duration-700 ease-out select-none pointer-events-none"
                   />
                 </div>
-              </div>
-            );
-          })}
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2: Rightward (Reverse) Scrolling Track */}
+          <div className="overflow-hidden w-full">
+            <div className="animate-infra-marquee-reverse flex items-center gap-4 sm:gap-5">
+              {[...INFRA_IMAGES.slice(8), ...INFRA_IMAGES.slice(0, 8), ...INFRA_IMAGES.slice(8), ...INFRA_IMAGES.slice(0, 8)].map((item, idx) => (
+                <div
+                  key={`row2-${idx}`}
+                  className="w-[260px] sm:w-[320px] md:w-[380px] h-[180px] sm:h-[220px] md:h-[250px] shrink-0 overflow-hidden rounded-2xl md:rounded-3xl bg-slate-100 border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-[#ff740e]/40 transition-all duration-500 cursor-pointer group/card"
+                >
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    loading="lazy"
+                    draggable={false}
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (!target.dataset.tried) {
+                        target.dataset.tried = '1';
+                        if (item.image.startsWith('/Infra/')) {
+                          target.src = item.image.replace('/Infra/', '/infra/');
+                        }
+                      }
+                    }}
+                    className="w-full h-full object-cover object-center group-hover/card:scale-105 transition-transform duration-700 ease-out select-none pointer-events-none"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
 
         {/* Video Redirect Banner to YouTube */}

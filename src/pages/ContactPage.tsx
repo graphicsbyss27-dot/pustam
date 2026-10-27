@@ -61,22 +61,33 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   return (
     <div
       ref={ref}
-      className={`pt-24 sm:pt-28 pb-28 sm:pb-20 bg-white min-h-screen relative overflow-hidden select-none reveal-fade-up ${
+      className={`pt-24 sm:pt-28 pb-28 sm:pb-20 bg-gradient-to-b from-[#f8faff] via-white to-[#edf2fb] min-h-screen relative overflow-hidden select-none reveal-fade-up ${
         isVisible ? 'reveal-visible' : ''
       }`}
     >
-      {/* Subtle gradient wash — light and airy */}
+      {/* Top brand tri-color highlight */}
       <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#283890] via-[#f0e846] to-[#ff740e]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_#eef1ff_0%,_transparent_55%)] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#fff8e6]/80 rounded-full blur-3xl pointer-events-none" />
+      
+      {/* Ambient background glows */}
+      <div className="absolute top-20 right-10 w-[550px] h-[400px] bg-[#283890]/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-20 left-10 w-[500px] h-[450px] bg-[#ff740e]/5 rounded-full blur-[140px] pointer-events-none" />
+
+      {/* Subtle background dot grid pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.035] pointer-events-none"
+        style={{
+          backgroundImage: `radial-gradient(#283890 1.2px, transparent 1.2px)`,
+          backgroundSize: '24px 24px',
+        }}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Back navigation */}
-        <div className="mb-6">
+        <div className="mb-8">
           <button
             onClick={() => onNavigate && onNavigate('home')}
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-500 hover:text-[#283890] transition-colors group"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-slate-200/80 text-xs sm:text-sm font-medium text-slate-600 hover:text-[#283890] hover:border-[#283890]/30 hover:shadow-sm transition-all group backdrop-blur-md"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             <span>Back to Home</span>
@@ -84,185 +95,210 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
         </div>
 
         {/* Hero Header */}
-        <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#283890]/8 border border-[#283890]/20 text-[#283890] text-xs font-semibold mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span className="font-headline tracking-wider uppercase">GET IN TOUCH</span>
+        <div className="max-w-3xl mb-12 sm:mb-14">
+          <div className="seq-item seq-delay-1 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#283890]/8 border border-[#283890]/15 backdrop-blur-md text-[#283890] text-xs font-semibold mb-4 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-[#283890] animate-pulse" />
+            <span className="font-headline tracking-widest uppercase">GET IN TOUCH</span>
           </div>
 
-          <h1 className="font-headline font-bold text-4xl sm:text-5xl md:text-6xl text-[#151f52] tracking-tight leading-tight mb-4">
-            Let's <span className="text-[#283890]">Talk</span>.
+          <h1 className="seq-item seq-delay-2 font-headline font-bold text-4xl sm:text-5xl md:text-6xl text-[#151f52] tracking-tight leading-[1.12] mb-4">
+            Let's <span className="bg-gradient-to-r from-[#283890] via-[#1e2b70] to-[#ff740e] bg-clip-text text-transparent">Talk</span>.
           </h1>
 
-          <p className="font-body text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
+          <p className="seq-item seq-delay-3 font-body text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
             Have a requirement, partnership opportunity or product enquiry? Get in touch with Pustam.
           </p>
         </div>
 
-        {/* Quick CTA Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
+        {/* Quick CTA Cards (Interactive Frosted Tactile Cards) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mb-12">
 
-          {/* WhatsApp */}
+          {/* WhatsApp Card */}
           <a
             href={contact.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-5 rounded-2xl bg-white border border-[#25D366]/30 hover:border-[#25D366]/60 hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-between group shadow-sm"
+            className="p-5 sm:p-6 rounded-3xl bg-white/90 border border-emerald-500/25 hover:border-emerald-500/60 hover:shadow-xl hover:shadow-emerald-950/5 transition-all duration-300 hover:-translate-y-1 flex items-center justify-between group shadow-sm backdrop-blur-xl relative overflow-hidden"
           >
-            <div className="flex items-center gap-3.5">
-              <div className="w-11 h-11 shrink-0 drop-shadow group-hover:scale-105 transition-transform">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none group-hover:bg-emerald-500/10 transition-colors" />
+
+            <div className="flex items-center gap-4 relative z-10">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center p-2.5 shrink-0 group-hover:scale-110 transition-transform">
                 <WhatsAppIcon className="w-full h-full object-contain" />
               </div>
               <div>
-                <h3 className="font-headline font-bold text-base sm:text-lg text-[#151f52]">WhatsApp Us</h3>
-                <p className="text-xs text-slate-500">Direct message for quick inquiries &amp; product questions</p>
+                <h3 className="font-headline font-bold text-base sm:text-lg text-[#151f52] group-hover:text-emerald-700 transition-colors">
+                  WhatsApp Us
+                </h3>
+                <p className="text-xs text-slate-500 font-body">
+                  Direct message for quick inquiries &amp; product questions
+                </p>
               </div>
             </div>
-            <span className="px-3.5 py-1.5 rounded-lg bg-[#25D366] text-white font-headline font-semibold text-xs shrink-0 group-hover:bg-[#20ba59] transition-colors">
+
+            <span className="relative z-10 px-4 py-2 rounded-xl bg-[#25D366] text-white font-headline font-semibold text-xs shrink-0 group-hover:bg-[#20ba59] transition-all duration-300 shadow-md shadow-emerald-500/20 group-hover:scale-105">
               Chat
             </span>
           </a>
 
-          {/* Call Us */}
+          {/* Call Us Card */}
           <a
             href={contact.phoneTel}
-            className="p-5 rounded-2xl bg-white border border-[#ff740e]/30 hover:border-[#ff740e]/60 hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-between group shadow-sm"
+            className="p-5 sm:p-6 rounded-3xl bg-white/90 border border-[#ff740e]/25 hover:border-[#ff740e]/60 hover:shadow-xl hover:shadow-orange-950/5 transition-all duration-300 hover:-translate-y-1 flex items-center justify-between group shadow-sm backdrop-blur-xl relative overflow-hidden"
           >
-            <div className="flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-xl bg-[#ff740e] text-white flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#ff740e]/5 rounded-full blur-2xl pointer-events-none group-hover:bg-[#ff740e]/10 transition-colors" />
+
+            <div className="flex items-center gap-4 relative z-10">
+              <div className="w-12 h-12 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center text-[#ff740e] shrink-0 group-hover:scale-110 transition-transform">
                 <PhoneCall className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-headline font-bold text-base sm:text-lg text-[#151f52]">Call Us</h3>
-                <p className="text-xs text-slate-500">Speak directly with our production &amp; sales coordinators</p>
+                <h3 className="font-headline font-bold text-base sm:text-lg text-[#151f52] group-hover:text-[#ff740e] transition-colors">
+                  Call Us
+                </h3>
+                <p className="text-xs text-slate-500 font-body">
+                  Speak directly with our production &amp; sales coordinators
+                </p>
               </div>
             </div>
-            <span className="px-3.5 py-1.5 rounded-lg bg-[#ff740e] text-white font-headline font-semibold text-xs shrink-0 group-hover:bg-[#ea6505] transition-colors">
+
+            <span className="relative z-10 px-4 py-2 rounded-xl bg-[#ff740e] text-white font-headline font-semibold text-xs shrink-0 group-hover:bg-[#ea6505] transition-all duration-300 shadow-md shadow-orange-500/20 group-hover:scale-105">
               Call
             </span>
           </a>
         </div>
 
-        {/* Main 2-Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-14">
+        {/* Main 2-Column Bento Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start mb-14">
 
-          {/* LEFT: Contact Info + Map */}
-          <div className="lg:col-span-5 space-y-6">
+          {/* LEFT: Contact Information & Palghar Plant Location (5 cols) */}
+          <div className="lg:col-span-5 flex flex-col space-y-6">
 
             {/* Contact Info Card */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-5">
-              <h2 className="font-headline font-bold text-xl sm:text-2xl text-[#151f52]">
-                Contact Information
-              </h2>
+            <div className="p-6 sm:p-7 rounded-3xl bg-white/95 border border-slate-200/90 shadow-xl shadow-blue-950/5 backdrop-blur-xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-[#283890]/5 rounded-full blur-3xl pointer-events-none" />
 
-              <div className="space-y-3 text-xs sm:text-sm text-slate-700 font-mono">
+              <div className="relative z-10 mb-4">
+                <h2 className="font-headline font-bold text-xl sm:text-2xl text-[#151f52] mb-1">
+                  Contact Information
+                </h2>
+                <p className="text-xs text-slate-500 font-body">
+                  Direct commercial &amp; production channels
+                </p>
+              </div>
+
+              <div className="space-y-2.5 relative z-10">
 
                 {/* Phone */}
-                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#283890] flex items-center justify-center text-[#f0e846] shrink-0">
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-50/80 border border-slate-100 hover:border-[#283890]/30 hover:bg-white hover:shadow-md transition-all duration-200 flex items-center gap-3.5 group">
+                  <div className="w-9 h-9 rounded-xl bg-[#283890]/10 border border-[#283890]/15 flex items-center justify-center text-[#283890] shrink-0 group-hover:scale-105 transition-transform">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-[11px] text-slate-400 block font-sans">Phone</span>
-                    {contact.phone}
+                    <span className="text-[10px] font-body font-semibold text-slate-400 block uppercase tracking-wider">Phone</span>
+                    <a href={contact.phoneTel} className="text-xs sm:text-sm text-slate-800 font-body font-medium hover:text-[#283890] transition-colors">
+                      {contact.phone}
+                    </a>
                   </div>
                 </div>
 
                 {/* Email */}
-                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#283890] flex items-center justify-center text-[#f0e846] shrink-0">
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-50/80 border border-slate-100 hover:border-[#283890]/30 hover:bg-white hover:shadow-md transition-all duration-200 flex items-center gap-3.5 group">
+                  <div className="w-9 h-9 rounded-xl bg-[#283890]/10 border border-[#283890]/15 flex items-center justify-center text-[#283890] shrink-0 group-hover:scale-105 transition-transform">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-[11px] text-slate-400 block font-sans">Email</span>
-                    <a href={contact.emailMailto} className="hover:text-[#283890] transition-colors break-all">
+                    <span className="text-[10px] font-body font-semibold text-slate-400 block uppercase tracking-wider">Email</span>
+                    <a href={contact.emailMailto} className="text-xs sm:text-sm text-slate-800 font-body font-medium hover:text-[#283890] transition-colors break-all">
                       {contact.email}
                     </a>
                   </div>
                 </div>
 
                 {/* WhatsApp */}
-                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-3">
-                  <div className="w-8 h-8 shrink-0">
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-50/80 border border-slate-100 hover:border-emerald-500/30 hover:bg-white hover:shadow-md transition-all duration-200 flex items-center gap-3.5 group">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center p-1.5 shrink-0 group-hover:scale-105 transition-transform">
                     <WhatsAppIcon className="w-full h-full object-contain" />
                   </div>
                   <div>
-                    <span className="text-[11px] text-slate-400 block font-sans">WhatsApp</span>
-                    {contact.whatsappDisplay}
+                    <span className="text-[10px] font-body font-semibold text-slate-400 block uppercase tracking-wider">WhatsApp</span>
+                    <a href={contact.whatsapp} target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-slate-800 font-body font-medium hover:text-[#25D366] transition-colors">
+                      {contact.whatsappDisplay}
+                    </a>
                   </div>
                 </div>
 
                 {/* Address */}
-                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#283890] flex items-center justify-center text-[#ff740e] shrink-0 mt-0.5">
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-50/80 border border-slate-100 hover:border-[#ff740e]/30 hover:bg-white hover:shadow-md transition-all duration-200 flex items-start gap-3.5 group">
+                  <div className="w-9 h-9 rounded-xl bg-[#ff740e]/10 border border-[#ff740e]/20 flex items-center justify-center text-[#ff740e] shrink-0 mt-0.5 group-hover:scale-105 transition-transform">
                     <MapPin className="w-4 h-4" />
                   </div>
-                  <div>
-                    <span className="text-[11px] text-slate-400 block font-sans">Address</span>
-                    <span className="leading-relaxed">
+                  <div className="min-w-0 flex-1">
+                    <span className="text-[10px] font-body font-semibold text-slate-400 block uppercase tracking-wider">Address</span>
+                    <p className="text-xs sm:text-sm text-slate-700 font-body leading-relaxed break-words">
                       {address.line1}, {address.line2}, {address.city}, {address.state} {address.pincode}, {address.country}
-                    </span>
+                    </p>
                   </div>
                 </div>
+
               </div>
             </div>
 
-            {/* Location & Directions Card */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-5">
+            {/* Location & Real Map Card */}
+            <div className="p-6 sm:p-7 rounded-3xl bg-white/95 border border-slate-200/90 shadow-xl shadow-blue-950/5 space-y-4 backdrop-blur-xl relative overflow-hidden">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-headline font-bold text-lg text-[#151f52]">
+                  <h3 className="font-headline font-bold text-lg sm:text-xl text-[#151f52]">
                     Plant &amp; Facility Location
                   </h3>
                   <span className="text-xs text-slate-500 font-body">Palghar Udyog Nagar Campus</span>
                 </div>
-                <div className="w-8 h-8 rounded-lg bg-[#283890]/8 flex items-center justify-center text-[#283890]">
+                <div className="w-9 h-9 rounded-xl bg-[#283890]/8 flex items-center justify-center text-[#283890]">
                   <MapPin className="w-4 h-4" />
                 </div>
               </div>
 
-              {/* Styled Location Pin Graphic */}
-              <div className="relative h-44 rounded-2xl bg-gradient-to-br from-[#151f52] to-[#283890] overflow-hidden flex items-center justify-center p-4 border border-slate-100 shadow-inner">
-                {/* Background grid lines */}
-                <div className="absolute inset-0 bg-grid-pattern opacity-25" />
-                
-                {/* Ambient pulse */}
-                <div className="relative z-10 flex flex-col items-center text-center">
-                  <div className="relative mb-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ff740e] opacity-70" />
-                    <div className="w-12 h-12 rounded-full bg-[#ff740e] text-white flex items-center justify-center shadow-xl border-2 border-white/60">
-                      <MapPin className="w-6 h-6" />
-                    </div>
-                  </div>
-                  <div className="font-headline font-bold text-sm text-white drop-shadow">
-                    Pustam Paper Products
-                  </div>
-                  <div className="text-[11px] font-mono text-white/70">
-                    Palghar, Maharashtra, India
-                  </div>
-                </div>
+              {/* Real Interactive Google Map Embed */}
+              <div className="relative h-44 sm:h-48 w-full rounded-2xl overflow-hidden border border-slate-200 shadow-inner bg-slate-100">
+                <iframe
+                  title="Pustam Paper Products Palghar Location"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3753.3039777933104!2d72.7663273!3d19.7093077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be71dc1c1f28b57%3A0x6b8ee9ffb0a2fa0b!2sPalghar%20Udyog%20Nagar!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-full"
+                />
               </div>
 
-              {/* Get Directions Button - Redirects directly to exact coordinates */}
+              {/* Get Directions Button */}
               <a
                 href={contact.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3.5 px-5 rounded-xl bg-[#283890] hover:bg-[#ff740e] text-white font-headline font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-md flex items-center justify-center gap-2 group"
+                className="btn-apple-base btn-apple-primary w-full py-3.5 text-xs sm:text-sm tracking-wide gap-2 group"
               >
-                <Navigation className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                <span>Get Directions</span>
-                <ExternalLink className="w-3.5 h-3.5 text-white/70" />
+                <Navigation className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+                <span>Get Directions in Google Maps</span>
+                <ExternalLink className="w-3.5 h-3.5 text-white/80" />
               </a>
             </div>
+
           </div>
 
-          {/* RIGHT: Contact Form */}
-          <div className="lg:col-span-7">
-            <div className="p-6 sm:p-8 md:p-10 rounded-3xl bg-white border border-slate-200 shadow-sm">
+          {/* RIGHT: Contact Form (7 cols) */}
+          <div className="lg:col-span-7 flex flex-col">
+            <div className="p-7 sm:p-9 md:p-11 rounded-3xl bg-white/95 border border-slate-200/90 shadow-xl shadow-blue-950/5 backdrop-blur-xl relative overflow-hidden flex-1 flex flex-col justify-between">
+              <div className="absolute top-0 right-0 w-80 h-80 bg-[#283890]/5 rounded-full blur-3xl pointer-events-none" />
 
-              <div className="mb-6">
-                <h2 className="font-headline font-bold text-2xl sm:text-3xl text-[#151f52] mb-2">
+              <div className="relative z-10 mb-7">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#283890]/8 text-[#283890] text-xs font-mono font-medium mb-3">
+                  <Sparkles className="w-3.5 h-3.5 text-[#ff740e]" />
+                  <span>Direct OEM Manufacturing Desk</span>
+                </div>
+                <h2 className="font-headline font-bold text-2xl sm:text-3xl text-[#151f52] mb-2 tracking-tight">
                   Send an Enquiry
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500 font-body">
@@ -271,25 +307,25 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
               </div>
 
               {isSubmitted ? (
-                <div className="p-8 rounded-2xl bg-[#f5f7ff] border border-[#283890]/15 text-center animate-fadeIn space-y-4">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-[#283890] text-white flex items-center justify-center shadow-xl">
+                <div className="p-8 sm:p-10 rounded-2xl bg-gradient-to-b from-[#f8faff] to-[#edf2fb] border border-[#283890]/20 text-center animate-fadeIn space-y-4">
+                  <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-[#283890] to-[#151f52] text-[#f0e846] flex items-center justify-center shadow-xl">
                     <CheckCircle2 className="w-9 h-9" />
                   </div>
                   <h3 className="font-headline font-bold text-2xl text-[#151f52]">
                     Enquiry Sent Successfully!
                   </h3>
-                  <p className="text-sm text-slate-600 max-w-md mx-auto font-body">
+                  <p className="text-sm text-slate-600 max-w-md mx-auto font-body leading-relaxed">
                     Thank you for contacting Pustam Paper Products. Our production and sales team will review your enquiry and get back to you shortly.
                   </p>
                   <button
                     onClick={() => setIsSubmitted(false)}
-                    className="btn-apple-base btn-apple-primary px-6 py-2.5 text-xs tracking-wide"
+                    className="btn-apple-base btn-apple-primary px-7 py-3 text-xs tracking-wide"
                   >
                     Send Another Enquiry
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+                <form onSubmit={handleSubmit} className="relative z-10 space-y-4 sm:space-y-5">
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
@@ -303,7 +339,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         value={formData.fullName}
                         onChange={handleChange}
                         placeholder="e.g. Rajesh Patel"
-                        className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#283890] focus:ring-1 focus:ring-[#283890]/20 transition-colors font-body"
+                        className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#283890] focus:ring-2 focus:ring-[#283890]/15 transition-all font-body hover:bg-white"
                       />
                     </div>
                     <div>
@@ -316,7 +352,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         value={formData.companyName}
                         onChange={handleChange}
                         placeholder="e.g. Apex Stationery Ltd"
-                        className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#283890] focus:ring-1 focus:ring-[#283890]/20 transition-colors font-body"
+                        className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#283890] focus:ring-2 focus:ring-[#283890]/15 transition-all font-body hover:bg-white"
                       />
                     </div>
                   </div>
@@ -333,7 +369,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="buyer@domain.com"
-                        className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#283890] focus:ring-1 focus:ring-[#283890]/20 transition-colors font-body"
+                        className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#283890] focus:ring-2 focus:ring-[#283890]/15 transition-all font-body hover:bg-white"
                       />
                     </div>
                     <div>
@@ -346,7 +382,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         value={formData.phoneNumber}
                         onChange={handleChange}
                         placeholder="+91 98765 43210"
-                        className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#283890] focus:ring-1 focus:ring-[#283890]/20 transition-colors font-body"
+                        className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#283890] focus:ring-2 focus:ring-[#283890]/15 transition-all font-body hover:bg-white"
                       />
                     </div>
                   </div>
@@ -361,7 +397,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                       value={formData.productRequirement}
                       onChange={handleChange}
                       placeholder="e.g. Exercise Notebooks, Registers, Copier Reams, Custom GSM..."
-                      className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#283890] focus:ring-1 focus:ring-[#283890]/20 transition-colors font-body"
+                      className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#283890] focus:ring-2 focus:ring-[#283890]/15 transition-all font-body hover:bg-white"
                     />
                   </div>
 
@@ -376,14 +412,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Please enter your quantity requirement, specifications, or inquiry details..."
-                      className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#283890] focus:ring-1 focus:ring-[#283890]/20 transition-colors resize-none font-body"
+                      className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#283890] focus:ring-2 focus:ring-[#283890]/15 transition-all resize-none font-body hover:bg-white"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="btn-apple-base btn-apple-primary w-full py-4 text-sm sm:text-base tracking-wide gap-2.5 group disabled:opacity-50"
+                    className="btn-apple-base btn-apple-primary w-full py-4 text-sm sm:text-base tracking-wide gap-2.5 group disabled:opacity-50 mt-2 shadow-lg"
                   >
                     {isSubmitting ? (
                       <span className="flex items-center gap-2">
@@ -398,7 +434,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     )}
                   </button>
 
-                  <p className="text-center text-[11px] text-slate-400 font-body">
+                  <p className="text-center text-[11px] text-slate-400 font-body pt-1">
                     We maintain commercial confidentiality. No third-party data sharing.
                   </p>
                 </form>
