@@ -11,49 +11,49 @@ const COVERFLOW_ITEMS = [
     id: 'prod-01',
     name: 'Center Pinned Exercise Books',
     category: 'School & Institutional',
-    image: '/products/Products/Exercise Books.jpg',
+    image: '/products/exercise-books.jpg',
     tag: '54–80 GSM',
   },
   {
     id: 'prod-02',
     name: 'Hardbound Counter Books',
     category: 'Commercial & Ledger',
-    image: '/products/Products/Counter Books.jpg',
+    image: '/products/counter-books.jpg',
     tag: '1 to 4 Quire',
   },
   {
     id: 'prod-03',
     name: 'Classic Composition Books',
     category: 'US & Global Academic',
-    image: '/products/Products/Composition Books.jpg',
+    image: '/products/composition-books.jpg',
     tag: 'Center Sewn',
   },
   {
     id: 'prod-04',
     name: 'Double Wire O-Ring Notebooks',
     category: 'Executive & Corporate',
-    image: '/products/Products/Double wire notebook.jpg',
+    image: '/products/double-wire-notebook.jpg',
     tag: '360° Lay-Flat',
   },
   {
     id: 'prod-05',
     name: 'Spiral Bound Notebooks',
     category: 'Student & Office',
-    image: '/products/Products/Spiral Notebooks.jpg',
+    image: '/products/spiral-notebooks.jpg',
     tag: 'Micro-Perforated',
   },
   {
     id: 'prod-06',
     name: 'Writing Pads & Legal Notepads',
     category: 'Legal & Enterprise',
-    image: '/products/Products/Notepads.jpg',
+    image: '/products/notepads.jpg',
     tag: 'Tear-Off Gummed',
   },
   {
     id: 'prod-07',
     name: 'Section-Sewn Handbound Registers',
     category: 'Heavy-Duty Industrial',
-    image: '/products/Products/handbound.jpg',
+    image: '/products/handbound-registers.jpg',
     tag: 'Greyboard Core',
   },
   {
@@ -136,7 +136,7 @@ export const Product3DCoverflow: React.FC<Product3DCoverflowProps> = ({ onNaviga
     if (!autoRotate || isDragging) return;
 
     const interval = setInterval(() => {
-      targetAngleRef.current += angleStep;
+      targetAngleRef.current -= angleStep;
       startSpringAnimation();
     }, 4500);
 
@@ -371,6 +371,32 @@ export const Product3DCoverflow: React.FC<Product3DCoverflowProps> = ({ onNaviga
           ))}
         </div>
       </div>
+
+      {/* Floating Left Navigation Arrow Button */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          rotatePrev();
+        }}
+        className="btn-apple-icon absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 pointer-events-auto"
+        aria-label="Previous Product"
+        title="Previous Product"
+      >
+        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+      </button>
+
+      {/* Floating Right Navigation Arrow Button */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          rotateNext();
+        }}
+        className="btn-apple-icon absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 pointer-events-auto"
+        aria-label="Next Product"
+        title="Next Product"
+      >
+        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+      </button>
     </div>
   );
 };
