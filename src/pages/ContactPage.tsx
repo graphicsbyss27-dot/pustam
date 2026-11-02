@@ -48,7 +48,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
     setErrorMessage(null);
 
     try {
-      const recipient = COMPANY_DETAILS.contact.inquiryRecipientEmail || 'sujalsawardekar27@gmail.com';
+      const recipient = COMPANY_DETAILS.contact.inquiryRecipientEmail || 'pustamofficial@gmail.com';
       const response = await fetch(`https://formsubmit.co/ajax/${recipient}`, {
         method: 'POST',
         headers: {
