@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import {
   Phone,
   Mail,
@@ -10,6 +10,7 @@ import {
   Sparkles,
   Navigation,
   ExternalLink,
+  ChevronDown,
 } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { COMPANY_DETAILS } from '../data/websiteData';
@@ -19,6 +20,69 @@ interface ContactPageProps {
   onNavigate?: (page: 'home' | 'contact') => void;
 }
 
+interface ProductSuggestion {
+  name: string;
+  category: string;
+  image: string;
+  keywords: string[];
+}
+
+const PRODUCT_SUGGESTIONS: ProductSuggestion[] = [
+  {
+    name: 'Drawing & Sketch Books',
+    category: 'Fine Art & Design (140+ GSM)',
+    image: '/products/Sketchbook_.jpg',
+    keywords: ['drawing', 'sketch', 'art', 'sketchbook', 'd', 'cartridge'],
+  },
+  {
+    name: 'Double Wire O-Ring Notebooks',
+    category: 'Executive & Corporate (360° Lay-Flat)',
+    image: '/products/double-wire-notebook.jpg',
+    keywords: ['double wire', 'wiro', 'o-ring', 'wirebound', 'd', 'twin wire'],
+  },
+  {
+    name: 'Center Pinned Exercise Books',
+    category: 'School & Institutional (54–80 GSM)',
+    image: '/products/exercise-books.jpg',
+    keywords: ['exercise', 'center pinned', 'school', 'staple', 'notebook'],
+  },
+  {
+    name: 'Hardbound Counter Books',
+    category: 'Commercial & Ledger (1 to 4 Quire)',
+    image: '/products/counter-books.jpg',
+    keywords: ['counter', 'hardbound', 'ledger', 'case bound', 'quire'],
+  },
+  {
+    name: 'Classic Composition Books',
+    category: 'US & Global Academic (Center-Sewn)',
+    image: '/products/composition-books.jpg',
+    keywords: ['composition', 'center sewn', 'college ruled', 'student'],
+  },
+  {
+    name: 'Spiral Bound Notebooks',
+    category: 'Student & Office (Micro-Perforated)',
+    image: '/products/spiral-notebooks.jpg',
+    keywords: ['spiral', 'perforated', 'spiral bound', 'ring', 'wiro'],
+  },
+  {
+    name: 'Writing Pads & Legal Notepads',
+    category: 'Legal & Enterprise (Tear-Off Gummed)',
+    image: '/products/notepads.jpg',
+    keywords: ['pad', 'legal pad', 'writing pad', 'notepad', 'tear off'],
+  },
+  {
+    name: 'Section-Sewn Handbound Registers',
+    category: 'Heavy-Duty Industrial (Greyboard Core)',
+    image: '/products/handbound-registers.jpg',
+    keywords: ['register', 'handbound', 'section sewn', 'hardcover'],
+  },
+  {
+    name: 'Custom White-Label / OEM Production',
+    category: 'Custom GSM, Cover Art & Corporate Branding',
+    image: '/assets/Favicon.png',
+    keywords: ['custom', 'oem', 'white label', 'branding', 'bulk', 'copier'],
+  },
+];
 export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   const { ref, isVisible } = useScrollReveal();
   const { contact, address } = COMPANY_DETAILS;
@@ -34,6 +98,36 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [showProductDropdown, setShowProductDropdown] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setShowProductDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
+
+  const filteredProducts = useMemo(() => {
+    const query = formData.productRequirement.trim().toLowerCase();
+    if (!query) return PRODUCT_SUGGESTIONS;
+
+    return PRODUCT_SUGGESTIONS.filter((p) => {
+      const matchName = p.name.toLowerCase().includes(query);
+      const matchCategory = p.category.toLowerCase().includes(query);
+      const matchKeywords = p.keywords.some((k) => k.toLowerCase().includes(query));
+      return matchName || matchCategory || matchKeywords;
+    }).sort((a, b) => {
+      const aStarts = a.name.toLowerCase().startsWith(query);
+      const bStarts = b.name.toLowerCase().startsWith(query);
+      if (aStarts && !bStarts) return -1;
+      if (!aStarts && bStarts) return 1;
+      return 0;
+    });
+  }, [formData.productRequirement]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -432,18 +526,93 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5 font-body">
-                      Product / Requirement
-                    </label>
-                    <input
-                      type="text"
-                      name="productRequirement"
-                      value={formData.productRequirement}
-                      onChange={handleChange}
-                      placeholder="e.g. Exercise Notebooks, Registers, Copier Reams, Custom GSM..."
-                      className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#283890] focus:ring-2 focus:ring-[#283890]/15 transition-all font-body hover:bg-white"
-                    />
+                  <div className="relative" ref={dropdownRef}>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider font-body">
+                        Product / Requirement
+                      </label>
+                      <span className="text-[11px] text-slate-400 font-body hidden sm:inline">
+                        Type or select a notebook
+                      </span>
+                    </div>
+
+                    <div className="relative">
+                      <input
+                        type="text"
+                        name="productRequirement"
+                        autoComplete="off"
+                        value={formData.productRequirement}
+                        onChange={(e) => {
+                          handleChange(e);
+                          setShowProductDropdown(true);
+                        }}
+                        onFocus={() => setShowProductDropdown(true)}
+                        placeholder="e.g. Type 'D' for Drawing, Double Wire or click to browse..."
+                        className="w-full px-4 py-3 sm:py-3.5 pr-10 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#283890] focus:ring-2 focus:ring-[#283890]/15 transition-all font-body hover:bg-white"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowProductDropdown((prev) => !prev)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#283890] p-1 transition-colors"
+                        tabIndex={-1}
+                        aria-label="Toggle notebook product list"
+                      >
+                        <ChevronDown
+                          className={`w-4 h-4 transition-transform duration-200 ${
+                            showProductDropdown ? 'rotate-180 text-[#283890]' : ''
+                          }`}
+                        />
+                      </button>
+                    </div>
+
+                    {/* Autocomplete Dropdown List with Thumbnail Book Imagery */}
+                    {showProductDropdown && (
+                      <div className="absolute left-0 right-0 top-full mt-1.5 bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-2xl shadow-2xl z-50 max-h-72 overflow-y-auto divide-y divide-slate-100 p-1.5 animate-in fade-in zoom-in-95 duration-150">
+                        {filteredProducts.length > 0 ? (
+                          filteredProducts.map((prod) => (
+                            <button
+                              key={prod.name}
+                              type="button"
+                              onClick={() => {
+                                setFormData((prev) => ({ ...prev, productRequirement: prod.name }));
+                                setShowProductDropdown(false);
+                              }}
+                              className="w-full text-left p-2 sm:p-2.5 rounded-xl hover:bg-slate-100/90 flex items-center gap-3 transition-colors group cursor-pointer"
+                            >
+                              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg overflow-hidden bg-slate-100 border border-slate-200/80 shrink-0 shadow-xs relative">
+                                <img
+                                  src={prod.image}
+                                  alt={prod.name}
+                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                  onError={(e) => {
+                                    (e.currentTarget as HTMLImageElement).style.display = 'none';
+                                  }}
+                                />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-[#283890] truncate transition-colors font-body">
+                                  {prod.name}
+                                </p>
+                                <p className="text-[11px] text-slate-500 truncate font-body">
+                                  {prod.category}
+                                </p>
+                              </div>
+                              <CheckCircle2
+                                className={`w-4 h-4 shrink-0 transition-opacity ${
+                                  formData.productRequirement === prod.name
+                                    ? 'text-[#283890] opacity-100'
+                                    : 'opacity-0 group-hover:opacity-40 text-slate-400'
+                                }`}
+                              />
+                            </button>
+                          ))
+                        ) : (
+                          <div className="p-3.5 text-center text-xs text-slate-500 font-body">
+                            No standard product matching "{formData.productRequirement}". Custom entry will still be submitted!
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   <div>
