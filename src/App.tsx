@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { FloatingActions } from './components/FloatingActions';
@@ -146,6 +147,9 @@ export function App() {
 
       {/* Footer */}
       <Footer onNavigate={handleNavigate} />
+
+      {/* Vercel Web Analytics */}
+      <Analytics />
     </div>
   );
 }
