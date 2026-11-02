@@ -33,6 +33,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -41,21 +42,65 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({
-        fullName: '',
-        companyName: '',
-        email: '',
-        phoneNumber: '',
-        productRequirement: '',
-        message: '',
+    setErrorMessage(null);
+
+    try {
+      const recipient = COMPANY_DETAILS.contact.inquiryRecipientEmail || 'sujalsawardekar27@gmail.com';
+      const response = await fetch(`https://formsubmit.co/ajax/${recipient}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `New Pustam Website Enquiry from ${formData.fullName || 'Buyer'}`,
+          _template: 'table',
+          _captcha: 'false',
+          'Full Name': formData.fullName,
+          'Company Name': formData.companyName || 'Not Provided',
+          'Email Address': formData.email,
+          'Phone / WhatsApp': formData.phoneNumber || 'Not Provided',
+          'Product / Requirement': formData.productRequirement || 'General Inquiry',
+          Message: formData.message,
+        }),
       });
-    }, 1000);
+
+      const data = await response.json();
+
+      if (response.ok || data.success === 'true' || data.success === true) {
+        setIsSubmitted(true);
+        setFormData({
+          fullName: '',
+          companyName: '',
+          email: '',
+          phoneNumber: '',
+          productRequirement: '',
+          message: '',
+        });
+      } else if (data.message && data.message.includes('Activation')) {
+        setIsSubmitted(true);
+        setFormData({
+          fullName: '',
+          companyName: '',
+          email: '',
+          phoneNumber: '',
+          productRequirement: '',
+          message: '',
+        });
+      } else {
+        throw new Error(data.message || 'Failed to submit enquiry.');
+      }
+    } catch (err) {
+      console.error('Enquiry submission error:', err);
+      setErrorMessage(
+        'Unable to send message directly. Please contact us via WhatsApp or call us directly.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -318,7 +363,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     Thank you for contacting Pustam Paper Products. Our production and sales team will review your enquiry and get back to you shortly.
                   </p>
                   <button
-                    onClick={() => setIsSubmitted(false)}
+                    onClick={() => { setIsSubmitted(false); setErrorMessage(null); }}
                     className="btn-apple-base btn-apple-primary px-7 py-3 text-xs tracking-wide"
                   >
                     Send Another Enquiry
@@ -415,6 +460,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                       className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#283890] focus:ring-2 focus:ring-[#283890]/15 transition-all resize-none font-body hover:bg-white"
                     />
                   </div>
+
+                  {errorMessage && (
+                    <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-xs text-red-600 font-body">
+                      {errorMessage}
+                    </div>
+                  )}
 
                   <button
                     type="submit"

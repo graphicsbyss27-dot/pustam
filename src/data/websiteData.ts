@@ -298,6 +298,7 @@ export const COMPANY_DETAILS = {
     email: "pustamofficial@gmail.com",
     emailMailto: "mailto:pustamofficial@gmail.com",
     exportEmail: "pustamofficial@gmail.com",
+    inquiryRecipientEmail: "sujalsawardekar27@gmail.com", // Change to pustamofficial@gmail.com after testing
     mapsUrl: "https://maps.app.goo.gl/bwigE29JJdmmgDDx8",
     workingHours: "Mon – Sat, 9:00 AM – 6:00 PM IST",
   },
